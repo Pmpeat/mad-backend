@@ -1,5 +1,5 @@
 {
-  "name": "immtrip-backend",
+  "name": "mad-backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mad-Arai-D-Co-Ltd/immtrip-backend.git"
+    "url": "git+https://github.com/Pmpeat/mad-backend.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mad-Arai-D-Co-Ltd/immtrip-backend/issues"
+    "url": "https://github.com/Pmpeat/mad-backend/issues"
   },
-  "homepage": "https://github.com/mad-Arai-D-Co-Ltd/immtrip-backend#readme",
+  "homepage": "https://github.com/Pmpeat/mad-backend#readme",
   "dependencies": {
     "aws-sdk": "^2.1176.0",
     "axios": "^0.27.2",
@@ -43,11 +43,13 @@
     "mysql2": "^2.3.3",
     "node-schedule": "^2.1.0",
     "nodemon": "^2.0.16",
+    "read-excel-file": "^5.5.3",
     "sequelize": "^6.21.0",
     "sequelize-cli": "^6.4.1",
     "uuid": "^8.3.2",
     "winston": "^3.7.2",
-    "winston-daily-rotate-file": "^4.7.1"
+    "winston-daily-rotate-file": "^4.7.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "jest": "^28.1.1"

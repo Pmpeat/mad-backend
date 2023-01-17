@@ -3,12 +3,12 @@ require('dotenv').config();
 module.exports = {
   app: {
     port: process.env.DEV_APP_PORT || 3001,
-    appName: process.env.APP_NAME || 'IMMTRIP',
+    appName: process.env.APP_NAME || 'MADOFFICE',
     env: process.env.NODE_ENV || 'development',
   },
   db: {
     host: process.env.DB_HOST || 'localhost',
-    database: process.env.DB_NAME || 'immtrip_database',
+    database: process.env.DB_NAME || 'mad_database',
     username: process.env.DB_USER || 'root',
     password: process.env.DB_PASS || '',
     port: process.env.DB_PORT || 3306,
@@ -16,7 +16,7 @@ module.exports = {
     logging: false,
   },
   winston: {
-    logpath: 'immtrip/logs/',
+    logpath: 'madoffice/logs/',
   },
   auth: {
     jwtSecret: process.env.JWT_SECRET,
