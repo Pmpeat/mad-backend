@@ -62,18 +62,18 @@ class SheetController extends BaseController {
           error ? error.details[0].message : ''
         );
       }
-      const options = { where: { email: data.email } };
+      // const options = { where: { email: data.email } };
 
-      let getTableData = await super.getByCustomOptions(req, 'applicants', options);
+      // let getTableData = await super.getByCustomOptions(req, 'applicants', options);
     
 
-      if (getTableData) {
-        requestHandler.throwError(
-          400,
-          'bad request',
-          'invalid email, email already existed'
-        )();
-      }
+      // if (getTableData) {
+      //   requestHandler.throwError(
+      //     400,
+      //     'bad request',
+      //     'invalid email, email already existed'
+      //   )();
+      // }
 
     //   const hashedPassword = bcrypt.hashSync(
     //     data.password,
