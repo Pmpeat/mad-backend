@@ -32,7 +32,7 @@ const upload = async (req, res) => {
             emergencyContact: row[10],
             refEmployee: row[11],
             portfolio: row[12],
-            portfolioFile: row[13],
+            portfolioLink: row[13],
             military: row[14],
             talent: row[15],
             drivingAbility: row[16],
