@@ -1,5 +1,5 @@
 'use strict';
-
+const hashPassword = require('../utils/hashPassword');
 module.exports = {
   async up (queryInterface, Sequelize) {
     /**

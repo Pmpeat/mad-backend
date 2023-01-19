@@ -19,7 +19,7 @@ module.exports = {
     logpath: 'madoffice/logs/',
   },
   auth: {
-    jwtSecret: process.env.JWT_SECRET,
+    jwtSecret: process.env.JWT_SECRET || 'madoffice',
     jwtExpiresIn: process.env.JWT_EXPIRES_IN || '1d',
     saltRounds: process.env.SALT_ROUND || 10,
     refreshTokenSecret:

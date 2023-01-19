@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
 router.use('/healthCheck', require('./healthCheck'));
-router.use('/applicant', require('./applicant'));
-
+router.use('/applicant', require('./applicantRouter'));
+router.use('/auth', require('./authRouter'));
 module.exports = router;
