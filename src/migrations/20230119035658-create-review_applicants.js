@@ -23,31 +23,31 @@ module.exports = {
           key: 'id',
         },
       },
-      work_skill_rate: {
+      workSkillRate: {
         type: Sequelize.INTEGER,
         allowNull: true
       },
-      attitude_rate: {
+      attitudeRate: {
         type: Sequelize.INTEGER,
         allowNull: true
       },
-      professionalism_rate: {
+      professionalismRate: {
         type: Sequelize.INTEGER,
         allowNull: true
       },
-      leadership_rate: {
+      leadershipRate: {
         type: Sequelize.INTEGER,
         allowNull: true
       },
-      social_skill_rate: {
+      socialSkillRate: {
         type: Sequelize.INTEGER,
         allowNull: true
       },
-      academic_score_rate: {
+      academicScoreRate: {
         type: Sequelize.INTEGER,
         allowNull: true
       },
-      other_skill_rate: {
+      otherSkillRate: {
         type: Sequelize.INTEGER,
         allowNull: true
       },

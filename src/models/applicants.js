@@ -11,12 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Applicants.hasMany(models.review_applicants, {
+        foreignKey: 'applicantId'
+      });
     }
   }
   Applicants.init({
     jobApplicationType: DataTypes.STRING,
     gender: DataTypes.STRING,
     name: DataTypes.STRING,
+    email: DataTypes.STRING,
     idCode: DataTypes.STRING,
     dateOfBirth: DataTypes.DATE,
     status: DataTypes.STRING,
@@ -26,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     emergencyContact: DataTypes.STRING,
     refEmployee: DataTypes.STRING,
     portfolio: DataTypes.STRING,
+    avatar: DataTypes.STRING,
     portfolioLink: DataTypes.STRING,
     military: DataTypes.STRING,
     talent: DataTypes.STRING,
@@ -46,6 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     interest: DataTypes.STRING,
     newsFrom: DataTypes.STRING,
     aboutYou: DataTypes.STRING,
+    avgRate: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'applicants',

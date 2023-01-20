@@ -20,6 +20,7 @@ class SheetController extends BaseController {
         jobApplicationType: Joi.string().allow("",null),
         gender: Joi.string().allow("",null),
         name: Joi.string().allow("",null),
+        email: Joi.string().allow("",null),
         idCode: Joi.string().allow("",null),
         dateOfBirth: Joi.string().allow("",null),
         status: Joi.string().allow("",null),
@@ -29,6 +30,7 @@ class SheetController extends BaseController {
         emergencyContact: Joi.string().allow("",null),
         refEmployee: Joi.string().allow("",null),
         portfolio: Joi.string().allow("",null),
+        avatar: Joi.string().allow("",null),
         portfolioFile: Joi.string().allow("",null),
         portfolioLink: Joi.string().allow("",null),
         military: Joi.string().allow("",null),
@@ -62,35 +64,8 @@ class SheetController extends BaseController {
           error ? error.details[0].message : ''
         );
       }
-      // const options = { where: { email: data.email } };
-
-      // let getTableData = await super.getByCustomOptions(req, 'applicants', options);
-    
-
-      // if (getTableData) {
-      //   requestHandler.throwError(
-      //     400,
-      //     'bad request',
-      //     'invalid email, email already existed'
-      //   )();
-      // }
-
-    //   const hashedPassword = bcrypt.hashSync(
-    //     data.password,
-    //     parseInt(config.auth.saltRounds)
-    //   );
-    //   data.password = hashedPassword;
 
       const createNewApplicants = await super.create(req, 'applicants');
-
-    //   const id = await createNewUser.dataValues.id;
-
-    //     const roleData = {
-    //       userId: id,
-    //       roleId: data.roleId
-    //     }
-
-    //     const createdRole = await super.create(req, 'user_roles', roleData);
 
 
       if (!_.isNull(createNewApplicants)) {

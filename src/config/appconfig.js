@@ -24,6 +24,6 @@ module.exports = {
     saltRounds: process.env.SALT_ROUND || 10,
     refreshTokenSecret:
       process.env.REFRESH_TOKEN_SECRET || 'uhwLE3mY6f8SrQuCrBs9R5==',
-    refreshTokenExpiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN || '2d',
+    refreshTokenExpiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN || '365d',
   },
 };

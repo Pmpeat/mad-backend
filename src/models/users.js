@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         through: models.user_roles,
         foreignKey: 'userId'
       });
+
+      Users.hasMany(models.review_applicants, {
+        foreignKey: 'userId'
+      });
     }
   }
   Users.init({

@@ -159,7 +159,6 @@ class AuthController extends BaseController {
         platform: Joi.string().valid('ios', 'android', 'web'),
         fcmToken: Joi.string(),
       });
-
       const { error } = schema.validate({
         platform: req.headers.platform,
         fcmToken: tokenFromHeader,
@@ -176,7 +175,6 @@ class AuthController extends BaseController {
 
       const user = jwt.decode(tokenFromHeader);
       let userId;
-
       if (typeof user.payload !== 'undefined') {
         userId = user.payload.id;
       } else {
@@ -198,7 +196,6 @@ class AuthController extends BaseController {
         'access_tokens',
         options
       );
-
       req.params.id = fcmToken.dataValues.id;
 
       const deleteFcm = await super.deleteById(req, 'access_tokens');
