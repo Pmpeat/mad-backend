@@ -15,15 +15,16 @@ class SheetController extends BaseController {
    */
    static async createApplicant(req, res) {
     try {
-      const data = req.body;
+      const data = req.body.data;
+      
       const schema = Joi.object({
         firstName: Joi.string().allow("",null),
         lastName: Joi.string().allow("",null),
         email: Joi.string().allow("",null),
         password: Joi.string().allow("",null),
         roleId: Joi.string().allow("",null),
+        createdByUserId: Joi.string().allow("",null),
       });
-
       const { error } = schema.validate(data);
 
       if (error) {
@@ -53,8 +54,7 @@ class SheetController extends BaseController {
       );
       data.password = hashedPassword;
 
-      const createNewUsers = await super.create(req, 'users');
-
+      const createNewUsers = await super.create(req, 'users',data);
       const id = await createNewUsers.dataValues.id;
 
         const roleData = {
@@ -93,17 +93,40 @@ class SheetController extends BaseController {
   }
 
   /**
-   * It's a function that get all applicant
+   * It's a function that get all user
    */
   static async getUserList(req, res) {
     try {
         const options = {
+          include: [
+            {
+              model: req.app.get('db')['roles'],
+            }
+          ],
           order: [['id', 'asc']],
         };
         const result = await super.getList(req, 'users', options);
         requestHandler.sendSuccess(
           res,
-          'Getting all applicants successfully!',
+          'Getting all users successfully!',
+        )({result});
+      } catch (err) {
+        requestHandler.sendError(req, res, err);
+      }
+  }
+
+   /**
+   * It's a function that get all roles
+   */
+   static async getRoleList(req, res) {
+    try {
+        const options = {
+          order: [['id', 'asc']],
+        };
+        const result = await super.getList(req, 'roles', options);
+        requestHandler.sendSuccess(
+          res,
+          'Getting all roles successfully!',
         )({result});
       } catch (err) {
         requestHandler.sendError(req, res, err);
