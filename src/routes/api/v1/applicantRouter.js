@@ -9,7 +9,7 @@ const upload = require("../../../middlewares/upload");
 // router.post('/uploads', upload.single("file"),excelController.upload);
 
 /**
- * /api/v1/applicant//create-applicant
+ * /api/v1/applicant/create-applicant
  * */
 router.post('/create-applicant', sheetController.createApplicant);
 
@@ -18,6 +18,18 @@ router.post('/create-applicant', sheetController.createApplicant);
  * /api/v1/applicant/applicants
  * */
 router.get("/applicants", sheetController.getApplicantList);
+
+
+/**
+ * /api/v1/applicant/filter-applicant
+ * */
+router.post('/filter-applicant', sheetController.getApplicantFilterList);
+
+/**
+ * /api/v1/applicant/position-applicant
+ * */
+router.get('/position-applicant', sheetController.getApplicantJobList);
+
 
 
 module.exports = router;

@@ -6,6 +6,8 @@ const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
 const logger = new Logger();
 const requestHandler = new RequestHandler(logger);
+const Sequelize = require('sequelize');
+const { Op } = require('sequelize');
 const config = require('../../config/appconfig');
 
 class SheetController extends BaseController {
@@ -91,7 +93,71 @@ class SheetController extends BaseController {
    */
   static async getApplicantList(req, res) {
     try {
+       
         const options = {
+          order: [['id', 'asc']],
+        };
+        const result = await super.getList(req, 'applicants', options);
+        requestHandler.sendSuccess(
+          res,
+          'Getting all applicants successfully!',
+        )({result});
+      } catch (err) {
+        requestHandler.sendError(req, res, err);
+      }
+  }
+
+  /**
+   * It's a function that get all applicant filter
+   */
+  static async getApplicantFilterList(req, res) {
+    try {
+        const data = req.body;
+        const options = {
+          where: {
+            jobApplicationType : {
+              [Op.like]: '%'+data.jobType+'%'
+            },
+            position : {
+              [Op.like]: '%'+data.position+'%'
+            },
+            [Op.or]: [
+              {
+                expectedSalary:{
+                  [Op.between]: data.price
+                },
+              },
+              {
+                expectedIncome:{
+                  [Op.between]: data.price
+                },
+              }
+            ],
+            avgRate : {
+              [Op.between]: [data.rateMin,data.rateMax]
+            }
+
+          },
+          order: [['id', 'asc']],
+        };
+        const result = await super.getList(req, 'applicants', options);
+        requestHandler.sendSuccess(
+          res,
+          'Getting all applicants successfully!',
+        )({result});
+      } catch (err) {
+        requestHandler.sendError(req, res, err);
+      }
+  }
+
+  /**
+   * It's a function that get all applicant position
+   */
+  static async getApplicantJobList(req, res) {
+    try {
+        const options = {
+          attributes: ["position"],
+          group: "position",
           order: [['id', 'asc']],
         };
         const result = await super.getList(req, 'applicants', options);
