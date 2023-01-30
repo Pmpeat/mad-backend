@@ -8,12 +8,12 @@ const logger = new Logger();
 const requestHandler = new RequestHandler(logger);
 const config = require('../../config/appconfig');
 
-class SheetController extends BaseController {
+class UserController extends BaseController {
 
   /**
    * It's a function that creates a tags.
    */
-   static async createApplicant(req, res) {
+   static async createUser(req, res) {
     try {
       const data = req.body.data;
       
@@ -136,4 +136,4 @@ class SheetController extends BaseController {
 }
 
 
-module.exports = SheetController;
+module.exports = UserController;

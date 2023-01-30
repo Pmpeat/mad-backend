@@ -5,7 +5,7 @@ const auth = require('../../../utils/auth');
 /**
  * /api/v1/user/create-user
  * */
-router.post('/create-user',auth.isAuth, userController.createApplicant);
+router.post('/create-user',auth.isAuth, userController.createUser);
 
 
 /**
