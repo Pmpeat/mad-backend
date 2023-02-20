@@ -7,6 +7,17 @@ const api = require('../routes');
 const Logger = require('../utils/logger.js');
 const logger = new Logger();
 
+const line = require('@line/bot-sdk');
+const dotenv = require('dotenv');
+const env = dotenv.config().parsed;
+
+const lineConfig = {
+    channelAccessToken : env.LINE_ACCESS_TOKEN,
+    channelSecret : env.LINE_SECRET_TOKEN
+}
+
+const client = new line.Client(lineConfig);
+
 // for parsing application/json
 app.use(bodyParser.json());
 // for parsing application/x-www-form-urlencoded
@@ -39,5 +50,24 @@ app.use((req, res, next) => {
   });
   next(err);
 });
+
+
+// line test
+
+app.post('/webhook', line.middleware(lineConfig), async (req ,res) => {
+  try {
+      const events = req.body.events;
+      console.log('event = >>>',events);
+      return events.length > 0 ? await events.map(item => handleEvent(item)):res.status(200).send("OK")
+  } catch (err) {
+      res.status(500).end();
+  }
+});
+
+const handleEvent = async (event) => {
+  console.log(event);
+  return client.replyMessage(event.replyToken,{type:'text',text:'Test'});
+}
+
 
 module.exports = app;
