@@ -10,6 +10,7 @@ const lineConfig = {
     channelSecret : env.LINE_SECRET_TOKEN
 }
 
+const client = new line.Client(lineConfig);
 /**
  * /api/v1/line/handle-event
  * */
@@ -17,11 +18,16 @@ router.post('/handle-event', line.middleware(lineConfig), async (req ,res) => {
     try {
         const events = req.body.events;
         console.log('event = >>>',events);
-        return events.length > 0 ? await events.map(item => dialogFlowController.handleEvent(item)):res.status(200).send("OK")
+        return events.length > 0 ? await events.map(item => handleEvent(item)):res.status(200).send("OK")
     } catch (err) {
-        requestHandler.sendError(req, res, err);
+        res.status(500).end();
     }
 });
+
+const handleEvent = async (event) => {
+    console.log(event);
+    return client.replyMessage(event.replyToken,{type:'text',text:'Test'});
+}
 
 
 module.exports = router;
