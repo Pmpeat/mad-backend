@@ -8,12 +8,10 @@ const Logger = require('../utils/logger.js');
 const logger = new Logger();
 
 const line = require('@line/bot-sdk');
-const dotenv = require('dotenv');
-const env = dotenv.config().parsed;
 
 const lineConfig = {
-    channelAccessToken : env.LINE_ACCESS_TOKEN,
-    channelSecret : env.LINE_SECRET_TOKEN
+    channelAccessToken : process.env.LINE_ACCESS_TOKEN,
+    channelSecret : process.env.LINE_SECRET_TOKEN
 }
 
 const client = new line.Client(lineConfig);
@@ -33,21 +31,13 @@ app.get('/', (req, res) => {
 
 // Api
 app.use(api);
-
+app.use('/webhook', line.middleware(lineConfig));
 // db connection
 app.set('db', require('../models/index'));
 
 // line test
-app.get('/test', line.middleware(lineConfig),async (req ,res) => {
-  try {
-      
-      return res.status(200).send("OK")
-  } catch (err) {
-      res.status(500).end();
-  }
-});
 
-app.post('/webhook', line.middleware(lineConfig), async (req ,res) => {
+app.post('/webhook', async (req ,res) => {
   try {
       const events = req.body.events;
       console.log('event = >>>',events);
