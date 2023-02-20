@@ -5,4 +5,6 @@ router.use('/applicant', require('./applicantRouter'));
 router.use('/auth', require('./authRouter'));
 router.use('/review', require('./reviewRouter'));
 router.use('/user', require('./userRouter'));
+router.use('/line', require('./lineRouter'));
+
 module.exports = router;
