@@ -37,22 +37,15 @@ app.use(api);
 // db connection
 app.set('db', require('../models/index'));
 
-app.use((req, res, next) => {
-  logger.log(
-    'the url you are trying to reach is not hosted on our server',
-    'error'
-  );
-  const err = new Error('Not Found');
-  err.status = 404;
-  res.status(err.status).json({
-    type: 'error',
-    message: 'the url you are trying to reach is not hosted on our server',
-  });
-  next(err);
-});
-
-
 // line test
+app.get('/test', line.middleware(lineConfig),async (req ,res) => {
+  try {
+      
+      return res.status(200).send("OK")
+  } catch (err) {
+      res.status(500).end();
+  }
+});
 
 app.post('/webhook', line.middleware(lineConfig), async (req ,res) => {
   try {
@@ -68,6 +61,24 @@ const handleEvent = async (event) => {
   console.log(event);
   return client.replyMessage(event.replyToken,{type:'text',text:'Test'});
 }
+
+app.use((req, res, next) => {
+  console.log(req.get("host")+req.originalUrl);
+  logger.log(
+    'the url you are trying to reach is not hosted on our server',
+    'error'
+  );
+  const err = new Error('Not Found');
+  err.status = 404;
+  res.status(err.status).json({
+    type: 'error',
+    message: 'the url you are trying to reach is not hosted on our server',
+  });
+  next(err);
+});
+
+
+
 
 
 module.exports = app;

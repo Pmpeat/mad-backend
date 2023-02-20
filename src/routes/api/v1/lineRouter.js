@@ -14,9 +14,6 @@ const lineConfig = {
 const client = new line.Client(lineConfig);
 
 
-router.use('/webhook', line.middleware(lineConfig))
-
-
 /**
  * /api/v1/line/handle-event
  * */
