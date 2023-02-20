@@ -14,8 +14,6 @@ const lineConfig = {
     channelSecret : process.env.LINE_SECRET_TOKEN
 }
 
-const client = new line.Client(lineConfig);
-
 app.use('/webhook', line.middleware(lineConfig));
 
 // for parsing application/json
@@ -37,25 +35,7 @@ app.use(api);
 // db connection
 app.set('db', require('../models/index'));
 
-// line test
-
-app.post('/webhook', async (req ,res) => {
-  try {
-      const events = req.body.events;
-      console.log('event = >>>',events);
-      return events.length > 0 ? await events.map(item => handleEvent(item)):res.status(200).send("OK")
-  } catch (err) {
-      res.status(500).end();
-  }
-});
-
-const handleEvent = async (event) => {
-  console.log(event);
-  return client.replyMessage(event.replyToken,{type:'text',text:'Test'});
-}
-
 app.use((req, res, next) => {
-  console.log(req.get("host")+req.originalUrl);
   logger.log(
     'the url you are trying to reach is not hosted on our server',
     'error'

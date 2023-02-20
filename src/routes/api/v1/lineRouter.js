@@ -7,8 +7,8 @@ const dotenv = require('dotenv');
 const env = dotenv.config().parsed;
 
 const lineConfig = {
-    channelAccessToken : env.LINE_ACCESS_TOKEN,
-    channelSecret : env.LINE_SECRET_TOKEN
+    channelAccessToken : process.env.LINE_ACCESS_TOKEN,
+    channelSecret : process.env.LINE_SECRET_TOKEN
 }
 
 const client = new line.Client(lineConfig);
@@ -21,16 +21,15 @@ router.post('/webhook', async (req ,res) => {
     try {
         const events = req.body.events;
         console.log('event = >>>',events);
-        return events.length > 0 ? await events.map(item => handleEvent(item)):res.status(200).send("OK")
+        return events.length > 0 ? await events.map(item => dialogFlowController.handleEvent(item)):res.status(200).send("OK")
     } catch (err) {
         res.status(500).end();
     }
 });
 
-const handleEvent = async (event) => {
-    console.log(event);
-    return client.replyMessage(event.replyToken,{type:'text',text:'Test'});
-}
+// const handleEvent = async (event) => {
+//     return client.replyMessage(event.replyToken,{type:'text',text:'Test'});
+// }
 
 
 module.exports = router;

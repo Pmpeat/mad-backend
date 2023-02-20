@@ -8,7 +8,7 @@ const requestHandler = new RequestHandler(logger);
 class DialogFlow extends BaseController {
 
   static async handleEvent (event) {
-    console.log(event);
+    return client.replyMessage(event.replyToken,{type:'text',text:'Test'});
   }
 }
 
