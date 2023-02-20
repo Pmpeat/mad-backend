@@ -16,6 +16,8 @@ const lineConfig = {
 
 const client = new line.Client(lineConfig);
 
+app.use('/webhook', line.middleware(lineConfig));
+
 // for parsing application/json
 app.use(bodyParser.json());
 // for parsing application/x-www-form-urlencoded
@@ -31,7 +33,7 @@ app.get('/', (req, res) => {
 
 // Api
 app.use(api);
-app.use('/webhook', line.middleware(lineConfig));
+
 // db connection
 app.set('db', require('../models/index'));
 
