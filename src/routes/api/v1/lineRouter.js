@@ -14,7 +14,7 @@ const client = new line.Client(lineConfig);
 /**
  * /api/v1/line/handle-event
  * */
-router.post('/handle-event', line.middleware(lineConfig), async (req ,res) => {
+router.post('/webhook', line.middleware(lineConfig), async (req ,res) => {
     try {
         const events = req.body.events;
         console.log('event = >>>',events);
