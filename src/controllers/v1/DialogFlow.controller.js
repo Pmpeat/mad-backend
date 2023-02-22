@@ -79,7 +79,7 @@ class DialogFlow extends BaseController {
 
         if(response[0].queryResult.intent.displayName === "CheckRepair"){
             const result = this.findRepair(event.source.userId,req,res);
-
+            console.log(result);
             let texts;
             if(result.length > 0){
                 texts = `ผู้ใช้รหัส : ${result[0].lineId}`;
