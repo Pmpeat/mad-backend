@@ -40,7 +40,7 @@ class DialogFlow extends BaseController {
     if(event.type !== 'message'|| event.message.type !== 'text'){
         return null;
     } else if (event.type === 'message') {
-        const response = this.textQuery(event.message.text,'madoffice-clsc');
+        const response = await this.textQuery(event.message.text,'madoffice-clsc');
         console.log('dialogFlow = >>>',response);
         return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
     }
