@@ -42,7 +42,21 @@ class DialogFlow extends BaseController {
     } else if (event.type === 'message') {
         const response = await this.textQuery(event.message.text,'madoffice-clsc');
         console.log('dialogFlow = >>>',response);
-        return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
+        let createNewProblem;
+        if(response[0].queryResult.intent.displayName === "RequestRepair - problem"){
+            const data = {
+                lineId: event.source.userId,
+                detail: event.message.text
+            };
+            createNewProblem = await super.create(req, 'request_repair',data);
+        }
+
+        if(!_.isNull(createNewProblem)){
+            return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
+        } else {
+            return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
+        }
+        
     }
     
   }
