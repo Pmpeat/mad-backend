@@ -83,7 +83,28 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
                 result.map((element) => { 
-                    texts += `\nปัญหาที่ยังไม่ได้รับการแก้ไข : \n${element.detail}`;
+                    texts += `\nปัญหา : \n${element.detail}`;
+                    texts += `\nสถานะ: ${element.status}`;
+                 });
+
+                 if(!_.isNull(result)){
+                    return client.replyMessage(event.replyToken,{type:'text',text:texts});
+                } else {
+                    return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
+                }
+                
+            } else {
+
+            }
+        }
+        
+        if(response[0].queryResult.intent.displayName === "CheckOrder"){
+            const result = await this.findOrder(event.source.userId,req,res);
+            let texts;
+            if(result.length > 0){
+                texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
+                result.map((element) => { 
+                    texts += `\nคำสั่งซื้อ : \n${element.detail}`;
                     texts += `\nสถานะ: ${element.status}`;
                  });
 
@@ -126,9 +147,21 @@ class DialogFlow extends BaseController {
   static async findRepair (userId,req,res) {
     try {
         const options = {
-            where : {lineId:userId}
+            where : {lineId:userId,status:"รอการตรวจสอบ"}
           };
           const result = await super.getList(req, 'request_repair', options);
+       return result;
+    } catch(err) {
+        console.log(err);
+    }
+  }
+
+  static async findOrder (userId,req,res) {
+    try {
+        const options = {
+            where : {lineId:userId,status:"รอการตรวจสอบ"}
+          };
+          const result = await super.getList(req, 'request_order', options);
        return result;
     } catch(err) {
         console.log(err);
