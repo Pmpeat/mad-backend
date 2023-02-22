@@ -81,10 +81,10 @@ class DialogFlow extends BaseController {
             const result = await this.findRepair(event.source.userId,req,res);
             let texts;
             if(result.length > 0){
-                texts = `ผู้ใช้รหัส : ${result[0].lineId}/n`;
+                texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
                 result.map((element) => { 
-                    texts += `/nปัญหาที่ยังไม่ได้รับการแก้ไข : /n${element.detail}`;
-                    texts += `/nสถานะ: ${element.detail}`;
+                    texts += `\nปัญหาที่ยังไม่ได้รับการแก้ไข : \n${element.detail}`;
+                    texts += `\nสถานะ: ${element.detail}`;
                  });
 
                  if(!_.isNull(result)){
