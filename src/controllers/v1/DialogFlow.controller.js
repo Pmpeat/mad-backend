@@ -47,6 +47,7 @@ class DialogFlow extends BaseController {
         return null;
     } else if (event.type === 'message') {
         const response = await this.textQuery(event.message.text,'madoffice-clsc');
+
         let createNewProblem;
         if(response[0].queryResult.intent.displayName === "RequestRepair - problem"){
             const data = {
@@ -54,13 +55,50 @@ class DialogFlow extends BaseController {
                 detail: event.message.text
             };
             createNewProblem = await super.create(req, 'request_repair',data);
+
+            if(!_.isNull(createNewProblem)){
+                return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
+            } else {
+                return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
+            }
+        }
+        let createNewOrder;
+        if(response[0].queryResult.intent.displayName === "RequestOrder - order"){
+            const data = {
+                lineId: event.source.userId,
+                detail: event.message.text
+            };
+            createNewOrder = await super.create(req, 'request_order',data);
+
+            if(!_.isNull(createNewOrder)){
+                return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
+            } else {
+                return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
+            }
         }
 
-        if(!_.isNull(createNewProblem)){
-            return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
-        } else {
-            return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
+        if(response[0].queryResult.intent.displayName === "CheckRepair"){
+            const result = this.findRepair(event.source.userId,req,res);
+
+            let texts;
+            if(result.length > 0){
+                texts = `ผู้ใช้รหัส : ${result[0].lineId}`;
+                result.map((element) => { 
+                    texts += `/nปัญหาที่ยังไม่ได้รับการแก้ไข : /n${element.detail}`;
+                    texts += `/nสถานะ: ${element.detail}`;
+                 })
+
+                 if(!_.isNull(result)){
+                    return client.replyMessage(event.replyToken,{type:'text',text:texts});
+                } else {
+                    return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
+                }
+                
+            } else {
+
+            }
         }
+
         
     }
     
@@ -81,6 +119,18 @@ class DialogFlow extends BaseController {
     try {
         const response = await sessionClient.detectIntent(request);
         return response;
+    } catch(err) {
+        console.log(err);
+    }
+  }
+
+  static async findRepair (userId,req,res) {
+    try {
+        const options = {
+            where : {lineId:userId}
+          };
+          const result = await super.getList(req, 'request_repair', options);
+       return result;
     } catch(err) {
         console.log(err);
     }
