@@ -83,10 +83,10 @@ class DialogFlow extends BaseController {
             let texts;
             if(result.length > 0){
                 texts = `ผู้ใช้รหัส : ${result[0].lineId}`;
-                result.map((element) => { 
-                    texts += `/nปัญหาที่ยังไม่ได้รับการแก้ไข : /n${element.detail}`;
-                    texts += `/nสถานะ: ${element.detail}`;
-                 })
+                // result.map((element) => { 
+                //     texts += `/nปัญหาที่ยังไม่ได้รับการแก้ไข : /n${element.detail}`;
+                //     texts += `/nสถานะ: ${element.detail}`;
+                //  });
 
                  if(!_.isNull(result)){
                     return client.replyMessage(event.replyToken,{type:'text',text:texts});
