@@ -27,6 +27,20 @@ router.post('/webhook', async (req ,res) => {
     }
 });
 
+/**
+ * /api/v1/line/text_query
+ * */
+router.post('/text-query', async (req ,res) => {
+    try {
+        const {text,userId} = req.body;
+        const resultQuery = await dialogFlowController.textQuery(text,userId);
+        console.log('dialogFlow = >>>',resultQuery[0].queryResult.fulfillmentText);
+        res.send("text query");
+    } catch (err) {
+        res.status(500).end();
+    }
+});
+
 // const handleEvent = async (event) => {
 //     return client.replyMessage(event.replyToken,{type:'text',text:'Test'});
 // }
