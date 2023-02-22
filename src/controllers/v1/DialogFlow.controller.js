@@ -84,7 +84,7 @@ class DialogFlow extends BaseController {
                 texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
                 result.map((element) => { 
                     texts += `\nปัญหาที่ยังไม่ได้รับการแก้ไข : \n${element.detail}`;
-                    texts += `\nสถานะ: ${element.detail}`;
+                    texts += `\nสถานะ: ${element.status}`;
                  });
 
                  if(!_.isNull(result)){
