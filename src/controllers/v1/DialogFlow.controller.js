@@ -1,6 +1,13 @@
+const Joi = require('joi');
+const bcrypt = require('bcrypt');
+const _ = require('lodash');
 const BaseController = require('./Base.controller');
 const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
+
+const logger = new Logger();
+const requestHandler = new RequestHandler(logger);
+
 const dialogflow = require('dialogflow');
 const line = require('@line/bot-sdk');
 
@@ -17,8 +24,7 @@ const lineConfig = {
 }
 
 const client = new line.Client(lineConfig);
-const logger = new Logger();
-const requestHandler = new RequestHandler(logger);
+
 
 
 const googlePrivateKey = process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
@@ -41,7 +47,6 @@ class DialogFlow extends BaseController {
         return null;
     } else if (event.type === 'message') {
         const response = await this.textQuery(event.message.text,'madoffice-clsc');
-        console.log('dialogFlow = >>>',response);
         let createNewProblem;
         if(response[0].queryResult.intent.displayName === "RequestRepair - problem"){
             const data = {
