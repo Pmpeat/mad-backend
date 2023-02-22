@@ -42,7 +42,7 @@ const sessionClient = new dialogflow.SessionsClient({googleProjectId,credentials
 
 class DialogFlow extends BaseController {
     
-  static async handleEvent (event) {
+  static async handleEvent (req ,res,event) {
     if(event.type !== 'message'|| event.message.type !== 'text'){
         return null;
     } else if (event.type === 'message') {
