@@ -79,14 +79,13 @@ class DialogFlow extends BaseController {
 
         if(response[0].queryResult.intent.displayName === "CheckRepair"){
             const result = await this.findRepair(event.source.userId,req,res);
-            console.log(result);
             let texts;
             if(result.length > 0){
-                texts = `ผู้ใช้รหัส : ${result[0].lineId}`;
-                // result.map((element) => { 
-                //     texts += `/nปัญหาที่ยังไม่ได้รับการแก้ไข : /n${element.detail}`;
-                //     texts += `/nสถานะ: ${element.detail}`;
-                //  });
+                texts = `ผู้ใช้รหัส : ${result[0].lineId}/n`;
+                result.map((element) => { 
+                    texts += `/nปัญหาที่ยังไม่ได้รับการแก้ไข : /n${element.detail}`;
+                    texts += `/nสถานะ: ${element.detail}`;
+                 });
 
                  if(!_.isNull(result)){
                     return client.replyMessage(event.replyToken,{type:'text',text:texts});
