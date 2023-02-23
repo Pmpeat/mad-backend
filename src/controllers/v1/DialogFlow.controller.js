@@ -49,6 +49,7 @@ class DialogFlow extends BaseController {
         const response = await this.textQuery(event.message.text,'madoffice-clsc');
 
         let createNewProblem;
+        let createNewOrder;
         if(response[0].queryResult.intent.displayName === "RequestRepair - problem"){
             const data = {
                 lineId: event.source.userId,
@@ -62,8 +63,8 @@ class DialogFlow extends BaseController {
                 return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
             }
         }
-        let createNewOrder;
-        if(response[0].queryResult.intent.displayName === "RequestOrder - order"){
+        
+        else if(response[0].queryResult.intent.displayName === "RequestOrder - order"){
             const data = {
                 lineId: event.source.userId,
                 detail: event.message.text
@@ -76,8 +77,7 @@ class DialogFlow extends BaseController {
                 return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
             }
         }
-
-        if(response[0].queryResult.intent.displayName === "CheckRepair"){
+        else if(response[0].queryResult.intent.displayName === "CheckRepair"){
             const result = await this.findRepair(event.source.userId,req,res);
             let texts;
             if(result.length > 0){
@@ -97,8 +97,7 @@ class DialogFlow extends BaseController {
 
             }
         }
-        
-        if(response[0].queryResult.intent.displayName === "CheckOrder"){
+        else if(response[0].queryResult.intent.displayName === "CheckOrder"){
             const result = await this.findOrder(event.source.userId,req,res);
             let texts;
             if(result.length > 0){
@@ -117,6 +116,8 @@ class DialogFlow extends BaseController {
             } else {
 
             }
+        } else {
+            return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
         }
 
         
@@ -167,6 +168,8 @@ class DialogFlow extends BaseController {
         console.log(err);
     }
   }
+
+  
 }
 
 module.exports = DialogFlow;
