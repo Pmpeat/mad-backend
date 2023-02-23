@@ -6,4 +6,10 @@ const RepairController = require('../../../controllers/v1/Repair.controller');
  * */
 router.post('/find', RepairController.getAllRepair);
 
+/**
+ * /api/v1/repair/update
+ * */
+router.post('/update', RepairController.updateRepairStatus);
+
+
 module.exports = router;

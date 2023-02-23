@@ -8,19 +8,19 @@ const logger = new Logger();
 const requestHandler = new RequestHandler(logger);
 const config = require('../../config/appconfig');
 
-class RepairController extends BaseController {
+class OrderController extends BaseController {
 
-    static async getAllRepair (req,res) {
+    static async getAllOrderr (req,res) {
         try {
             const data = req.body;
             const options = {
                 where : {status:data.status}
               };
-              const result = await super.getList(req, 'request_repair',options);
+              const result = await super.getList(req, 'request_order',options);
               if (!_.isNull(result)) {
                 requestHandler.sendSuccess(
                   res,
-                  'successfully get all repair',
+                  'successfully get all order',
                   201
                 )(result);
               } else {
@@ -36,13 +36,13 @@ class RepairController extends BaseController {
       }
 
       /**
-     * It's a function that update repair status.
+     * It's a function that update order status.
      */
-     static async updateRepairStatus(req, res) {
+     static async updateOrderStatus(req, res) {
         try {
             const data = req.body;
             const schema = Joi.object({
-                repairId: Joi.string().required(),
+                orderId: Joi.string().required(),
                 status: Joi.string().required(),
             });
 
@@ -59,17 +59,17 @@ class RepairController extends BaseController {
 
             const option = {
                 where : {
-                  id : data.repairId
+                  id : data.orderId
                 }
               }
-              const updateRepairStatus = await super.updateByCustomWhere(req, 'request_repair', data ,option);
+              const updateOrderStatus = await super.updateByCustomWhere(req, 'request_order', data ,option);
 
-            if (!_.isNull(updateRepairStatus)) {
+            if (!_.isNull(updateOrderStatus)) {
                 requestHandler.sendSuccess(
                     res,
-                    'successfully updated repair status',
+                    'successfully updated order status',
                     201
-                )(updateRepairStatus);
+                )(updateOrderStatus);
             } else {
                 requestHandler.throwError(
                     422,
@@ -85,4 +85,4 @@ class RepairController extends BaseController {
 }
 
 
-module.exports = RepairController;
+module.exports = OrderController;

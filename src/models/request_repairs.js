@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   request_repair.init({
     lineId: DataTypes.STRING,
     detail: DataTypes.STRING,
+    status: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'request_repair',
