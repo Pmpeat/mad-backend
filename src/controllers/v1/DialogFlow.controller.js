@@ -56,6 +56,10 @@ class DialogFlow extends BaseController {
             const result = RichController.nextCheckRepair(event.source.userId);
         }
 
+        if(event.message.text === "ย้อนกลับ"){
+            const result = RichController.backCheckRepair(event.source.userId);
+        }
+
         if(response[0].queryResult.intent.displayName === "RequestRepair - problem"){
             const data = {
                 lineId: event.source.userId,
@@ -71,7 +75,7 @@ class DialogFlow extends BaseController {
             }
         }
         
-        else if(response[0].queryResult.intent.displayName === "RequestOrder - order"){
+        if(response[0].queryResult.intent.displayName === "RequestOrder - order"){
             const data = {
                 lineId: event.source.userId,
                 detail: event.message.text,
@@ -85,28 +89,80 @@ class DialogFlow extends BaseController {
                 return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
             }
         }
-        else if(response[0].queryResult.intent.displayName === "CheckRepair"){
-            // const result = await this.findRepair(event.source.userId,req,res);
-            // let texts;
-            // if(result.length > 0){
-            //     texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
-            //     result.map((element) => { 
-            //         texts += `\nปัญหา : \n${element.detail}`;
-            //         texts += `\nสถานะ: ${element.status}`;
-            //      });
 
-            //      if(!_.isNull(result)){
-            //         return client.replyMessage(event.replyToken,{type:'text',text:texts});
-            //     } else {
-            //         return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
-            //     }
+        // repair check
+        if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม : ไม่รับคำร้อง"){
+            const result = await this.findRepair(event.source.userId,"ไม่รับคำร้อง",req,res);
+            let texts;
+            if(result.length > 0){
+                texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
+                result.map((element) => { 
+                    texts += `\nปัญหา : \n${element.detail}`;
+                    texts += `\nสถานะ: ${element.status}`;
+                 });
+
+                 if(!_.isNull(result)){
+                    return client.replyMessage(event.replyToken,{type:'text',text:texts});
+                } else {
+                    return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
+                }
                 
-            // } else {
-
-            // }
+            } else {
+                texts = `ไม่พบคำร้องที่อยู่ในสถานะนี้`;
+                return client.replyMessage(event.replyToken,{type:'text',text:texts});
+            }
         }
-        else if(response[0].queryResult.intent.displayName === "CheckOrder"){
-            const result = await this.findOrder(event.source.userId,req,res);
+
+        if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม : รอการตรวจสอบ"){
+            const result = await this.findRepair(event.source.userId,"รอการตรวจสอบ",req,res);
+            let texts;
+            if(result.length > 0){
+                texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
+                result.map((element) => { 
+                    texts += `\nปัญหา : \n${element.detail}`;
+                    texts += `\nสถานะ: ${element.status}`;
+                 });
+
+                 if(!_.isNull(result)){
+                    return client.replyMessage(event.replyToken,{type:'text',text:texts});
+                } else {
+                    return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
+                }
+                
+            } else {
+                texts = `ไม่พบคำร้องที่อยู่ในสถานะนี้`;
+                return client.replyMessage(event.replyToken,{type:'text',text:texts});
+            }
+        }
+
+        if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม : แก้ไขแล้ว"){
+            const result = await this.findRepair(event.source.userId,"แก้ไขแล้ว",req,res);
+            let texts;
+            if(result.length > 0){
+                texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
+                result.map((element) => { 
+                    texts += `\nปัญหา : \n${element.detail}`;
+                    texts += `\nสถานะ: ${element.status}`;
+                 });
+
+                 if(!_.isNull(result)){
+                    return client.replyMessage(event.replyToken,{type:'text',text:texts});
+                } else {
+                    return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
+                }
+                
+            } else {
+                texts = `ไม่พบคำร้องที่อยู่ในสถานะนี้`;
+                return client.replyMessage(event.replyToken,{type:'text',text:texts});
+            }
+        }
+
+        
+        // repair check
+
+        // order check
+        if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ : ไม่รับคำร้อง"){
+            const result = await this.findOrder(event.source.userId,"ไม่รับคำร้อง",req,res);
             let texts;
             if(result.length > 0){
                 texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
@@ -122,9 +178,56 @@ class DialogFlow extends BaseController {
                 }
                 
             } else {
-
+                texts = `ไม่พบคำร้องที่อยู่ในสถานะนี้`;
+                return client.replyMessage(event.replyToken,{type:'text',text:texts});
             }
-        } else {
+        }
+        if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ : รอการตรวจสอบ"){
+            const result = await this.findOrder(event.source.userId,"รอการตรวจสอบ",req,res);
+            let texts;
+            if(result.length > 0){
+                texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
+                result.map((element) => { 
+                    texts += `\nคำสั่งซื้อ : \n${element.detail}`;
+                    texts += `\nสถานะ: ${element.status}`;
+                 });
+
+                 if(!_.isNull(result)){
+                    return client.replyMessage(event.replyToken,{type:'text',text:texts});
+                } else {
+                    return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
+                }
+                
+            } else {
+                texts = `ไม่พบคำร้องที่อยู่ในสถานะนี้`;
+                return client.replyMessage(event.replyToken,{type:'text',text:texts});
+            }
+        }
+        if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ : สั่งซื้อแล้ว"){
+            const result = await this.findOrder(event.source.userId,"สั่งซื้อแล้ว",req,res);
+            let texts;
+            if(result.length > 0){
+                texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
+                result.map((element) => { 
+                    texts += `\nคำสั่งซื้อ : \n${element.detail}`;
+                    texts += `\nสถานะ: ${element.status}`;
+                 });
+
+                 if(!_.isNull(result)){
+                    return client.replyMessage(event.replyToken,{type:'text',text:texts});
+                } else {
+                    return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
+                }
+                
+            } else {
+                texts = `ไม่พบคำร้องที่อยู่ในสถานะนี้`;
+                return client.replyMessage(event.replyToken,{type:'text',text:texts});
+            }
+        }
+
+        // order check
+
+         if (response[0].queryResult.intent.displayName === "Default Fallback Intent") {
             return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
         }
 
@@ -153,10 +256,10 @@ class DialogFlow extends BaseController {
     }
   }
 
-  static async findRepair (userId,req,res) {
+  static async findRepair (userId,state,req,res) {
     try {
         const options = {
-            where : {lineId:userId},
+            where : {lineId:userId,status:state},
             limit : 4,
             order: [['id', 'desc']],
           };
@@ -167,10 +270,10 @@ class DialogFlow extends BaseController {
     }
   }
 
-  static async findOrder (userId,req,res) {
+  static async findOrder (userId,state,req,res) {
     try {
         const options = {
-            where : {lineId:userId},
+            where : {lineId:userId,status:state},
             limit : 4,
             order: [['id', 'desc']],
           };
