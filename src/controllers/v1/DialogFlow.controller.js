@@ -219,7 +219,7 @@ class DialogFlow extends BaseController {
 
         // order check
 
-        let resultRichMenu;
+        let resultRichMenu = "default";
 
         if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม"){
             resultRichMenu = await RichController.nextCheckRepair(event.source.userId);
@@ -233,11 +233,11 @@ class DialogFlow extends BaseController {
             resultRichMenu = await RichController.backCheckRepair(event.source.userId);
         }
         console.log(resultRichMenu);
-         if (response[0].queryResult.intent.displayName === "Default Fallback Intent" 
-            || response[0].queryResult.intent.displayName === "RequestOrder" 
-            || response[0].queryResult.intent.displayName === "RequestRepair" 
-            || response[0].queryResult.intent.displayName === "Joke" 
-            || response[0].queryResult.intent.displayName === "Default Welcome Intent" 
+         if (response[0].queryResult.intent.displayName === "Default Fallback Intent" && resultRichMenu !== "changeScene"
+            || response[0].queryResult.intent.displayName === "RequestOrder" && resultRichMenu !== "changeScene"
+            || response[0].queryResult.intent.displayName === "RequestRepair" && resultRichMenu !== "changeScene"
+            || response[0].queryResult.intent.displayName === "Joke" && resultRichMenu !== "changeScene"
+            || response[0].queryResult.intent.displayName === "Default Welcome Intent" && resultRichMenu !== "changeScene"
          ) {
             return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
         }

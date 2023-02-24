@@ -49,7 +49,7 @@ class RichMenu extends BaseController {
  static async nextCheckRepair (userId) {
     try {
        const response = await client.linkRichMenuToUser(userId,richMenuRepair);
-       return response;
+       return "changeScene";
     } catch (err) {
         console.log(err);
     }
@@ -58,7 +58,7 @@ class RichMenu extends BaseController {
  static async nextCheckOrder (userId) {
     try {
        const response = await client.linkRichMenuToUser(userId,richMenuOrder);
-       return response;
+       return "changeScene";
     } catch (err) {
         console.log(err);
     }
@@ -67,7 +67,7 @@ class RichMenu extends BaseController {
  static async backCheckRepair (userId) {
     try {
         const response = await client.unlinkRichMenuFromUser(userId,richMenuMain);
-        return response;
+        return "changeScene";
      } catch (err) {
          console.log(err);
      }
