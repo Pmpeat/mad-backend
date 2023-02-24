@@ -56,10 +56,10 @@ class DialogFlow extends BaseController {
             const result = RichController.nextCheckRepair(event.source.userId);
         }
 
-        if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม"){
+        if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ"){
             const result = RichController.nextCheckOrder(event.source.userId);
         }
-        
+
         if(event.message.text === "ย้อนกลับ"){
             const result = RichController.backCheckRepair(event.source.userId);
         }
