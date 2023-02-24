@@ -232,9 +232,10 @@ class DialogFlow extends BaseController {
         // order check
 
          if (response[0].queryResult.intent.displayName === "Default Fallback Intent" 
-            && event.message.text !== "ย้อนกลับ"
-            && event.message.text !== "ตรวจสอบสถานะการสั่งซ่อม"
-            && event.message.text !== "ตรวจสอบสถานะการสั่งซื้อ"
+            || response[0].queryResult.intent.displayName === "RequestOrder" 
+            || response[0].queryResult.intent.displayName === "RequestRepair" 
+            || response[0].queryResult.intent.displayName === "Joke" 
+            || response[0].queryResult.intent.displayName === "Default Welcome Intent" 
          ) {
             return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
         }
