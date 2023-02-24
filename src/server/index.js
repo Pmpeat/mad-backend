@@ -14,7 +14,7 @@ const lineConfig = {
     channelSecret : process.env.LINE_SECRET_TOKEN
 }
 
-RichMenuController.createRishMenu();
+// RichMenuController.createRishMenu();
 
 app.use('/webhook', line.middleware(lineConfig));
 
