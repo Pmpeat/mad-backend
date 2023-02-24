@@ -207,7 +207,7 @@ class DialogFlow extends BaseController {
                 return client.replyMessage(event.replyToken,{type:'text',text:texts});
             }
         }
-        if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ : สั่งซื้อแล้ว"){
+        if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ : สั่งซื้อเเล้ว"){
             const result = await this.findOrder(event.source.userId,"สั่งซื้อแล้ว",req,res);
             let texts;
             if(result.length > 0){
