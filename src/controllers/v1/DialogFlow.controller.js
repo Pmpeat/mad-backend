@@ -53,7 +53,8 @@ class DialogFlow extends BaseController {
         if(response[0].queryResult.intent.displayName === "RequestRepair - problem"){
             const data = {
                 lineId: event.source.userId,
-                detail: event.message.text
+                detail: event.message.text,
+                status: "รอการตรวจสอบ"
             };
             createNewProblem = await super.create(req, 'request_repair',data);
 
@@ -67,7 +68,8 @@ class DialogFlow extends BaseController {
         else if(response[0].queryResult.intent.displayName === "RequestOrder - order"){
             const data = {
                 lineId: event.source.userId,
-                detail: event.message.text
+                detail: event.message.text,
+                status: "รอการตรวจสอบ"
             };
             createNewOrder = await super.create(req, 'request_order',data);
 
@@ -148,7 +150,9 @@ class DialogFlow extends BaseController {
   static async findRepair (userId,req,res) {
     try {
         const options = {
-            where : {lineId:userId,status:"รอการตรวจสอบ"}
+            where : {lineId:userId},
+            limit : 4,
+            order: [['id', 'desc']],
           };
           const result = await super.getList(req, 'request_repair', options);
        return result;
@@ -160,7 +164,9 @@ class DialogFlow extends BaseController {
   static async findOrder (userId,req,res) {
     try {
         const options = {
-            where : {lineId:userId,status:"รอการตรวจสอบ"}
+            where : {lineId:userId},
+            limit : 4,
+            order: [['id', 'desc']],
           };
           const result = await super.getList(req, 'request_order', options);
        return result;
