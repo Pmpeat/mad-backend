@@ -52,18 +52,6 @@ class DialogFlow extends BaseController {
         let createNewProblem;
         let createNewOrder;
 
-        if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม"){
-            const result = RichController.nextCheckRepair(event.source.userId);
-        }
-
-        if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ"){
-            const result = RichController.nextCheckOrder(event.source.userId);
-        }
-
-        if(event.message.text === "ย้อนกลับ"){
-            const result = RichController.backCheckRepair(event.source.userId);
-        }
-
         if(response[0].queryResult.intent.displayName === "RequestRepair - problem"){
             const data = {
                 lineId: event.source.userId,
@@ -231,6 +219,20 @@ class DialogFlow extends BaseController {
 
         // order check
 
+        let resultRichMenu;
+
+        if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม"){
+            resultRichMenu = RichController.nextCheckRepair(event.source.userId);
+        }
+
+        if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ"){
+            resultRichMenu = RichController.nextCheckOrder(event.source.userId);
+        }
+
+        if(event.message.text === "ย้อนกลับ"){
+            resultRichMenu = RichController.backCheckRepair(event.source.userId);
+        }
+        console.log(resultRichMenu);
          if (response[0].queryResult.intent.displayName === "Default Fallback Intent" 
             || response[0].queryResult.intent.displayName === "RequestOrder" 
             || response[0].queryResult.intent.displayName === "RequestRepair" 
