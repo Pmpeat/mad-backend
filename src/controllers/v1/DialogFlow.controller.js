@@ -222,15 +222,15 @@ class DialogFlow extends BaseController {
         let resultRichMenu;
 
         if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม"){
-            resultRichMenu = RichController.nextCheckRepair(event.source.userId);
+            resultRichMenu = await RichController.nextCheckRepair(event.source.userId);
         }
 
         if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ"){
-            resultRichMenu = RichController.nextCheckOrder(event.source.userId);
+            resultRichMenu = await RichController.nextCheckOrder(event.source.userId);
         }
 
         if(event.message.text === "ย้อนกลับ"){
-            resultRichMenu = RichController.backCheckRepair(event.source.userId);
+            resultRichMenu = await RichController.backCheckRepair(event.source.userId);
         }
         console.log(resultRichMenu);
          if (response[0].queryResult.intent.displayName === "Default Fallback Intent" 
