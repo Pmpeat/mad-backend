@@ -36,8 +36,9 @@ const credentials = {
     client_email: process.env.GOOGLE_CLIENT_EMAIL,
     private_key: googlePrivateKey,
 }
-const richMenuA = process.env.RICH_MENU_ID_A;
-const richMenuB = process.env.RICH_MENU_ID_B;
+const richMenuMain = process.env.RICH_MENU_ID_MAIN;
+const richMenuRepair = process.env.RICH_MENU_ID_REPAIR;
+const richMenuOrder = process.env.RICH_MENU_ID_ORDER;
 // Create a new session
 const sessionClient = new dialogflow.SessionsClient({googleProjectId,credentials});
 // const sessionPath = sessionClient.sessionPath(projectId, sessionId);
@@ -47,7 +48,16 @@ class RichMenu extends BaseController {
 
  static async nextCheckRepair (userId) {
     try {
-       const response = await client.linkRichMenuToUser(userId,richMenuB);
+       const response = await client.linkRichMenuToUser(userId,richMenuRepair);
+       return response;
+    } catch (err) {
+        console.log(err);
+    }
+ }
+
+ static async nextCheckOrder (userId) {
+    try {
+       const response = await client.linkRichMenuToUser(userId,richMenuOrder);
        return response;
     } catch (err) {
         console.log(err);
@@ -56,7 +66,7 @@ class RichMenu extends BaseController {
 
  static async backCheckRepair (userId) {
     try {
-        const response = await client.unlinkRichMenuFromUser(userId,richMenuB);
+        const response = await client.unlinkRichMenuFromUser(userId,richMenuMain);
         return response;
      } catch (err) {
          console.log(err);
