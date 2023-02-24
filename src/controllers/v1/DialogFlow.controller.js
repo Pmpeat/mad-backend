@@ -232,7 +232,6 @@ class DialogFlow extends BaseController {
         if(event.message.text === "ย้อนกลับ"){
             resultRichMenu = await RichController.backCheckRepair(event.source.userId);
         }
-        console.log(resultRichMenu);
          if (response[0].queryResult.intent.displayName === "Default Fallback Intent" && resultRichMenu !== "changeScene"
             || response[0].queryResult.intent.displayName === "RequestOrder" && resultRichMenu !== "changeScene"
             || response[0].queryResult.intent.displayName === "RequestRepair" && resultRichMenu !== "changeScene"
