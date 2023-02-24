@@ -2,6 +2,7 @@ const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const BaseController = require('./Base.controller');
+const RichController = require('./RichMenu.controller');
 const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
 
@@ -50,6 +51,11 @@ class DialogFlow extends BaseController {
 
         let createNewProblem;
         let createNewOrder;
+
+        if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม"){
+            const result = RichController.nextCheckRepair(event.source.userId);
+        }
+
         if(response[0].queryResult.intent.displayName === "RequestRepair - problem"){
             const data = {
                 lineId: event.source.userId,
@@ -80,24 +86,24 @@ class DialogFlow extends BaseController {
             }
         }
         else if(response[0].queryResult.intent.displayName === "CheckRepair"){
-            const result = await this.findRepair(event.source.userId,req,res);
-            let texts;
-            if(result.length > 0){
-                texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
-                result.map((element) => { 
-                    texts += `\nปัญหา : \n${element.detail}`;
-                    texts += `\nสถานะ: ${element.status}`;
-                 });
+            // const result = await this.findRepair(event.source.userId,req,res);
+            // let texts;
+            // if(result.length > 0){
+            //     texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
+            //     result.map((element) => { 
+            //         texts += `\nปัญหา : \n${element.detail}`;
+            //         texts += `\nสถานะ: ${element.status}`;
+            //      });
 
-                 if(!_.isNull(result)){
-                    return client.replyMessage(event.replyToken,{type:'text',text:texts});
-                } else {
-                    return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
-                }
+            //      if(!_.isNull(result)){
+            //         return client.replyMessage(event.replyToken,{type:'text',text:texts});
+            //     } else {
+            //         return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
+            //     }
                 
-            } else {
+            // } else {
 
-            }
+            // }
         }
         else if(response[0].queryResult.intent.displayName === "CheckOrder"){
             const result = await this.findOrder(event.source.userId,req,res);

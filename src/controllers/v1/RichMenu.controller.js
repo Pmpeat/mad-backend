@@ -36,97 +36,31 @@ const credentials = {
     client_email: process.env.GOOGLE_CLIENT_EMAIL,
     private_key: googlePrivateKey,
 }
-
+const richMenuA = process.env.RICH_MENU_ID_A;
+const richMenuB = process.env.RICH_MENU_ID_B;
 // Create a new session
 const sessionClient = new dialogflow.SessionsClient({googleProjectId,credentials});
 // const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
-const richMenuObjectA = () => ({
-    size: {
-      width: 2500,
-      height: 1686
-    },
-    selected: false,
-    name: "richmenu-a",
-    chatBarText: "Tap to open",
-    areas: [
-      {
-        bounds: {
-          x: 0,
-          y: 0,
-          width: 1250,
-          height: 1686
-        },
-        action: {
-          type: "uri",
-          uri: "https://www.line-community.me/"
-        }
-      },
-      {
-        bounds: {
-          x: 1251,
-          y: 0,
-          width: 1250,
-          height: 1686
-        },
-        action: {
-          type: "richmenuswitch",
-          richMenuAliasId: "richmenu-alias-b",
-          data: "richmenu-changed-to-b"
-        }
-      }
-    ]
-  });
-  
-  const richMenuObjectB = () => ({
-    size: {
-      width: 2500,
-      height: 1686
-    },
-    selected: false,
-    name: "richmenu-b",
-    chatBarText: "Tap to open",
-    areas: [
-      {
-        bounds: {
-          x: 0,
-          y: 0,
-          width: 1250,
-          height: 1686
-        },
-        action: {
-          type: "richmenuswitch",
-          richMenuAliasId: "richmenu-alias-a",
-          data: "richmenu-changed-to-a"
-        }
-      },
-        {
-        bounds: {
-          x: 1251,
-          y: 0,
-          width: 1250,
-          height: 1686
-        },
-        action: {
-          type: "uri",
-          uri: "https://www.line-community.me/"
-        }
-      }
-    ]
-  });
 
 class RichMenu extends BaseController {
 
- static async createRishMenu () {
-    const richMenuAId = await client.createRichMenu(
-        richMenuObjectA()
-    );
-    const richMenuBId = await client.createRichMenu(
-        richMenuObjectB()
-    );
-    await client.createRichMenuAlias(richMenuAId, 'richmenu-alias-a');
-    await client.createRichMenuAlias(richMenuBId, 'richmenu-alias-b');
-    client.setDefaultRichMenu("richmenu-alias-a");
+ static async nextCheckRepair (userId) {
+    try {
+       const response = await client.linkRichMenuToUser(userId,richMenuB);
+       return response;
+    } catch (err) {
+        console.log(err);
+    }
+ }
+
+ static async backCheckRepair (userId) {
+    try {
+        const response = await client.unlinkRichMenuFromUser(userId,richMenuB);
+        return response;
+     } catch (err) {
+         console.log(err);
+     }
  }
 
   
