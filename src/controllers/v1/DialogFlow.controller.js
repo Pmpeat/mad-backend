@@ -193,22 +193,57 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 await result.map((element) => { 
                     const arrayData = {
-                        "title": element.detail,
-                        "text": element.status,
-                        "actions": [
-                        ]
+                        "type": "bubble",
+                        "header": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "flex": 0,
+                          "backgroundColor": "#FF0000FF",
+                          "contents": [
+                            {
+                              "type": "box",
+                              "layout": "vertical",
+                              "flex": 1,
+                              "width": "100%",
+                              "height": "100px",
+                              "contents": [
+                                {
+                                  "type": "text",
+                                  "text": element.status,
+                                  "size": "xl",
+                                  "color": "#FFFFFFFF",
+                                  "flex": 1,
+                                  "align": "center",
+                                  "gravity": "center",
+                                  "contents": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "body": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "spacing": "sm",
+                          "contents": [
+                            {
+                              "type": "text",
+                              "text": element.detail,
+                              "weight": "bold",
+                              "size": "xl",
+                              "wrap": true,
+                              "contents": []
+                            },
+                          ]
+                        }
                       };
                       dataToMsg.push(arrayData);
                  });
                  texts = {
-                    "type": "template",
-                    "altText": "this is a carousel template",
-                    "template": {
-                      "type": "carousel",
-                      "columns": [
-                        ...dataToMsg
-                      ]
-                    }
+                    "type": "carousel",
+                    "contents": [
+                      ...dataToMsg
+                    ]
                   }
 
                  if(!_.isNull(result)){
