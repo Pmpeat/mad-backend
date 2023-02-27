@@ -209,7 +209,7 @@ class DialogFlow extends BaseController {
                               "contents": [
                                 {
                                   "type": "text",
-                                  "text": element.detail,
+                                  "text": "testtestsetset",
                                   "size": "xl",
                                   "color": "#FFFFFFFF",
                                   "flex": 1,
@@ -228,7 +228,7 @@ class DialogFlow extends BaseController {
                           "contents": [
                             {
                               "type": "text",
-                              "text": element.status,
+                              "text": "Arm%20Chair%2C%20White",
                               "weight": "bold",
                               "size": "xl",
                               "wrap": true,
@@ -268,7 +268,7 @@ class DialogFlow extends BaseController {
                     "altText": "this is a carousel template",
                     "template": {
                       "type": "carousel",
-                      "columns": [
+                      "contents": [
                        ...dataToMsg
                       ]
                     }
