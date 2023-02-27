@@ -783,7 +783,7 @@ class DialogFlow extends BaseController {
 
   static async pushMessage (req,res) {
     const data = req.body;
-
+    console.log("innnnnnnnnnn");
     const arrayData = {
         type: "bubble",
         size: "nano",

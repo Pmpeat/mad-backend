@@ -47,6 +47,7 @@ router.post('/text-query', async (req ,res) => {
 router.post('/push-message', async (req ,res) => {
     try {
         const resultQuery = await dialogFlowController.pushMessage(req,res);
+        res.send(resultQuery);
     } catch (err) {
         res.status(500).end();
     }
