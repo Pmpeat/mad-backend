@@ -86,12 +86,94 @@ class DialogFlow extends BaseController {
         if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม : ไม่รับคำร้อง"){
             const result = await this.findRepair(event.source.userId,"ไม่รับคำร้อง",req,res);
             let texts;
+            const dataToMsg = [];
             if(result.length > 0){
-                texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
-                result.map((element) => { 
-                    texts += `\nปัญหา : \n${element.detail}`;
-                    texts += `\nสถานะ: ${element.status}`;
+                await result.map((element) => { 
+                    const arrayData = {
+                        type: "bubble",
+                        size: "nano",
+                        header: {
+                          type: "box",
+                          layout: "vertical",
+                          contents: [
+                            {
+                              type: "text",
+                              text: element.status,
+                              color: "#ffffff",
+                              align: "start",
+                              size: "md",
+                              gravity: "center"
+                            },
+                            {
+                              type: "text",
+                              text: "100%",
+                              color: "#ffffff",
+                              align: "start",
+                              size: "xs",
+                              gravity: "center",
+                              margin: "lg"
+                            },
+                            {
+                              type: "box",
+                              layout: "vertical",
+                              contents: [
+                                {
+                                  type: "box",
+                                  layout: "vertical",
+                                  contents: [
+                                    {
+                                      type: "filler"
+                                    }
+                                  ],
+                                  width: "0%",
+                                  backgroundColor: "#DE5658",
+                                  height: "6px"
+                                }
+                              ],
+                              backgroundColor: "#FAD2A76E",
+                              height: "6px",
+                              margin: "sm"
+                            }
+                          ],
+                          backgroundColor: "#FF6B6E",
+                          paddingTop: "19px",
+                          paddingAll: "12px",
+                          paddingBottom: "16px"
+                        },
+                        body: {
+                          type: "box",
+                          layout: "vertical",
+                          contents: [
+                            {
+                              type: "box",
+                              layout: "horizontal",
+                              contents: [
+                                {
+                                  type: "text",
+                                  text: element.detail,
+                                  color: "#8C8C8C",
+                                  size: "sm",
+                                  wrap: true
+                                }
+                              ],
+                              flex: 1
+                            }
+                          ],
+                          spacing: "md",
+                          paddingAll: "12px"
+                        },
+                        styles: {
+                          footer: {
+                            separator: false
+                          }
+                        }
+                      }
+                      dataToMsg.push(arrayData);
                  });
+                 texts = {
+                    "type": "carousel",
+                    "contents": [...dataToMsg]
+                  }
 
                  if(!_.isNull(result)){
                     return client.replyMessage(event.replyToken,{type:'text',text:texts});
@@ -104,16 +186,97 @@ class DialogFlow extends BaseController {
                 return client.replyMessage(event.replyToken,{type:'text',text:texts});
             }
         }
-
         if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม : รอการตรวจสอบ"){
             const result = await this.findRepair(event.source.userId,"รอการตรวจสอบ",req,res);
             let texts;
+            const dataToMsg = [];
             if(result.length > 0){
-                texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
-                result.map((element) => { 
-                    texts += `\nปัญหา : \n${element.detail}`;
-                    texts += `\nสถานะ: ${element.status}`;
+                await result.map((element) => { 
+                    const arrayData = {
+                        type: "bubble",
+                        size: "nano",
+                        header: {
+                          type: "box",
+                          layout: "vertical",
+                          contents: [
+                            {
+                              type: "text",
+                              text: element.status,
+                              color: "#ffffff",
+                              align: "start",
+                              size: "md",
+                              gravity: "center"
+                            },
+                            {
+                              type: "text",
+                              text: "100%",
+                              color: "#ffffff",
+                              align: "start",
+                              size: "xs",
+                              gravity: "center",
+                              margin: "lg"
+                            },
+                            {
+                              type: "box",
+                              layout: "vertical",
+                              contents: [
+                                {
+                                  type: "box",
+                                  layout: "vertical",
+                                  contents: [
+                                    {
+                                      type: "filler"
+                                    }
+                                  ],
+                                  width: "70%",
+                                  backgroundColor: "#FAE089",
+                                  height: "6px"
+                                }
+                              ],
+                              backgroundColor: "#FAF4B8",
+                              height: "6px",
+                              margin: "sm"
+                            }
+                          ],
+                          backgroundColor: "#FDF97E",
+                          paddingTop: "19px",
+                          paddingAll: "12px",
+                          paddingBottom: "16px"
+                        },
+                        body: {
+                          type: "box",
+                          layout: "vertical",
+                          contents: [
+                            {
+                              type: "box",
+                              layout: "horizontal",
+                              contents: [
+                                {
+                                  type: "text",
+                                  text: element.detail,
+                                  color: "#8C8C8C",
+                                  size: "sm",
+                                  wrap: true
+                                }
+                              ],
+                              flex: 1
+                            }
+                          ],
+                          spacing: "md",
+                          paddingAll: "12px"
+                        },
+                        styles: {
+                          footer: {
+                            separator: false
+                          }
+                        }
+                      }
+                      dataToMsg.push(arrayData);
                  });
+                 texts = {
+                    "type": "carousel",
+                    "contents": [...dataToMsg]
+                  }
 
                  if(!_.isNull(result)){
                     return client.replyMessage(event.replyToken,{type:'text',text:texts});
@@ -126,17 +289,98 @@ class DialogFlow extends BaseController {
                 return client.replyMessage(event.replyToken,{type:'text',text:texts});
             }
         }
-
         if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม : แก้ไขแล้ว"){
             const result = await this.findRepair(event.source.userId,"แก้ไขแล้ว",req,res);
             let texts;
+            const dataToMsg = [];
             if(result.length > 0){
-                texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
-                result.map((element) => { 
-                    texts += `\nปัญหา : \n${element.detail}`;
-                    texts += `\nสถานะ: ${element.status}`;
+                
+                await result.map((element) => { 
+                    const arrayData = {
+                        type: "bubble",
+                        size: "nano",
+                        header: {
+                          type: "box",
+                          layout: "vertical",
+                          contents: [
+                            {
+                              type: "text",
+                              text: element.status,
+                              color: "#ffffff",
+                              align: "start",
+                              size: "md",
+                              gravity: "center"
+                            },
+                            {
+                              type: "text",
+                              text: "100%",
+                              color: "#ffffff",
+                              align: "start",
+                              size: "xs",
+                              gravity: "center",
+                              margin: "lg"
+                            },
+                            {
+                              type: "box",
+                              layout: "vertical",
+                              contents: [
+                                {
+                                  type: "box",
+                                  layout: "vertical",
+                                  contents: [
+                                    {
+                                      type: "filler"
+                                    }
+                                  ],
+                                  width: "100%",
+                                  backgroundColor: "#0D8186",
+                                  height: "6px"
+                                }
+                              ],
+                              backgroundColor: "#9FD8E36E",
+                              height: "6px",
+                              margin: "sm"
+                            }
+                          ],
+                          backgroundColor: "#27ACB2",
+                          paddingTop: "19px",
+                          paddingAll: "12px",
+                          paddingBottom: "16px"
+                        },
+                        body: {
+                          type: "box",
+                          layout: "vertical",
+                          contents: [
+                            {
+                              type: "box",
+                              layout: "horizontal",
+                              contents: [
+                                {
+                                  type: "text",
+                                  text: element.detail,
+                                  color: "#8C8C8C",
+                                  size: "sm",
+                                  wrap: true
+                                }
+                              ],
+                              flex: 1
+                            }
+                          ],
+                          spacing: "md",
+                          paddingAll: "12px"
+                        },
+                        styles: {
+                          footer: {
+                            separator: false
+                          }
+                        }
+                      }
+                      dataToMsg.push(arrayData);
                  });
-
+                 texts = {
+                    "type": "carousel",
+                    "contents": [...dataToMsg]
+                  }
                  if(!_.isNull(result)){
                     return client.replyMessage(event.replyToken,{type:'text',text:texts});
                 } else {
@@ -148,20 +392,100 @@ class DialogFlow extends BaseController {
                 return client.replyMessage(event.replyToken,{type:'text',text:texts});
             }
         }
-
-        
         // repair check
 
         // order check
         if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ : ไม่รับคำร้อง"){
             const result = await this.findOrder(event.source.userId,"ไม่รับคำร้อง",req,res);
             let texts;
+            const dataToMsg = [];
             if(result.length > 0){
-                texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
-                result.map((element) => { 
-                    texts += `\nคำสั่งซื้อ : \n${element.detail}`;
-                    texts += `\nสถานะ: ${element.status}`;
+                await result.map((element) => { 
+                    const arrayData = {
+                        type: "bubble",
+                        size: "nano",
+                        header: {
+                          type: "box",
+                          layout: "vertical",
+                          contents: [
+                            {
+                              type: "text",
+                              text: element.status,
+                              color: "#ffffff",
+                              align: "start",
+                              size: "md",
+                              gravity: "center"
+                            },
+                            {
+                              type: "text",
+                              text: "100%",
+                              color: "#ffffff",
+                              align: "start",
+                              size: "xs",
+                              gravity: "center",
+                              margin: "lg"
+                            },
+                            {
+                              type: "box",
+                              layout: "vertical",
+                              contents: [
+                                {
+                                  type: "box",
+                                  layout: "vertical",
+                                  contents: [
+                                    {
+                                      type: "filler"
+                                    }
+                                  ],
+                                  width: "0%",
+                                  backgroundColor: "#DE5658",
+                                  height: "6px"
+                                }
+                              ],
+                              backgroundColor: "#FAD2A76E",
+                              height: "6px",
+                              margin: "sm"
+                            }
+                          ],
+                          backgroundColor: "#FF6B6E",
+                          paddingTop: "19px",
+                          paddingAll: "12px",
+                          paddingBottom: "16px"
+                        },
+                        body: {
+                          type: "box",
+                          layout: "vertical",
+                          contents: [
+                            {
+                              type: "box",
+                              layout: "horizontal",
+                              contents: [
+                                {
+                                  type: "text",
+                                  text: element.detail,
+                                  color: "#8C8C8C",
+                                  size: "sm",
+                                  wrap: true
+                                }
+                              ],
+                              flex: 1
+                            }
+                          ],
+                          spacing: "md",
+                          paddingAll: "12px"
+                        },
+                        styles: {
+                          footer: {
+                            separator: false
+                          }
+                        }
+                      }
+                      dataToMsg.push(arrayData);
                  });
+                 texts = {
+                    "type": "carousel",
+                    "contents": [...dataToMsg]
+                  }
 
                  if(!_.isNull(result)){
                     return client.replyMessage(event.replyToken,{type:'text',text:texts});
@@ -177,12 +501,94 @@ class DialogFlow extends BaseController {
         if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ : รอการตรวจสอบ"){
             const result = await this.findOrder(event.source.userId,"รอการตรวจสอบ",req,res);
             let texts;
+            const dataToMsg = [];
             if(result.length > 0){
-                texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
-                result.map((element) => { 
-                    texts += `\nคำสั่งซื้อ : \n${element.detail}`;
-                    texts += `\nสถานะ: ${element.status}`;
+                await result.map((element) => { 
+                    const arrayData = {
+                        type: "bubble",
+                        size: "nano",
+                        header: {
+                          type: "box",
+                          layout: "vertical",
+                          contents: [
+                            {
+                              type: "text",
+                              text: element.status,
+                              color: "#ffffff",
+                              align: "start",
+                              size: "md",
+                              gravity: "center"
+                            },
+                            {
+                              type: "text",
+                              text: "100%",
+                              color: "#ffffff",
+                              align: "start",
+                              size: "xs",
+                              gravity: "center",
+                              margin: "lg"
+                            },
+                            {
+                              type: "box",
+                              layout: "vertical",
+                              contents: [
+                                {
+                                  type: "box",
+                                  layout: "vertical",
+                                  contents: [
+                                    {
+                                      type: "filler"
+                                    }
+                                  ],
+                                  width: "70%",
+                                  backgroundColor: "#FAE089",
+                                  height: "6px"
+                                }
+                              ],
+                              backgroundColor: "#FAF4B8",
+                              height: "6px",
+                              margin: "sm"
+                            }
+                          ],
+                          backgroundColor: "#FDF97E",
+                          paddingTop: "19px",
+                          paddingAll: "12px",
+                          paddingBottom: "16px"
+                        },
+                        body: {
+                          type: "box",
+                          layout: "vertical",
+                          contents: [
+                            {
+                              type: "box",
+                              layout: "horizontal",
+                              contents: [
+                                {
+                                  type: "text",
+                                  text: element.detail,
+                                  color: "#8C8C8C",
+                                  size: "sm",
+                                  wrap: true
+                                }
+                              ],
+                              flex: 1
+                            }
+                          ],
+                          spacing: "md",
+                          paddingAll: "12px"
+                        },
+                        styles: {
+                          footer: {
+                            separator: false
+                          }
+                        }
+                      }
+                      dataToMsg.push(arrayData);
                  });
+                 texts = {
+                    "type": "carousel",
+                    "contents": [...dataToMsg]
+                  }
 
                  if(!_.isNull(result)){
                     return client.replyMessage(event.replyToken,{type:'text',text:texts});
@@ -198,12 +604,94 @@ class DialogFlow extends BaseController {
         if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ: สั่งซื้อแล้ว"){
             const result = await this.findOrder(event.source.userId,"สั่งซื้อแล้ว",req,res);
             let texts;
+            const dataToMsg = [];
             if(result.length > 0){
-                texts = `ผู้ใช้รหัส : ${result[0].lineId}\n`;
-                result.map((element) => { 
-                    texts += `\nคำสั่งซื้อ : \n${element.detail}`;
-                    texts += `\nสถานะ: ${element.status}`;
+                await result.map((element) => { 
+                    const arrayData = {
+                        type: "bubble",
+                        size: "nano",
+                        header: {
+                          type: "box",
+                          layout: "vertical",
+                          contents: [
+                            {
+                              type: "text",
+                              text: element.status,
+                              color: "#ffffff",
+                              align: "start",
+                              size: "md",
+                              gravity: "center"
+                            },
+                            {
+                              type: "text",
+                              text: "100%",
+                              color: "#ffffff",
+                              align: "start",
+                              size: "xs",
+                              gravity: "center",
+                              margin: "lg"
+                            },
+                            {
+                              type: "box",
+                              layout: "vertical",
+                              contents: [
+                                {
+                                  type: "box",
+                                  layout: "vertical",
+                                  contents: [
+                                    {
+                                      type: "filler"
+                                    }
+                                  ],
+                                  width: "100%",
+                                  backgroundColor: "#0D8186",
+                                  height: "6px"
+                                }
+                              ],
+                              backgroundColor: "#9FD8E36E",
+                              height: "6px",
+                              margin: "sm"
+                            }
+                          ],
+                          backgroundColor: "#27ACB2",
+                          paddingTop: "19px",
+                          paddingAll: "12px",
+                          paddingBottom: "16px"
+                        },
+                        body: {
+                          type: "box",
+                          layout: "vertical",
+                          contents: [
+                            {
+                              type: "box",
+                              layout: "horizontal",
+                              contents: [
+                                {
+                                  type: "text",
+                                  text: element.detail,
+                                  color: "#8C8C8C",
+                                  size: "sm",
+                                  wrap: true
+                                }
+                              ],
+                              flex: 1
+                            }
+                          ],
+                          spacing: "md",
+                          paddingAll: "12px"
+                        },
+                        styles: {
+                          footer: {
+                            separator: false
+                          }
+                        }
+                      }
+                      dataToMsg.push(arrayData);
                  });
+                 texts = {
+                    "type": "carousel",
+                    "contents": [...dataToMsg]
+                  }
 
                  if(!_.isNull(result)){
                     return client.replyMessage(event.replyToken,{type:'text',text:texts});
@@ -216,7 +704,6 @@ class DialogFlow extends BaseController {
                 return client.replyMessage(event.replyToken,{type:'text',text:texts});
             }
         }
-
         // order check
 
         let resultRichMenu = "default";
