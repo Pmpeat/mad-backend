@@ -193,28 +193,85 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 await result.map((element) => { 
                     const arrayData = {
-                        "title": element.detail,
-                        "text": element.status,
-                        "actions": [
-                          {
-                            "type": "message",
-                            "label": "Action 1",
-                            "text": "Action 1"
-                          },
-                          {
-                            "type": "message",
-                            "label": "Action 2",
-                            "text": "Action 2"
-                          }
-                        ]
+                        "type": "bubble",
+                        "header": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "flex": 0,
+                          "backgroundColor": "#FF0000FF",
+                          "contents": [
+                            {
+                              "type": "box",
+                              "layout": "vertical",
+                              "flex": 1,
+                              "width": "100%",
+                              "height": "100px",
+                              "contents": [
+                                {
+                                  "type": "text",
+                                  "text": element.detail,
+                                  "size": "xl",
+                                  "color": "#FFFFFFFF",
+                                  "flex": 1,
+                                  "align": "center",
+                                  "gravity": "center",
+                                  "contents": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "body": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "spacing": "sm",
+                          "contents": [
+                            {
+                              "type": "text",
+                              "text": element.status,
+                              "weight": "bold",
+                              "size": "xl",
+                              "wrap": true,
+                              "contents": []
+                            },
+                            {
+                              "type": "box",
+                              "layout": "baseline",
+                              "contents": [
+                                {
+                                  "type": "text",
+                                  "text": "%2449",
+                                  "weight": "bold",
+                                  "size": "xl",
+                                  "flex": 0,
+                                  "wrap": true,
+                                  "contents": []
+                                },
+                                {
+                                  "type": "text",
+                                  "text": ".99",
+                                  "weight": "bold",
+                                  "size": "sm",
+                                  "flex": 0,
+                                  "wrap": true,
+                                  "contents": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
                       };
                       dataToMsg.push(arrayData);
                  });
                  texts = {
-                    "type": "carousel",
-                    "contents": [
-                      ...dataToMsg
-                    ]
+                    "type": "template",
+                    "altText": "this is a carousel template",
+                    "template": {
+                      "type": "carousel",
+                      "columns": [
+                       ...dataToMsg
+                      ]
+                    }
                   }
 
                  if(!_.isNull(result)){
