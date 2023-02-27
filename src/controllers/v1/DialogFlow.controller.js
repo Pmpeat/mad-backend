@@ -204,26 +204,22 @@ class DialogFlow extends BaseController {
                 //   }
 
                 texts = {
-                    "type": "flex",
-                    "altText": "This is a Flex message",
-                    "contents": {
-                        "type": "carousel",
-                        "contents":[
-                            {
-                                "type": "bubble",
-                                "styles": {},
-                                "body": {},
-                                "footer": {}
-                            },
-                            {
-                                "type": "bubble",
-                                "styles": {},
-                                "body": {},
-                                "footer": {}
-                            }
-                        ]
-                    }
-                }
+                    "type": "carousel",
+                    "contents":[
+                        {
+                            "type": "bubble",
+                            "styles": {},
+                            "body": {},
+                            "footer": {}
+                        },
+                        {
+                            "type": "bubble",
+                            "styles": {},
+                            "body": {},
+                            "footer": {}
+                        }
+                    ]
+                } 
                 
 
                  if(!_.isNull(result)){
