@@ -221,112 +221,74 @@ class DialogFlow extends BaseController {
                 //     }
                 //   }
 
-                texts = {
-                    "type": "template",
-                    "altText": "this is a carousel template","template": {
-                    "type": "carousel",
-                    "contents": [
-                      {
-                        "type": "bubble",
-                        "direction": "ltr",
-                        "header": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "contents": [
+                
+                    texts = {
+                        "type": "template",
+                        "altText": "this is a carousel template",
+                        "template": {
+                          "type": "carousel",
+                          "columns": [
                             {
-                              "type": "text",
-                              "text": "Header",
-                              "align": "center",
-                              "contents": []
-                            }
-                          ]
-                        },
-                        "hero": {
-                          "type": "image",
-                          "url": "https://vos.line-scdn.net/bot-designer-template-images/bot-designer-icon.png",
-                          "size": "full",
-                          "aspectRatio": "1.51:1",
-                          "aspectMode": "fit"
-                        },
-                        "body": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "contents": [
-                            {
-                              "type": "text",
-                              "text": "Body",
-                              "align": "center",
-                              "contents": []
-                            }
-                          ]
-                        },
-                        "footer": {
-                          "type": "box",
-                          "layout": "horizontal",
-                          "contents": [
-                            {
-                              "type": "button",
-                              "action": {
+                              "thumbnailImageUrl": "https://example.com/bot/images/item1.jpg",
+                              "imageBackgroundColor": "#FFFFFF",
+                              "title": "this is menu",
+                              "text": "description",
+                              "defaultAction": {
                                 "type": "uri",
-                                "label": "Button",
-                                "uri": "https://linecorp.com"
-                              }
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "type": "bubble",
-                        "direction": "ltr",
-                        "header": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "contents": [
+                                "label": "View detail",
+                                "uri": "http://example.com/page/123"
+                              },
+                              "actions": [
+                                {
+                                  "type": "postback",
+                                  "label": "Buy",
+                                  "data": "action=buy&itemid=111"
+                                },
+                                {
+                                  "type": "postback",
+                                  "label": "Add to cart",
+                                  "data": "action=add&itemid=111"
+                                },
+                                {
+                                  "type": "uri",
+                                  "label": "View detail",
+                                  "uri": "http://example.com/page/111"
+                                }
+                              ]
+                            },
                             {
-                              "type": "text",
-                              "text": "Header",
-                              "align": "center",
-                              "contents": []
-                            }
-                          ]
-                        },
-                        "hero": {
-                          "type": "image",
-                          "url": "https://vos.line-scdn.net/bot-designer-template-images/bot-designer-icon.png",
-                          "size": "full",
-                          "aspectRatio": "1.51:1",
-                          "aspectMode": "fit"
-                        },
-                        "body": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "contents": [
-                            {
-                              "type": "text",
-                              "text": "Body",
-                              "align": "center",
-                              "contents": []
-                            }
-                          ]
-                        },
-                        "footer": {
-                          "type": "box",
-                          "layout": "horizontal",
-                          "contents": [
-                            {
-                              "type": "button",
-                              "action": {
+                              "thumbnailImageUrl": "https://example.com/bot/images/item2.jpg",
+                              "imageBackgroundColor": "#000000",
+                              "title": "this is menu",
+                              "text": "description",
+                              "defaultAction": {
                                 "type": "uri",
-                                "label": "Button",
-                                "uri": "https://linecorp.com"
-                              }
+                                "label": "View detail",
+                                "uri": "http://example.com/page/222"
+                              },
+                              "actions": [
+                                {
+                                  "type": "postback",
+                                  "label": "Buy",
+                                  "data": "action=buy&itemid=222"
+                                },
+                                {
+                                  "type": "postback",
+                                  "label": "Add to cart",
+                                  "data": "action=add&itemid=222"
+                                },
+                                {
+                                  "type": "uri",
+                                  "label": "View detail",
+                                  "uri": "http://example.com/page/222"
+                                }
+                              ]
                             }
-                          ]
+                          ],
+                          "imageAspectRatio": "rectangle",
+                          "imageSize": "cover"
                         }
-                      }
-                    ]
-                  }
-                }
+                      };
 
                  if(!_.isNull(result)){
                     return client.pushMessage(event.source.userId,texts);
