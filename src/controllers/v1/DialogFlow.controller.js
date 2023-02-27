@@ -193,96 +193,33 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 await result.map((element) => { 
                     const arrayData = {
-                        type: "box",
-                        layout: "horizontal",
-                        margin: "md",
-                        contents: [
+                        "title": element.detail,
+                        "text": element.status,
+                        "actions": [
                           {
-                            type: "text",
-                            text: `${element.detail}`,
-                            weight: "bold",
-                            color: "#000",
-                            size: "sm",
-                            flex: 0,
+                            "type": "message",
+                            "label": "Action 1",
+                            "text": "Action 1"
                           },
                           {
-                            type: "text",
-                            text: `${element.status}`,
-                            color: "#FAE089",
-                            size: "sm",
-                            align: "end",
-                          },
-                        ],
+                            "type": "message",
+                            "label": "Action 2",
+                            "text": "Action 2"
+                          }
+                        ]
                       };
                       dataToMsg.push(arrayData);
                  });
-                //  texts = {
-                //     "type": "carousel",
-                //     "contents": [...dataToMsg]
-                //   }
-
-                texts = {
-                    type: "flex",
-                    altText: "Mad IT",
-                    contents: {
-                      type: "bubble",
-                      size: "giga",
-                      body: {
-                        type: "box",
-                        layout: "vertical",
-                        contents: [
-                          {
-                            type: "text",
-                            text: "Mad IT",
-                            weight: "bold",
-                            size: "xl",
-                            margin: "md",
-                          },
-                          {
-                            type: "text",
-                            text: "ข้อมูลคำร้องของคุณ",
-                            margin: "sm",
-                            size: "sm",
-                          },
-                          {
-                            type: "separator",
-                            margin: "xxl",
-                          },
-                          {
-                            type: "box",
-                            layout: "vertical",
-                            margin: "xxl",
-                            spacing: "sm",
-                            contents: dataToMsg,
-                          },
-                          {
-                            type: "separator",
-                            margin: "xxl",
-                          },
-                          {
-                            type: "box",
-                            layout: "horizontal",
-                            margin: "md",
-                            contents: [
-                              {
-                                type: "text",
-                                text: "ขอบคุณสำหรับการแจ้ง",
-                                size: "xs",
-                                color: "#aaaaaa",
-                                flex: 0,
-                              },
-                            ],
-                          },
-                        ],
-                      },
-                      styles: {
-                        footer: {
-                          separator: true,
-                        },
-                      },
-                    },
-                  };
-                
+                 texts = {
+                    "type": "template",
+                    "altText": "this is a carousel template",
+                    "template": {
+                      "type": "carousel",
+                      "columns": [
+                        ...dataToMsg
+                      ]
+                    }
+                  }
 
                  if(!_.isNull(result)){
                     return client.pushMessage(event.source.userId,texts);
@@ -787,10 +724,8 @@ class DialogFlow extends BaseController {
     }
   }
 
-  static async pushMessage (req,res) {
-    const data = req.body;
-    console.log("innnnnnnnnnn");
-    const message = {
+  static async pushMessage (dataToMsg) {
+    const texts = {
         type: "flex",
         altText: "Mad IT",
         contents: {
@@ -822,7 +757,7 @@ class DialogFlow extends BaseController {
                 layout: "vertical",
                 margin: "xxl",
                 spacing: "sm",
-                contents: [...prodData],
+                contents: [...dataToMsg],
               },
               {
                 type: "separator",
