@@ -193,23 +193,57 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 await result.map((element) => { 
                     const arrayData = {
-                        "type": "buttons",
-                        "imageBackgroundColor": "#F00000",
-                        "title": element.detail,
-                        "text": element.status,
-                        "actions": [
-                          {
-                            "type": "message",
-                            "label": "Action 1",
-                            "text": "Action 1"
-                          },
-                          {
-                            "type": "message",
-                            "label": "Action 2",
-                            "text": "Action 2"
-                          }
-                        ]
-                      };
+                        "type": "bubble",
+                        "size": "nano",
+                        "header": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "contents": [
+                            {
+                              "type": "text",
+                              "text": "Pending",
+                              "color": "#ffffff",
+                              "align": "start",
+                              "size": "md",
+                              "gravity": "center"
+                            },
+                            {
+                              "type": "text",
+                              "text": "30%",
+                              "color": "#ffffff",
+                              "align": "start",
+                              "size": "xs",
+                              "gravity": "center",
+                              "margin": "lg"
+                            },
+                            {
+                              "type": "box",
+                              "layout": "vertical",
+                              "contents": [
+                                {
+                                  "type": "box",
+                                  "layout": "vertical",
+                                  "contents": [
+                                    {
+                                      "type": "filler"
+                                    }
+                                  ],
+                                  "width": "30%",
+                                  "backgroundColor": "#DE5658",
+                                  "height": "6px"
+                                }
+                              ],
+                              "backgroundColor": "#FAD2A76E",
+                              "height": "6px",
+                              "margin": "sm"
+                            }
+                          ],
+                          "backgroundColor": "#FF6B6E",
+                          "paddingTop": "19px",
+                          "paddingAll": "12px",
+                          "paddingBottom": "16px"
+                        }
+                    }
                       dataToMsg.push(arrayData);
                  });
                  texts = {
