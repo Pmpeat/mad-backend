@@ -268,7 +268,7 @@ class DialogFlow extends BaseController {
                   }
 
                  if(!_.isNull(result)){
-                    return client.replyMessage(event.replyToken,texts);
+                    return client.pushMessage(event.replyToken,texts);
                 } else {
                     return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
                 }
