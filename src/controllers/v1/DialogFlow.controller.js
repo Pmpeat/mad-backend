@@ -193,9 +193,27 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 await result.map((element) => { 
                     const arrayData = {
-                        "type": "text",
-                        "text": element.detail
-                      }
+                        type: "box",
+                        layout: "horizontal",
+                        margin: "md",
+                        contents: [
+                          {
+                            type: "text",
+                            text: element.detail,
+                            weight: "bold",
+                            color: "#000",
+                            size: "sm",
+                            flex: 0,
+                          },
+                          {
+                            type: "text",
+                            text: element.status,
+                            color: "#FAE089",
+                            size: "sm",
+                            align: "end",
+                          },
+                        ],
+                      };
                       dataToMsg.push(arrayData);
                  });
                 //  texts = {
@@ -203,69 +221,67 @@ class DialogFlow extends BaseController {
                 //     "contents": [...dataToMsg]
                 //   }
 
-                texts = {
-                    type: "carousel",
-                    contents: [
-                      {
-                        type: "bubble",
-                        body: {
-                          type: "box",
-                          layout: "horizontal",
-                          contents: [
-                            {
-                              type: "text",
-                              text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                              wrap: true
-                            }
-                          ]
-                        },
-                        footer: {
-                          type: "box",
-                          layout: "horizontal",
-                          contents: [
-                            {
-                              type: "button",
-                              style: "primary",
-                              action: {
-                                type: "uri",
-                                label: "Go",
-                                uri: "https://example.com"
-                              }
-                            }
-                          ]
-                        }
+                texts = message = {
+                    type: "flex",
+                    altText: "Mad IT",
+                    contents: {
+                      type: "bubble",
+                      size: "giga",
+                      body: {
+                        type: "box",
+                        layout: "vertical",
+                        contents: [
+                          {
+                            type: "text",
+                            text: "Mad IT",
+                            weight: "bold",
+                            size: "xl",
+                            margin: "md",
+                          },
+                          {
+                            type: "text",
+                            text: "ข้อมูลคำร้องของคุณ",
+                            margin: "sm",
+                            size: "sm",
+                          },
+                          {
+                            type: "separator",
+                            margin: "xxl",
+                          },
+                          {
+                            type: "box",
+                            layout: "vertical",
+                            margin: "xxl",
+                            spacing: "sm",
+                            contents: [...dataToMsg],
+                          },
+                          {
+                            type: "separator",
+                            margin: "xxl",
+                          },
+                          {
+                            type: "box",
+                            layout: "horizontal",
+                            margin: "md",
+                            contents: [
+                              {
+                                type: "text",
+                                text: "ขอบคุณสำหรับการแจ้ง",
+                                size: "xs",
+                                color: "#aaaaaa",
+                                flex: 0,
+                              },
+                            ],
+                          },
+                        ],
                       },
-                      {
-                        type: "bubble",
-                        body: {
-                          type: "box",
-                          layout: "horizontal",
-                          contents: [
-                            {
-                              type: "text",
-                              text: "Hello, World!",
-                              wrap: true
-                            }
-                          ]
-                        },
+                      styles: {
                         footer: {
-                          type: "box",
-                          layout: "horizontal",
-                          contents: [
-                            {
-                              type: "button",
-                              style: "primary",
-                              action: {
-                                type: "uri",
-                                label: "Go",
-                                uri: "https://example.com"
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
+                          separator: true,
+                        },
+                      },
+                    },
+                  };
                 
 
                  if(!_.isNull(result)){
@@ -774,89 +790,67 @@ class DialogFlow extends BaseController {
   static async pushMessage (req,res) {
     const data = req.body;
     console.log("innnnnnnnnnn");
-    const arrayData = {
-        type: "bubble",
-        size: "nano",
-        header: {
-          type: "box",
-          layout: "vertical",
-          contents: [
-            {
-              type: "text",
-              text: "test",
-              color: "#ffffff",
-              align: "start",
-              size: "md",
-              gravity: "center"
+    const message = {
+        type: "flex",
+        altText: "Mad IT",
+        contents: {
+          type: "bubble",
+          size: "giga",
+          body: {
+            type: "box",
+            layout: "vertical",
+            contents: [
+              {
+                type: "text",
+                text: "Mad IT",
+                weight: "bold",
+                size: "xl",
+                margin: "md",
+              },
+              {
+                type: "text",
+                text: "ข้อมูลคำร้องของคุณ",
+                margin: "sm",
+                size: "sm",
+              },
+              {
+                type: "separator",
+                margin: "xxl",
+              },
+              {
+                type: "box",
+                layout: "vertical",
+                margin: "xxl",
+                spacing: "sm",
+                contents: [...prodData],
+              },
+              {
+                type: "separator",
+                margin: "xxl",
+              },
+              {
+                type: "box",
+                layout: "horizontal",
+                margin: "md",
+                contents: [
+                  {
+                    type: "text",
+                    text: "ขอบคุณสำหรับการแจ้ง",
+                    size: "xs",
+                    color: "#aaaaaa",
+                    flex: 0,
+                  },
+                ],
+              },
+            ],
+          },
+          styles: {
+            footer: {
+              separator: true,
             },
-            {
-              type: "text",
-              text: "100%",
-              color: "#ffffff",
-              align: "start",
-              size: "xs",
-              gravity: "center",
-              margin: "lg"
-            },
-            {
-              type: "box",
-              layout: "vertical",
-              contents: [
-                {
-                  type: "box",
-                  layout: "vertical",
-                  contents: [
-                    {
-                      type: "filler"
-                    }
-                  ],
-                  width: "0%",
-                  backgroundColor: "#DE5658",
-                  height: "6px"
-                }
-              ],
-              backgroundColor: "#FAD2A76E",
-              height: "6px",
-              margin: "sm"
-            }
-          ],
-          backgroundColor: "#FF6B6E",
-          paddingTop: "19px",
-          paddingAll: "12px",
-          paddingBottom: "16px"
+          },
         },
-        body: {
-          type: "box",
-          layout: "vertical",
-          contents: [
-            {
-              type: "box",
-              layout: "horizontal",
-              contents: [
-                {
-                  type: "text",
-                  text: "test",
-                  color: "#8C8C8C",
-                  size: "sm",
-                  wrap: true
-                }
-              ],
-              flex: 1
-            }
-          ],
-          spacing: "md",
-          paddingAll: "12px"
-        },
-        styles: {
-          footer: {
-            separator: false
-          }
-        }
-      }
-    const texts = {
-        type: "carousel",
-        contents: [...arrayData]
-    }
+      };
 
     return client.pushMessage(data.lineUserId,texts);
   }
