@@ -251,38 +251,42 @@ class DialogFlow extends BaseController {
 
                 texts = {
                     "type": "bubble",
+                    "header": {
+                      "type": "box",
+                      "layout": "vertical",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "Header text"
+                        }
+                      ]
+                    },
+                    "hero": {
+                      "type": "image",
+                      "url": "https://example.com/flex/images/image.jpg"
+                    },
                     "body": {
                       "type": "box",
                       "layout": "vertical",
                       "contents": [
                         {
-                          "type": "image",
-                          "url": "https://example.com/flex/images/image.jpg"
-                        },
-                        {
-                          "type": "separator"
-                        },
+                          "type": "text",
+                          "text": "Body text"
+                        }
+                      ]
+                    },
+                    "footer": {
+                      "type": "box",
+                      "layout": "vertical",
+                      "contents": [
                         {
                           "type": "text",
-                          "text": "Text in the box"
-                        },
-                        {
-                          "type": "box",
-                          "layout": "vertical",
-                          "contents": [],
-                          "width": "30px",
-                          "height": "30px",
-                          "background": {
-                            "type": "linearGradient",
-                            "angle": "90deg",
-                            "startColor": "#FFFF00",
-                            "endColor": "#0080ff"
-                          }
+                          "text": "Footer text"
                         }
-                      ],
-                      "height": "400px",
-                      "justifyContent": "space-evenly",
-                      "alignItems": "center"
+                      ]
+                    },
+                    "styles": {
+                      "comment": "See the example of a bubble style object"
                     }
                   }
 
