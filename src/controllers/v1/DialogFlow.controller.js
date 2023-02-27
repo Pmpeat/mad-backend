@@ -195,9 +195,6 @@ class DialogFlow extends BaseController {
                     const arrayData = {
                         "title": element.detail,
                         "text": element.status,
-                        "backgroundColor": "#9FD8E36E",
-                        "height": "6px",
-                        "margin": "sm"
                       };
                       dataToMsg.push(arrayData);
                  });
