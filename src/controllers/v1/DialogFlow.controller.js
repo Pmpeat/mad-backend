@@ -195,18 +195,9 @@ class DialogFlow extends BaseController {
                     const arrayData = {
                         "title": element.detail,
                         "text": element.status,
-                        "actions": [
-                          {
-                            "type": "message",
-                            "label": "Action 1",
-                            "text": "Action 1"
-                          },
-                          {
-                            "type": "message",
-                            "label": "Action 2",
-                            "text": "Action 2"
-                          }
-                        ]
+                        "backgroundColor": "#9FD8E36E",
+                        "height": "6px",
+                        "margin": "sm"
                       };
                       dataToMsg.push(arrayData);
                  });
