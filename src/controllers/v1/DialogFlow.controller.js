@@ -193,57 +193,11 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 await result.map((element) => { 
                     const arrayData = {
-                        "type": "bubble",
-                        "size": "nano",
-                        "header": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "contents": [
-                            {
-                              "type": "text",
-                              "text": "Pending",
-                              "color": "#ffffff",
-                              "align": "start",
-                              "size": "md",
-                              "gravity": "center"
-                            },
-                            {
-                              "type": "text",
-                              "text": "30%",
-                              "color": "#ffffff",
-                              "align": "start",
-                              "size": "xs",
-                              "gravity": "center",
-                              "margin": "lg"
-                            },
-                            {
-                              "type": "box",
-                              "layout": "vertical",
-                              "contents": [
-                                {
-                                  "type": "box",
-                                  "layout": "vertical",
-                                  "contents": [
-                                    {
-                                      "type": "filler"
-                                    }
-                                  ],
-                                  "width": "30%",
-                                  "backgroundColor": "#DE5658",
-                                  "height": "6px"
-                                }
-                              ],
-                              "backgroundColor": "#FAD2A76E",
-                              "height": "6px",
-                              "margin": "sm"
-                            }
-                          ],
-                          "backgroundColor": "#FF6B6E",
-                          "paddingTop": "19px",
-                          "paddingAll": "12px",
-                          "paddingBottom": "16px"
-                        }
-                    }
+                        "title": element.detail,
+                        "text": element.status,
+                        "actions": [
+                        ]
+                      };
                       dataToMsg.push(arrayData);
                  });
                  texts = {
