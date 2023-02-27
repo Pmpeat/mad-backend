@@ -193,125 +193,89 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 await result.map((element) => { 
                     const arrayData = {
-                        type: "bubble",
-                        size: "nano",
-                        header: {
-                          type: "box",
-                          layout: "vertical",
-                          contents: [
+                        "type": "bubble",
+                        "size": "nano",
+                        "header": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "contents": [
                             {
-                              type: "text",
-                              text: element.status,
-                              color: "#ffffff",
-                              align: "start",
-                              size: "md",
-                              gravity: "center"
+                              "type": "text",
+                              "text": element.status,
+                              "color": "#ffffff",
+                              "align": "start",
+                              "size": "md",
+                              "gravity": "center"
                             },
                             {
-                              type: "text",
-                              text: "100%",
-                              color: "#ffffff",
-                              align: "start",
-                              size: "xs",
-                              gravity: "center",
-                              margin: "lg"
+                              "type": "text",
+                              "text": "100%",
+                              "color": "#ffffff",
+                              "align": "start",
+                              "size": "xs",
+                              "gravity": "center",
+                              "margin": "lg"
                             },
                             {
-                              type: "box",
-                              layout: "vertical",
-                              contents: [
+                              "type": "box",
+                              "layout": "vertical",
+                              "contents": [
                                 {
-                                  type: "box",
-                                  layout: "vertical",
-                                  contents: [
+                                  "type": "box",
+                                  "layout": "vertical",
+                                  "contents": [
                                     {
-                                      type: "filler"
+                                      "type": "filler"
                                     }
                                   ],
-                                  width: "70%",
-                                  backgroundColor: "#FAE089",
-                                  height: "6px"
+                                  "width": "70%",
+                                  "backgroundColor": "#FAE089",
+                                  "height": "6px"
                                 }
                               ],
-                              backgroundColor: "#FAF4B8",
-                              height: "6px",
-                              margin: "sm"
+                              "backgroundColor": "#FAF4B8",
+                              "height": "6px",
+                              "margin": "sm"
                             }
                           ],
-                          backgroundColor: "#FDF97E",
-                          paddingTop: "19px",
-                          paddingAll: "12px",
-                          paddingBottom: "16px"
+                          "backgroundColor": "#FDF97E",
+                          "paddingTop": "19px",
+                          "paddingAll": "12px",
+                          "paddingBottom": "16px"
                         },
-                        body: {
-                          type: "box",
-                          layout: "vertical",
-                          contents: [
+                        "body": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "contents": [
                             {
-                              type: "box",
-                              layout: "horizontal",
-                              contents: [
+                              "type": "box",
+                              "layout": "horizontal",
+                              "contents": [
                                 {
-                                  type: "text",
-                                  text: element.detail,
-                                  color: "#8C8C8C",
-                                  size: "sm",
-                                  wrap: true
+                                  "type": "text",
+                                  "text": element.detail,
+                                  "color": "#8C8C8C",
+                                  "size": "sm",
+                                  "wrap": true
                                 }
                               ],
-                              flex: 1
+                              "flex": 1
                             }
                           ],
-                          spacing: "md",
-                          paddingAll: "12px"
+                          "spacing": "md",
+                          "paddingAll": "12px"
                         },
-                        styles: {
-                          footer: {
-                            separator: false
+                        "styles": {
+                          "footer": {
+                            "separator": false
                           }
                         }
                       }
                       dataToMsg.push(arrayData);
                  });
-                //  texts = {
-                //     type: "carousel",
-                //     contents: [...dataToMsg]
-                //   }
-
-                texts = {
-                    "type": "template",
-                    "altText": "This is a buttons template",
-                    "template": {
-                      "type": "buttons",
-                      "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
-                      "imageAspectRatio": "rectangle",
-                      "imageSize": "cover",
-                      "imageBackgroundColor": "#FFFFFF",
-                      "title": "Menu",
-                      "text": "Please select",
-                      "defaultAction": {
-                        "type": "uri",
-                        "label": "View detail",
-                        "uri": "http://example.com/page/123"
-                      },
-                      "actions": [
-                        {
-                          "type": "postback",
-                          "label": "Buy",
-                          "data": "action=buy&itemid=123"
-                        },
-                        {
-                          "type": "postback",
-                          "label": "Add to cart",
-                          "data": "action=add&itemid=123"
-                        },
-                        {
-                          "type": "uri",
-                          "label": "View detail",
-                          "uri": "http://example.com/page/123"
-                        }
-                      ]
-                    }
+                 texts = {
+                    "type": "carousel",
+                    "contents": [...dataToMsg]
                   }
 
                  if(!_.isNull(result)){
