@@ -239,83 +239,53 @@ class DialogFlow extends BaseController {
                       };
                       dataToMsg.push(arrayData);
                  });
-                 texts = 
-                    {"type": "carousel",
-                    "contents": [
-                      {
-                        "type": "bubble",
-                        "header": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "flex": 0,
-                          "backgroundColor": "#FF0000FF",
-                          "contents": [
+                 texts = {
+                    "type": "template",
+                    "altText": "this is a carousel template",
+                    "template": {
+                      "type": "carousel",
+                      "columns": [
+                        {
+                          "title": "Title",
+                          "text": "Text",
+                          "actions": [
                             {
-                              "type": "box",
-                              "layout": "vertical",
-                              "flex": 1,
-                              "width": "100%",
-                              "height": "100px",
-                              "contents": [
-                                {
-                                  "type": "text",
-                                  "text": "testtestsetset",
-                                  "size": "xl",
-                                  "color": "#FFFFFFFF",
-                                  "flex": 1,
-                                  "align": "center",
-                                  "gravity": "center",
-                                  "contents": []
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        "body": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "spacing": "sm",
-                          "contents": [
-                            {
-                              "type": "text",
-                              "text": "Arm%20Chair%2C%20White",
-                              "weight": "bold",
-                              "size": "xl",
-                              "wrap": true,
-                              "contents": []
+                              "type": "message",
+                              "label": "Action 1",
+                              "text": "Action 1"
                             },
                             {
-                              "type": "box",
-                              "layout": "baseline",
-                              "contents": [
-                                {
-                                  "type": "text",
-                                  "text": "%2449",
-                                  "weight": "bold",
-                                  "size": "xl",
-                                  "flex": 0,
-                                  "wrap": true,
-                                  "contents": []
-                                },
-                                {
-                                  "type": "text",
-                                  "text": ".99",
-                                  "weight": "bold",
-                                  "size": "sm",
-                                  "flex": 0,
-                                  "wrap": true,
-                                  "contents": []
-                                }
-                              ]
+                              "type": "message",
+                              "label": "Action 2",
+                              "text": "Action 2"
+                            }
+                          ],
+                          "thumbnailImageUrl": "PROVIDE_URL_FROM_YOUR_SERVER",
+                          "imageBackgroundColor": "#F20000"
+                        },
+                        {
+                          "title": "Title",
+                          "text": "Text",
+                          "actions": [
+                            {
+                              "type": "message",
+                              "label": "Action 1",
+                              "text": "Action 1"
+                            },
+                            {
+                              "type": "message",
+                              "label": "Action 2",
+                              "text": "Action 2"
                             }
                           ]
                         }
-                      }
-                    ]
-            };
+                      ]
+                    }
+                  }
+                    
 
                  if(!_.isNull(result)){
-                    return client.replyMessage(event.replyToken,{type:'carousel',contents:[...dataToMsg]});
+                    return client.replyMessage(event.replyToken,texts);
                 } else {
                     return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
                 }
