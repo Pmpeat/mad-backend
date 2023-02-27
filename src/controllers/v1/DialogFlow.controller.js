@@ -204,19 +204,67 @@ class DialogFlow extends BaseController {
                 //   }
 
                 texts = {
-                    "type": "flex",
-                    "altText": "this is a flex message",
-                    "contents": {
-                      "type": "bubble",
-                      "body": {
-                        "type": "box",
-                        "layout": "vertical",
-                        "contents": [
-                            ...dataToMsg
-                          
-                        ]
+                    "type": "carousel",
+                    "contents": [
+                      {
+                        "type": "bubble",
+                        "body": {
+                          "type": "box",
+                          "layout": "horizontal",
+                          "contents": [
+                            {
+                              "type": "text",
+                              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                              "wrap": true
+                            }
+                          ]
+                        },
+                        "footer": {
+                          "type": "box",
+                          "layout": "horizontal",
+                          "contents": [
+                            {
+                              "type": "button",
+                              "style": "primary",
+                              "action": {
+                                "type": "uri",
+                                "label": "Go",
+                                "uri": "https://example.com"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "type": "bubble",
+                        "body": {
+                          "type": "box",
+                          "layout": "horizontal",
+                          "contents": [
+                            {
+                              "type": "text",
+                              "text": "Hello, World!",
+                              "wrap": true
+                            }
+                          ]
+                        },
+                        "footer": {
+                          "type": "box",
+                          "layout": "horizontal",
+                          "contents": [
+                            {
+                              "type": "button",
+                              "style": "primary",
+                              "action": {
+                                "type": "uri",
+                                "label": "Go",
+                                "uri": "https://example.com"
+                              }
+                            }
+                          ]
+                        }
                       }
-                    }
+                    ]
                   }
 
                  if(!_.isNull(result)){
