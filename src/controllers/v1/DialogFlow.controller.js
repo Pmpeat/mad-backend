@@ -194,7 +194,7 @@ class DialogFlow extends BaseController {
                 await result.map((element) => { 
                     const arrayData = {
                         "title": element.detail,
-                        "text": element.status,
+                        "text": element.status
                       };
                       dataToMsg.push(arrayData);
                  });
