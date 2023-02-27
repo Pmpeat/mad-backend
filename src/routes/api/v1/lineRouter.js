@@ -41,6 +41,17 @@ router.post('/text-query', async (req ,res) => {
     }
 });
 
+/**
+ * /api/v1/line/text_query
+ * */
+router.post('/push-message', async (req ,res) => {
+    try {
+        const resultQuery = await dialogFlowController.pushMessage(req,res);
+    } catch (err) {
+        res.status(500).end();
+    }
+});
+
 // const handleEvent = async (event) => {
 //     return client.replyMessage(event.replyToken,{type:'text',text:'Test'});
 // }
