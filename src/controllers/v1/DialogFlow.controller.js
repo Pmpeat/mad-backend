@@ -193,20 +193,44 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 await result.map((element) => { 
                     const arrayData = {
-                        "title": element.detail,
-                        "text": element.status,
-                        "actions": [
-                          {
-                            "type": "message",
-                            "label": "Action 1",
-                            "text": "Action 1"
-                          },
-                          {
-                            "type": "message",
-                            "label": "Action 2",
-                            "text": "Action 2"
-                          }
-                        ]
+                        "type": "bubble",
+                        "direction": "ltr",
+                        "header": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "height": "100px",
+                          "backgroundColor": "#FF0000FF",
+                          "contents": [
+                            {
+                              "type": "box",
+                              "layout": "vertical",
+                              "flex": 1,
+                              "contents": [
+                                {
+                                  "type": "text",
+                                  "text": element.status,
+                                  "color": "#FFFFFFFF",
+                                  "flex": 1,
+                                  "align": "center",
+                                  "gravity": "center",
+                                  "contents": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "body": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "contents": [
+                            {
+                              "type": "text",
+                              "text": element.detail,
+                              "align": "center",
+                              "contents": []
+                            }
+                          ]
+                        }
                       };
                       dataToMsg.push(arrayData);
                  });
@@ -228,32 +252,7 @@ class DialogFlow extends BaseController {
                         "contents": {
                             "type": "carousel",
                             "contents": [
-                              {
-                                "type": "bubble",
-                                "body": {
-                                  "type": "box",
-                                  "layout": "vertical",
-                                  "contents": [
-                                    {
-                                      "type": "text",
-                                      "text": "First bubble"
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "type": "bubble",
-                                "body": {
-                                  "type": "box",
-                                  "layout": "vertical",
-                                  "contents": [
-                                    {
-                                      "type": "text",
-                                      "text": "Second bubble"
-                                    }
-                                  ]
-                                }
-                              }
+                              ...dataToMsg
                             ]
                           }
                       }
