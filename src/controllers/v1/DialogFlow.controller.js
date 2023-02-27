@@ -222,75 +222,53 @@ class DialogFlow extends BaseController {
                 //   }
 
                 texts = {
+                    "type": "template",
+                    "altText": "this is a carousel template","template": {
                     "type": "carousel",
                     "contents": [
                       {
                         "type": "bubble",
+                        "direction": "ltr",
+                        "header": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "contents": [
+                            {
+                              "type": "text",
+                              "text": "Header",
+                              "align": "center",
+                              "contents": []
+                            }
+                          ]
+                        },
                         "hero": {
                           "type": "image",
-                          "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_5_carousel.png",
+                          "url": "https://vos.line-scdn.net/bot-designer-template-images/bot-designer-icon.png",
                           "size": "full",
-                          "aspectRatio": "20:13",
-                          "aspectMode": "cover"
+                          "aspectRatio": "1.51:1",
+                          "aspectMode": "fit"
                         },
                         "body": {
                           "type": "box",
                           "layout": "vertical",
-                          "spacing": "sm",
                           "contents": [
                             {
                               "type": "text",
-                              "text": "Arm Chair, White",
-                              "weight": "bold",
-                              "size": "xl",
-                              "wrap": true,
+                              "text": "Body",
+                              "align": "center",
                               "contents": []
-                            },
-                            {
-                              "type": "box",
-                              "layout": "baseline",
-                              "contents": [
-                                {
-                                  "type": "text",
-                                  "text": "$49",
-                                  "weight": "bold",
-                                  "size": "xl",
-                                  "flex": 0,
-                                  "wrap": true,
-                                  "contents": []
-                                },
-                                {
-                                  "type": "text",
-                                  "text": ".99",
-                                  "weight": "bold",
-                                  "size": "sm",
-                                  "flex": 0,
-                                  "wrap": true,
-                                  "contents": []
-                                }
-                              ]
                             }
                           ]
                         },
                         "footer": {
                           "type": "box",
-                          "layout": "vertical",
-                          "spacing": "sm",
+                          "layout": "horizontal",
                           "contents": [
                             {
                               "type": "button",
                               "action": {
                                 "type": "uri",
-                                "label": "Add to Cart",
-                                "uri": "https://linecorp.com"
-                              },
-                              "style": "primary"
-                            },
-                            {
-                              "type": "button",
-                              "action": {
-                                "type": "uri",
-                                "label": "Add to wishlist",
+                                "label": "Button",
                                 "uri": "https://linecorp.com"
                               }
                             }
@@ -299,112 +277,56 @@ class DialogFlow extends BaseController {
                       },
                       {
                         "type": "bubble",
+                        "direction": "ltr",
+                        "header": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "contents": [
+                            {
+                              "type": "text",
+                              "text": "Header",
+                              "align": "center",
+                              "contents": []
+                            }
+                          ]
+                        },
                         "hero": {
                           "type": "image",
-                          "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_6_carousel.png",
+                          "url": "https://vos.line-scdn.net/bot-designer-template-images/bot-designer-icon.png",
                           "size": "full",
-                          "aspectRatio": "20:13",
-                          "aspectMode": "cover"
+                          "aspectRatio": "1.51:1",
+                          "aspectMode": "fit"
                         },
                         "body": {
                           "type": "box",
                           "layout": "vertical",
-                          "spacing": "sm",
                           "contents": [
                             {
                               "type": "text",
-                              "text": "Metal Desk Lamp",
-                              "weight": "bold",
-                              "size": "xl",
-                              "wrap": true,
-                              "contents": []
-                            },
-                            {
-                              "type": "box",
-                              "layout": "baseline",
-                              "flex": 1,
-                              "contents": [
-                                {
-                                  "type": "text",
-                                  "text": "$11",
-                                  "weight": "bold",
-                                  "size": "xl",
-                                  "flex": 0,
-                                  "wrap": true,
-                                  "contents": []
-                                },
-                                {
-                                  "type": "text",
-                                  "text": ".99",
-                                  "weight": "bold",
-                                  "size": "sm",
-                                  "flex": 0,
-                                  "wrap": true,
-                                  "contents": []
-                                }
-                              ]
-                            },
-                            {
-                              "type": "text",
-                              "text": "Temporarily out of stock",
-                              "size": "xxs",
-                              "color": "#FF5551",
-                              "flex": 0,
-                              "margin": "md",
-                              "wrap": true,
+                              "text": "Body",
+                              "align": "center",
                               "contents": []
                             }
                           ]
                         },
                         "footer": {
                           "type": "box",
-                          "layout": "vertical",
-                          "spacing": "sm",
+                          "layout": "horizontal",
                           "contents": [
                             {
                               "type": "button",
                               "action": {
                                 "type": "uri",
-                                "label": "Add to Cart",
-                                "uri": "https://linecorp.com"
-                              },
-                              "flex": 2,
-                              "color": "#AAAAAA",
-                              "style": "primary"
-                            },
-                            {
-                              "type": "button",
-                              "action": {
-                                "type": "uri",
-                                "label": "Add to wish list",
+                                "label": "Button",
                                 "uri": "https://linecorp.com"
                               }
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "type": "bubble",
-                        "body": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "spacing": "sm",
-                          "contents": [
-                            {
-                              "type": "button",
-                              "action": {
-                                "type": "uri",
-                                "label": "See more",
-                                "uri": "https://linecorp.com"
-                              },
-                              "flex": 1,
-                              "gravity": "center"
                             }
                           ]
                         }
                       }
                     ]
                   }
+                }
 
                  if(!_.isNull(result)){
                     return client.pushMessage(event.source.userId,texts);
