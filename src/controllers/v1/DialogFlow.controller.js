@@ -199,7 +199,7 @@ class DialogFlow extends BaseController {
                         contents: [
                           {
                             type: "text",
-                            text: element.detail,
+                            text: `${element.detail}`,
                             weight: "bold",
                             color: "#000",
                             size: "sm",
@@ -207,7 +207,7 @@ class DialogFlow extends BaseController {
                           },
                           {
                             type: "text",
-                            text: element.status,
+                            text: `${element.status}`,
                             color: "#FAE089",
                             size: "sm",
                             align: "end",
