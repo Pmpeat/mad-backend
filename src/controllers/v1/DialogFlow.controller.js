@@ -176,7 +176,7 @@ class DialogFlow extends BaseController {
                   }
 
                  if(!_.isNull(result)){
-                    return client.replyMessage(event.replyToken,{type:'text',text:texts});
+                    return client.replyMessage(event.replyToken,texts);
                 } else {
                     return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
                 }
@@ -279,7 +279,7 @@ class DialogFlow extends BaseController {
                   }
 
                  if(!_.isNull(result)){
-                    return client.replyMessage(event.replyToken,{type:'text',text:texts});
+                    return client.replyMessage(event.replyToken,texts);
                 } else {
                     return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
                 }
@@ -779,6 +779,96 @@ class DialogFlow extends BaseController {
     } catch(err) {
         console.log(err);
     }
+  }
+
+  static async pushMessage (req,res) {
+    const data = req.body;
+
+    const arrayData = {
+        type: "bubble",
+        size: "nano",
+        header: {
+          type: "box",
+          layout: "vertical",
+          contents: [
+            {
+              type: "text",
+              text: "test",
+              color: "#ffffff",
+              align: "start",
+              size: "md",
+              gravity: "center"
+            },
+            {
+              type: "text",
+              text: "100%",
+              color: "#ffffff",
+              align: "start",
+              size: "xs",
+              gravity: "center",
+              margin: "lg"
+            },
+            {
+              type: "box",
+              layout: "vertical",
+              contents: [
+                {
+                  type: "box",
+                  layout: "vertical",
+                  contents: [
+                    {
+                      type: "filler"
+                    }
+                  ],
+                  width: "0%",
+                  backgroundColor: "#DE5658",
+                  height: "6px"
+                }
+              ],
+              backgroundColor: "#FAD2A76E",
+              height: "6px",
+              margin: "sm"
+            }
+          ],
+          backgroundColor: "#FF6B6E",
+          paddingTop: "19px",
+          paddingAll: "12px",
+          paddingBottom: "16px"
+        },
+        body: {
+          type: "box",
+          layout: "vertical",
+          contents: [
+            {
+              type: "box",
+              layout: "horizontal",
+              contents: [
+                {
+                  type: "text",
+                  text: "test",
+                  color: "#8C8C8C",
+                  size: "sm",
+                  wrap: true
+                }
+              ],
+              flex: 1
+            }
+          ],
+          spacing: "md",
+          paddingAll: "12px"
+        },
+        styles: {
+          footer: {
+            separator: false
+          }
+        }
+      }
+    const texts = {
+        "type": "carousel",
+        "contents": [...dataToMsg]
+    }
+
+    return client.pushMessage(data.lineUserId,texts);
   }
 
   
