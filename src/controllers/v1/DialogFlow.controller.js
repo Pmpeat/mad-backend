@@ -204,68 +204,89 @@ class DialogFlow extends BaseController {
                 //   }
 
                 texts = {
-                    "type": "carousel",
-                    "contents": [
-                      {
-                        "type": "bubble",
-                        "body": {
-                          "type": "box",
-                          "layout": "horizontal",
-                          "contents": [
-                            {
-                              "type": "text",
-                              "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                              "wrap": true
-                            }
-                          ]
-                        },
-                        "footer": {
-                          "type": "box",
-                          "layout": "horizontal",
-                          "contents": [
-                            {
-                              "type": "button",
-                              "style": "primary",
-                              "action": {
-                                "type": "uri",
-                                "label": "Go",
-                                "uri": "https://example.com"
-                              }
-                            }
-                          ]
-                        }
+                    type: "flex",
+                    altText: "Kaspy Subscription",
+                    contents: {
+                      type: "bubble",
+                      size: "giga",
+                      body: {
+                        type: "box",
+                        layout: "vertical",
+                        contents: [
+                          {
+                            type: "box",
+                            layout: "horizontal",
+                            margin: "md",
+                            contents: [
+                              {
+                                type: "text",
+                                text: "ORDER STATUS",
+                                weight: "bold",
+                                color: "#1DB446",
+                                size: "sm",
+                                flex: 0,
+                              },
+                              {
+                                type: "text",
+                                text: `อยู่ระหว่างการจัดส่ง`,
+                                color: "#fa7700",
+                                size: "sm",
+                                align: "end",
+                              },
+                            ],
+                          },
+                          {
+                            type: "text",
+                            text: "Kaspy Subscription",
+                            weight: "bold",
+                            size: "xl",
+                            margin: "md",
+                          },
+                          {
+                            type: "text",
+                            text: "คำสั่งซื้อที่ได้รับการจัดส่งของคุณ ",
+                            margin: "sm",
+                            size: "sm",
+                          },
+                          {
+                            type: "separator",
+                            margin: "xxl",
+                          },
+                          {
+                            type: "box",
+                            layout: "vertical",
+                            margin: "xxl",
+                            spacing: "sm",
+                            contents: [...dataToMsg],
+                          },
+                          {
+                            type: "separator",
+                            margin: "xxl",
+                          },
+                          {
+                            type: "box",
+                            layout: "horizontal",
+                            margin: "md",
+                            contents: [
+                              {
+                                type: "text",
+                                text: "กรุณารอรับและตรวจสอบสินค้า ขอบคุณค่ะ",
+                                size: "xs",
+                                color: "#aaaaaa",
+                                flex: 0,
+                              },
+                            ],
+                          },
+                        ],
                       },
-                      {
-                        "type": "bubble",
-                        "body": {
-                          "type": "box",
-                          "layout": "horizontal",
-                          "contents": [
-                            {
-                              "type": "text",
-                              "text": "Hello, World!",
-                              "wrap": true
-                            }
-                          ]
+                      styles: {
+                        footer: {
+                          separator: true,
                         },
-                        "footer": {
-                          "type": "box",
-                          "layout": "horizontal",
-                          "contents": [
-                            {
-                              "type": "button",
-                              "style": "primary",
-                              "action": {
-                                "type": "uri",
-                                "label": "Go",
-                                "uri": "https://example.com"
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
+                      },
+                    },
+                  };
+                
 
                  if(!_.isNull(result)){
                     return client.pushMessage(event.source.userId,texts);
