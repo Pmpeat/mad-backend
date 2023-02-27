@@ -90,93 +90,64 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 await result.map((element) => { 
                     const arrayData = {
-                        type: "bubble",
-                        size: "nano",
-                        header: {
-                          type: "box",
-                          layout: "vertical",
-                          contents: [
+                        "type": "bubble",
+                        "direction": "ltr",
+                        "header": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "height": "100px",
+                          "backgroundColor": "#F73000FF",
+                          "contents": [
                             {
-                              type: "text",
-                              text: element.status,
-                              color: "#ffffff",
-                              align: "start",
-                              size: "md",
-                              gravity: "center"
-                            },
-                            {
-                              type: "text",
-                              text: "100%",
-                              color: "#ffffff",
-                              align: "start",
-                              size: "xs",
-                              gravity: "center",
-                              margin: "lg"
-                            },
-                            {
-                              type: "box",
-                              layout: "vertical",
-                              contents: [
+                              "type": "box",
+                              "layout": "vertical",
+                              "flex": 1,
+                              "contents": [
                                 {
-                                  type: "box",
-                                  layout: "vertical",
-                                  contents: [
-                                    {
-                                      type: "filler"
-                                    }
-                                  ],
-                                  width: "0%",
-                                  backgroundColor: "#DE5658",
-                                  height: "6px"
+                                  "type": "text",
+                                  "text": element.status,
+                                  "size": "xl",
+                                  "color": "#FFFFFFFF",
+                                  "flex": 1,
+                                  "align": "center",
+                                  "gravity": "center",
+                                  "contents": []
                                 }
-                              ],
-                              backgroundColor: "#FAD2A76E",
-                              height: "6px",
-                              margin: "sm"
+                              ]
                             }
-                          ],
-                          backgroundColor: "#FF6B6E",
-                          paddingTop: "19px",
-                          paddingAll: "12px",
-                          paddingBottom: "16px"
+                          ]
                         },
-                        body: {
-                          type: "box",
-                          layout: "vertical",
-                          contents: [
+                        "body": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "paddingTop": "20px",
+                          "paddingBottom": "30px",
+                          "contents": [
                             {
-                              type: "box",
-                              layout: "horizontal",
-                              contents: [
-                                {
-                                  type: "text",
-                                  text: element.detail,
-                                  color: "#8C8C8C",
-                                  size: "sm",
-                                  wrap: true
-                                }
-                              ],
-                              flex: 1
+                              "type": "text",
+                              "text": element.detail,
+                              "align": "center",
+                              "contents": []
                             }
-                          ],
-                          spacing: "md",
-                          paddingAll: "12px"
-                        },
-                        styles: {
-                          footer: {
-                            separator: false
-                          }
+                          ]
                         }
-                      }
+                      };
                       dataToMsg.push(arrayData);
                  });
-                 texts = {
-                    type: "carousel",
-                    contents: [...dataToMsg]
-                  }
+
+                    texts = {
+                        "type": "flex",
+                        "altText": "this is a flex message",
+                        "contents": {
+                            "type": "carousel",
+                            "contents": [
+                              ...dataToMsg
+                            ]
+                          }
+                      }
 
                  if(!_.isNull(result)){
-                    return client.replyMessage(event.replyToken,texts);
+                    return client.pushMessage(event.source.userId,texts);
                 } else {
                     return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
                 }
@@ -199,7 +170,7 @@ class DialogFlow extends BaseController {
                           "type": "box",
                           "layout": "vertical",
                           "height": "100px",
-                          "backgroundColor": "#FF0000FF",
+                          "backgroundColor": "#F7B600FF",
                           "contents": [
                             {
                               "type": "box",
@@ -209,6 +180,7 @@ class DialogFlow extends BaseController {
                                 {
                                   "type": "text",
                                   "text": element.status,
+                                  "size": "xl",
                                   "color": "#FFFFFFFF",
                                   "flex": 1,
                                   "align": "center",
@@ -222,6 +194,8 @@ class DialogFlow extends BaseController {
                         "body": {
                           "type": "box",
                           "layout": "vertical",
+                          "paddingTop": "20px",
+                          "paddingBottom": "30px",
                           "contents": [
                             {
                               "type": "text",
@@ -234,18 +208,7 @@ class DialogFlow extends BaseController {
                       };
                       dataToMsg.push(arrayData);
                  });
-                //  texts = {
-                //     "type": "template",
-                //     "altText": "this is a carousel template",
-                //     "template": {
-                //       "type": "carousel",
-                //       "columns": [
-                //        ...dataToMsg
-                //       ]
-                //     }
-                //   }
 
-                
                     texts = {
                         "type": "flex",
                         "altText": "this is a flex message",
@@ -273,95 +236,66 @@ class DialogFlow extends BaseController {
             let texts;
             const dataToMsg = [];
             if(result.length > 0){
-                
                 await result.map((element) => { 
                     const arrayData = {
-                        type: "bubble",
-                        size: "nano",
-                        header: {
-                          type: "box",
-                          layout: "vertical",
-                          contents: [
+                        "type": "bubble",
+                        "direction": "ltr",
+                        "header": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "height": "100px",
+                          "backgroundColor": "#3BC001FF",
+                          "contents": [
                             {
-                              type: "text",
-                              text: element.status,
-                              color: "#ffffff",
-                              align: "start",
-                              size: "md",
-                              gravity: "center"
-                            },
-                            {
-                              type: "text",
-                              text: "100%",
-                              color: "#ffffff",
-                              align: "start",
-                              size: "xs",
-                              gravity: "center",
-                              margin: "lg"
-                            },
-                            {
-                              type: "box",
-                              layout: "vertical",
-                              contents: [
+                              "type": "box",
+                              "layout": "vertical",
+                              "flex": 1,
+                              "contents": [
                                 {
-                                  type: "box",
-                                  layout: "vertical",
-                                  contents: [
-                                    {
-                                      type: "filler"
-                                    }
-                                  ],
-                                  width: "100%",
-                                  backgroundColor: "#0D8186",
-                                  height: "6px"
+                                  "type": "text",
+                                  "text": element.status,
+                                  "size": "xl",
+                                  "color": "#FFFFFFFF",
+                                  "flex": 1,
+                                  "align": "center",
+                                  "gravity": "center",
+                                  "contents": []
                                 }
-                              ],
-                              backgroundColor: "#9FD8E36E",
-                              height: "6px",
-                              margin: "sm"
+                              ]
                             }
-                          ],
-                          backgroundColor: "#27ACB2",
-                          paddingTop: "19px",
-                          paddingAll: "12px",
-                          paddingBottom: "16px"
+                          ]
                         },
-                        body: {
-                          type: "box",
-                          layout: "vertical",
-                          contents: [
+                        "body": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "paddingTop": "20px",
+                          "paddingBottom": "30px",
+                          "contents": [
                             {
-                              type: "box",
-                              layout: "horizontal",
-                              contents: [
-                                {
-                                  type: "text",
-                                  text: element.detail,
-                                  color: "#8C8C8C",
-                                  size: "sm",
-                                  wrap: true
-                                }
-                              ],
-                              flex: 1
+                              "type": "text",
+                              "text": element.detail,
+                              "align": "center",
+                              "contents": []
                             }
-                          ],
-                          spacing: "md",
-                          paddingAll: "12px"
-                        },
-                        styles: {
-                          footer: {
-                            separator: false
-                          }
+                          ]
                         }
-                      }
+                      };
                       dataToMsg.push(arrayData);
                  });
-                 texts = {
-                    "type": "carousel",
-                    "contents": [...dataToMsg]
-                  }
+
+                    texts = {
+                        "type": "flex",
+                        "altText": "this is a flex message",
+                        "contents": {
+                            "type": "carousel",
+                            "contents": [
+                              ...dataToMsg
+                            ]
+                          }
+                      }
+
                  if(!_.isNull(result)){
-                    return client.replyMessage(event.replyToken,{type:'text',text:texts});
+                    return client.pushMessage(event.source.userId,texts);
                 } else {
                     return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
                 }
@@ -381,93 +315,64 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 await result.map((element) => { 
                     const arrayData = {
-                        type: "bubble",
-                        size: "nano",
-                        header: {
-                          type: "box",
-                          layout: "vertical",
-                          contents: [
+                        "type": "bubble",
+                        "direction": "ltr",
+                        "header": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "height": "100px",
+                          "backgroundColor": "#F73000FF",
+                          "contents": [
                             {
-                              type: "text",
-                              text: element.status,
-                              color: "#ffffff",
-                              align: "start",
-                              size: "md",
-                              gravity: "center"
-                            },
-                            {
-                              type: "text",
-                              text: "100%",
-                              color: "#ffffff",
-                              align: "start",
-                              size: "xs",
-                              gravity: "center",
-                              margin: "lg"
-                            },
-                            {
-                              type: "box",
-                              layout: "vertical",
-                              contents: [
+                              "type": "box",
+                              "layout": "vertical",
+                              "flex": 1,
+                              "contents": [
                                 {
-                                  type: "box",
-                                  layout: "vertical",
-                                  contents: [
-                                    {
-                                      type: "filler"
-                                    }
-                                  ],
-                                  width: "0%",
-                                  backgroundColor: "#DE5658",
-                                  height: "6px"
+                                  "type": "text",
+                                  "text": element.status,
+                                  "size": "xl",
+                                  "color": "#FFFFFFFF",
+                                  "flex": 1,
+                                  "align": "center",
+                                  "gravity": "center",
+                                  "contents": []
                                 }
-                              ],
-                              backgroundColor: "#FAD2A76E",
-                              height: "6px",
-                              margin: "sm"
+                              ]
                             }
-                          ],
-                          backgroundColor: "#FF6B6E",
-                          paddingTop: "19px",
-                          paddingAll: "12px",
-                          paddingBottom: "16px"
+                          ]
                         },
-                        body: {
-                          type: "box",
-                          layout: "vertical",
-                          contents: [
+                        "body": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "paddingTop": "20px",
+                          "paddingBottom": "30px",
+                          "contents": [
                             {
-                              type: "box",
-                              layout: "horizontal",
-                              contents: [
-                                {
-                                  type: "text",
-                                  text: element.detail,
-                                  color: "#8C8C8C",
-                                  size: "sm",
-                                  wrap: true
-                                }
-                              ],
-                              flex: 1
+                              "type": "text",
+                              "text": element.detail,
+                              "align": "center",
+                              "contents": []
                             }
-                          ],
-                          spacing: "md",
-                          paddingAll: "12px"
-                        },
-                        styles: {
-                          footer: {
-                            separator: false
-                          }
+                          ]
                         }
-                      }
+                      };
                       dataToMsg.push(arrayData);
                  });
-                 texts = {
-                    "type": "carousel",
-                    "contents": [...dataToMsg]
-                  }
+
+                    texts = {
+                        "type": "flex",
+                        "altText": "this is a flex message",
+                        "contents": {
+                            "type": "carousel",
+                            "contents": [
+                              ...dataToMsg
+                            ]
+                          }
+                      }
 
                  if(!_.isNull(result)){
-                    return client.replyMessage(event.replyToken,{type:'text',text:texts});
+                    return client.pushMessage(event.source.userId,texts);
                 } else {
                     return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
                 }
@@ -484,93 +389,64 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 await result.map((element) => { 
                     const arrayData = {
-                        type: "bubble",
-                        size: "nano",
-                        header: {
-                          type: "box",
-                          layout: "vertical",
-                          contents: [
+                        "type": "bubble",
+                        "direction": "ltr",
+                        "header": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "height": "100px",
+                          "backgroundColor": "#F7B600FF",
+                          "contents": [
                             {
-                              type: "text",
-                              text: element.status,
-                              color: "#ffffff",
-                              align: "start",
-                              size: "md",
-                              gravity: "center"
-                            },
-                            {
-                              type: "text",
-                              text: "100%",
-                              color: "#ffffff",
-                              align: "start",
-                              size: "xs",
-                              gravity: "center",
-                              margin: "lg"
-                            },
-                            {
-                              type: "box",
-                              layout: "vertical",
-                              contents: [
+                              "type": "box",
+                              "layout": "vertical",
+                              "flex": 1,
+                              "contents": [
                                 {
-                                  type: "box",
-                                  layout: "vertical",
-                                  contents: [
-                                    {
-                                      type: "filler"
-                                    }
-                                  ],
-                                  width: "70%",
-                                  backgroundColor: "#FAE089",
-                                  height: "6px"
+                                  "type": "text",
+                                  "text": element.status,
+                                  "size": "xl",
+                                  "color": "#FFFFFFFF",
+                                  "flex": 1,
+                                  "align": "center",
+                                  "gravity": "center",
+                                  "contents": []
                                 }
-                              ],
-                              backgroundColor: "#FAF4B8",
-                              height: "6px",
-                              margin: "sm"
+                              ]
                             }
-                          ],
-                          backgroundColor: "#FDF97E",
-                          paddingTop: "19px",
-                          paddingAll: "12px",
-                          paddingBottom: "16px"
+                          ]
                         },
-                        body: {
-                          type: "box",
-                          layout: "vertical",
-                          contents: [
+                        "body": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "paddingTop": "20px",
+                          "paddingBottom": "30px",
+                          "contents": [
                             {
-                              type: "box",
-                              layout: "horizontal",
-                              contents: [
-                                {
-                                  type: "text",
-                                  text: element.detail,
-                                  color: "#8C8C8C",
-                                  size: "sm",
-                                  wrap: true
-                                }
-                              ],
-                              flex: 1
+                              "type": "text",
+                              "text": element.detail,
+                              "align": "center",
+                              "contents": []
                             }
-                          ],
-                          spacing: "md",
-                          paddingAll: "12px"
-                        },
-                        styles: {
-                          footer: {
-                            separator: false
-                          }
+                          ]
                         }
-                      }
+                      };
                       dataToMsg.push(arrayData);
                  });
-                 texts = {
-                    "type": "carousel",
-                    "contents": [...dataToMsg]
-                  }
+
+                    texts = {
+                        "type": "flex",
+                        "altText": "this is a flex message",
+                        "contents": {
+                            "type": "carousel",
+                            "contents": [
+                              ...dataToMsg
+                            ]
+                          }
+                      }
 
                  if(!_.isNull(result)){
-                    return client.replyMessage(event.replyToken,{type:'text',text:texts});
+                    return client.pushMessage(event.source.userId,texts);
                 } else {
                     return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
                 }
@@ -587,93 +463,64 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 await result.map((element) => { 
                     const arrayData = {
-                        type: "bubble",
-                        size: "nano",
-                        header: {
-                          type: "box",
-                          layout: "vertical",
-                          contents: [
+                        "type": "bubble",
+                        "direction": "ltr",
+                        "header": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "height": "100px",
+                          "backgroundColor": "#3BC001FF",
+                          "contents": [
                             {
-                              type: "text",
-                              text: element.status,
-                              color: "#ffffff",
-                              align: "start",
-                              size: "md",
-                              gravity: "center"
-                            },
-                            {
-                              type: "text",
-                              text: "100%",
-                              color: "#ffffff",
-                              align: "start",
-                              size: "xs",
-                              gravity: "center",
-                              margin: "lg"
-                            },
-                            {
-                              type: "box",
-                              layout: "vertical",
-                              contents: [
+                              "type": "box",
+                              "layout": "vertical",
+                              "flex": 1,
+                              "contents": [
                                 {
-                                  type: "box",
-                                  layout: "vertical",
-                                  contents: [
-                                    {
-                                      type: "filler"
-                                    }
-                                  ],
-                                  width: "100%",
-                                  backgroundColor: "#0D8186",
-                                  height: "6px"
+                                  "type": "text",
+                                  "text": element.status,
+                                  "size": "xl",
+                                  "color": "#FFFFFFFF",
+                                  "flex": 1,
+                                  "align": "center",
+                                  "gravity": "center",
+                                  "contents": []
                                 }
-                              ],
-                              backgroundColor: "#9FD8E36E",
-                              height: "6px",
-                              margin: "sm"
+                              ]
                             }
-                          ],
-                          backgroundColor: "#27ACB2",
-                          paddingTop: "19px",
-                          paddingAll: "12px",
-                          paddingBottom: "16px"
+                          ]
                         },
-                        body: {
-                          type: "box",
-                          layout: "vertical",
-                          contents: [
+                        "body": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "paddingTop": "20px",
+                          "paddingBottom": "30px",
+                          "contents": [
                             {
-                              type: "box",
-                              layout: "horizontal",
-                              contents: [
-                                {
-                                  type: "text",
-                                  text: element.detail,
-                                  color: "#8C8C8C",
-                                  size: "sm",
-                                  wrap: true
-                                }
-                              ],
-                              flex: 1
+                              "type": "text",
+                              "text": element.detail,
+                              "align": "center",
+                              "contents": []
                             }
-                          ],
-                          spacing: "md",
-                          paddingAll: "12px"
-                        },
-                        styles: {
-                          footer: {
-                            separator: false
-                          }
+                          ]
                         }
-                      }
+                      };
                       dataToMsg.push(arrayData);
                  });
-                 texts = {
-                    "type": "carousel",
-                    "contents": [...dataToMsg]
-                  }
+
+                    texts = {
+                        "type": "flex",
+                        "altText": "this is a flex message",
+                        "contents": {
+                            "type": "carousel",
+                            "contents": [
+                              ...dataToMsg
+                            ]
+                          }
+                      }
 
                  if(!_.isNull(result)){
-                    return client.replyMessage(event.replyToken,{type:'text',text:texts});
+                    return client.pushMessage(event.source.userId,texts);
                 } else {
                     return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
                 }
