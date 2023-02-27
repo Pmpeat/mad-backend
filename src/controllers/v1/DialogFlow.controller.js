@@ -171,8 +171,8 @@ class DialogFlow extends BaseController {
                       dataToMsg.push(arrayData);
                  });
                  texts = {
-                    "type": "carousel",
-                    "contents": [...dataToMsg]
+                    type: "carousel",
+                    contents: [...dataToMsg]
                   }
 
                  if(!_.isNull(result)){
@@ -274,8 +274,8 @@ class DialogFlow extends BaseController {
                       dataToMsg.push(arrayData);
                  });
                  texts = {
-                    "type": "carousel",
-                    "contents": [...dataToMsg]
+                    type: "carousel",
+                    contents: [...dataToMsg]
                   }
 
                  if(!_.isNull(result)){
