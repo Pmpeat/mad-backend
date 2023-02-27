@@ -283,27 +283,63 @@ class DialogFlow extends BaseController {
                     "contents": [
                       {
                         "type": "bubble",
-                        "size": "nano",
-                        "header": {
+                        "size": "micro",
+                        "hero": {
+                          "type": "image",
+                          "url": "https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip10.jpg",
+                          "size": "full",
+                          "aspectMode": "cover",
+                          "aspectRatio": "320:213"
+                        },
+                        "body": {
                           "type": "box",
                           "layout": "vertical",
                           "contents": [
                             {
                               "type": "text",
-                              "text": "In Progress",
-                              "color": "#ffffff",
-                              "align": "start",
-                              "size": "md",
-                              "gravity": "center"
+                              "text": "Brown Cafe",
+                              "weight": "bold",
+                              "size": "sm",
+                              "wrap": true
                             },
                             {
-                              "type": "text",
-                              "text": "70%",
-                              "color": "#ffffff",
-                              "align": "start",
-                              "size": "xs",
-                              "gravity": "center",
-                              "margin": "lg"
+                              "type": "box",
+                              "layout": "baseline",
+                              "contents": [
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                },
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                },
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                },
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                },
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png"
+                                },
+                                {
+                                  "type": "text",
+                                  "text": "4.0",
+                                  "size": "xs",
+                                  "color": "#8c8c8c",
+                                  "margin": "md",
+                                  "flex": 0
+                                }
+                              ]
                             },
                             {
                               "type": "box",
@@ -311,78 +347,85 @@ class DialogFlow extends BaseController {
                               "contents": [
                                 {
                                   "type": "box",
-                                  "layout": "vertical",
+                                  "layout": "baseline",
+                                  "spacing": "sm",
                                   "contents": [
                                     {
-                                      "type": "filler"
+                                      "type": "text",
+                                      "text": "東京旅行",
+                                      "wrap": true,
+                                      "color": "#8c8c8c",
+                                      "size": "xs",
+                                      "flex": 5
                                     }
-                                  ],
-                                  "width": "70%",
-                                  "backgroundColor": "#0D8186",
-                                  "height": "6px"
+                                  ]
                                 }
-                              ],
-                              "backgroundColor": "#9FD8E36E",
-                              "height": "6px",
-                              "margin": "sm"
+                              ]
                             }
                           ],
-                          "backgroundColor": "#27ACB2",
-                          "paddingTop": "19px",
-                          "paddingAll": "12px",
-                          "paddingBottom": "16px"
-                        },
-                        "body": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "contents": [
-                            {
-                              "type": "box",
-                              "layout": "horizontal",
-                              "contents": [
-                                {
-                                  "type": "text",
-                                  "text": "Buy milk and lettuce before class",
-                                  "color": "#8C8C8C",
-                                  "size": "sm",
-                                  "wrap": true
-                                }
-                              ],
-                              "flex": 1
-                            }
-                          ],
-                          "spacing": "md",
-                          "paddingAll": "12px"
-                        },
-                        "styles": {
-                          "footer": {
-                            "separator": false
-                          }
+                          "spacing": "sm",
+                          "paddingAll": "13px"
                         }
                       },
                       {
                         "type": "bubble",
-                        "size": "nano",
-                        "header": {
+                        "size": "micro",
+                        "hero": {
+                          "type": "image",
+                          "url": "https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip11.jpg",
+                          "size": "full",
+                          "aspectMode": "cover",
+                          "aspectRatio": "320:213"
+                        },
+                        "body": {
                           "type": "box",
                           "layout": "vertical",
                           "contents": [
                             {
                               "type": "text",
-                              "text": "Pending",
-                              "color": "#ffffff",
-                              "align": "start",
-                              "size": "md",
-                              "gravity": "center"
+                              "text": "Brow&Cony's Restaurant",
+                              "weight": "bold",
+                              "size": "sm",
+                              "wrap": true
                             },
                             {
-                              "type": "text",
-                              "text": "30%",
-                              "color": "#ffffff",
-                              "align": "start",
-                              "size": "xs",
-                              "gravity": "center",
-                              "margin": "lg"
+                              "type": "box",
+                              "layout": "baseline",
+                              "contents": [
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                },
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                },
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                },
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                },
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png"
+                                },
+                                {
+                                  "type": "text",
+                                  "text": "4.0",
+                                  "size": "sm",
+                                  "color": "#8c8c8c",
+                                  "margin": "md",
+                                  "flex": 0
+                                }
+                              ]
                             },
                             {
                               "type": "box",
@@ -390,78 +433,84 @@ class DialogFlow extends BaseController {
                               "contents": [
                                 {
                                   "type": "box",
-                                  "layout": "vertical",
+                                  "layout": "baseline",
+                                  "spacing": "sm",
                                   "contents": [
                                     {
-                                      "type": "filler"
+                                      "type": "text",
+                                      "text": "東京旅行",
+                                      "wrap": true,
+                                      "color": "#8c8c8c",
+                                      "size": "xs",
+                                      "flex": 5
                                     }
-                                  ],
-                                  "width": "30%",
-                                  "backgroundColor": "#DE5658",
-                                  "height": "6px"
+                                  ]
                                 }
-                              ],
-                              "backgroundColor": "#FAD2A76E",
-                              "height": "6px",
-                              "margin": "sm"
+                              ]
                             }
                           ],
-                          "backgroundColor": "#FF6B6E",
-                          "paddingTop": "19px",
-                          "paddingAll": "12px",
-                          "paddingBottom": "16px"
-                        },
-                        "body": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "contents": [
-                            {
-                              "type": "box",
-                              "layout": "horizontal",
-                              "contents": [
-                                {
-                                  "type": "text",
-                                  "text": "Wash my car",
-                                  "color": "#8C8C8C",
-                                  "size": "sm",
-                                  "wrap": true
-                                }
-                              ],
-                              "flex": 1
-                            }
-                          ],
-                          "spacing": "md",
-                          "paddingAll": "12px"
-                        },
-                        "styles": {
-                          "footer": {
-                            "separator": false
-                          }
+                          "spacing": "sm",
+                          "paddingAll": "13px"
                         }
                       },
                       {
                         "type": "bubble",
-                        "size": "nano",
-                        "header": {
+                        "size": "micro",
+                        "hero": {
+                          "type": "image",
+                          "url": "https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip12.jpg",
+                          "size": "full",
+                          "aspectMode": "cover",
+                          "aspectRatio": "320:213"
+                        },
+                        "body": {
                           "type": "box",
                           "layout": "vertical",
                           "contents": [
                             {
                               "type": "text",
-                              "text": "In Progress",
-                              "color": "#ffffff",
-                              "align": "start",
-                              "size": "md",
-                              "gravity": "center"
+                              "text": "Tata",
+                              "weight": "bold",
+                              "size": "sm"
                             },
                             {
-                              "type": "text",
-                              "text": "100%",
-                              "color": "#ffffff",
-                              "align": "start",
-                              "size": "xs",
-                              "gravity": "center",
-                              "margin": "lg"
+                              "type": "box",
+                              "layout": "baseline",
+                              "contents": [
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                },
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                },
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                },
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gold_star_28.png"
+                                },
+                                {
+                                  "type": "icon",
+                                  "size": "xs",
+                                  "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/review_gray_star_28.png"
+                                },
+                                {
+                                  "type": "text",
+                                  "text": "4.0",
+                                  "size": "sm",
+                                  "color": "#8c8c8c",
+                                  "margin": "md",
+                                  "flex": 0
+                                }
+                              ]
                             },
                             {
                               "type": "box",
@@ -469,53 +518,24 @@ class DialogFlow extends BaseController {
                               "contents": [
                                 {
                                   "type": "box",
-                                  "layout": "vertical",
+                                  "layout": "baseline",
+                                  "spacing": "sm",
                                   "contents": [
                                     {
-                                      "type": "filler"
+                                      "type": "text",
+                                      "text": "東京旅行",
+                                      "wrap": true,
+                                      "color": "#8c8c8c",
+                                      "size": "xs",
+                                      "flex": 5
                                     }
-                                  ],
-                                  "width": "100%",
-                                  "backgroundColor": "#7D51E4",
-                                  "height": "6px"
+                                  ]
                                 }
-                              ],
-                              "backgroundColor": "#9FD8E36E",
-                              "height": "6px",
-                              "margin": "sm"
+                              ]
                             }
                           ],
-                          "backgroundColor": "#A17DF5",
-                          "paddingTop": "19px",
-                          "paddingAll": "12px",
-                          "paddingBottom": "16px"
-                        },
-                        "body": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "contents": [
-                            {
-                              "type": "box",
-                              "layout": "horizontal",
-                              "contents": [
-                                {
-                                  "type": "text",
-                                  "text": "Buy milk and lettuce before class",
-                                  "color": "#8C8C8C",
-                                  "size": "sm",
-                                  "wrap": true
-                                }
-                              ],
-                              "flex": 1
-                            }
-                          ],
-                          "spacing": "md",
-                          "paddingAll": "12px"
-                        },
-                        "styles": {
-                          "footer": {
-                            "separator": false
-                          }
+                          "spacing": "sm",
+                          "paddingAll": "13px"
                         }
                       }
                     ]
