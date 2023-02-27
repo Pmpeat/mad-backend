@@ -239,7 +239,7 @@ class DialogFlow extends BaseController {
                       };
                       dataToMsg.push(arrayData);
                  });
-                 texts = [
+                 texts = 
                     {"type": "carousel",
                     "contents": [
                       {
@@ -312,10 +312,10 @@ class DialogFlow extends BaseController {
                         }
                       }
                     ]
-            }];
+            };
 
                  if(!_.isNull(result)){
-                    return client.pushMessage(event.source.userId,texts);
+                    return client.replyMessage(event.replyToken,texts);
                 } else {
                     return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
                 }
