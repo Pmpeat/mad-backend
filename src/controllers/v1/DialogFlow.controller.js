@@ -221,7 +221,7 @@ class DialogFlow extends BaseController {
                 //     "contents": [...dataToMsg]
                 //   }
 
-                texts = message = {
+                texts = {
                     type: "flex",
                     altText: "Mad IT",
                     contents: {
