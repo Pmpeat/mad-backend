@@ -864,8 +864,8 @@ class DialogFlow extends BaseController {
         }
       }
     const texts = {
-        "type": "carousel",
-        "contents": [...dataToMsg]
+        type: "carousel",
+        contents: [...arrayData]
     }
 
     return client.pushMessage(data.lineUserId,texts);
