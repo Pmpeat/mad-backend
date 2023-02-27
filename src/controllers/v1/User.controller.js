@@ -6,6 +6,7 @@ const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
 const logger = new Logger();
 const requestHandler = new RequestHandler(logger);
+const { Op } = require('sequelize');
 const config = require('../../config/appconfig');
 
 class UserController extends BaseController {
@@ -128,6 +129,54 @@ class UserController extends BaseController {
           res,
           'Getting all roles successfully!',
         )({result});
+      } catch (err) {
+        requestHandler.sendError(req, res, err);
+      }
+  }
+
+  /**
+   * It's a function that link user lineId
+   */
+  static async linkUserLineId(req, res) {
+    try {
+
+        const data = req.body;
+        const options = {
+          where: {email:data.email,lineId:{[Op.eq]: null}},
+        };
+        const result = await super.getList(req, 'users', options);
+        if(result.length > 0){
+          const option = {
+            where : {
+              email : data.email
+            }
+          }
+          const dataLine = {
+            lineId : data.lineId
+          }
+          const updateUserLink = await super.updateByCustomWhere(req, 'users', dataLine ,option);
+
+          if (!_.isNull(updateUserLink)) {
+              requestHandler.sendSuccess(
+                  res,
+                  'successfully updated order status',
+                  201
+              )(updateUserLink);
+          } else {
+              requestHandler.throwError(
+                  422,
+                  'Unprocessable Entity',
+                  'Unable to process the contained instructions'
+              );
+          }
+        } else {
+          requestHandler.throwError(
+            422,
+            'Unprocessable Entity',
+            'Unable to process the contained instructions'
+        );
+        }
+        
       } catch (err) {
         requestHandler.sendError(req, res, err);
       }
