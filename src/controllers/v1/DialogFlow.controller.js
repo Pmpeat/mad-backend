@@ -194,81 +194,52 @@ class DialogFlow extends BaseController {
                 await result.map((element) => { 
                     const arrayData = {
                         "type": "bubble",
-                        "size": "nano",
+                        "styles": {
+                          "header": {
+                            "backgroundColor": "#ffaaaa"
+                          },
+                          "body": {
+                            "backgroundColor": "#aaffaa"
+                          },
+                          "footer": {
+                            "backgroundColor": "#aaaaff"
+                          }
+                        },
                         "header": {
                           "type": "box",
                           "layout": "vertical",
                           "contents": [
                             {
                               "type": "text",
-                              "text": "test",
-                              "color": "#ffffff",
-                              "align": "start",
-                              "size": "md",
-                              "gravity": "center"
-                            },
-                            {
-                              "type": "text",
-                              "text": "100%",
-                              "color": "#ffffff",
-                              "align": "start",
-                              "size": "xs",
-                              "gravity": "center",
-                              "margin": "lg"
-                            },
-                            {
-                              "type": "box",
-                              "layout": "vertical",
-                              "contents": [
-                                {
-                                  "type": "box",
-                                  "layout": "vertical",
-                                  "contents": [
-                                    {
-                                      "type": "filler"
-                                    }
-                                  ],
-                                  "width": "70%",
-                                  "backgroundColor": "#FAE089",
-                                  "height": "6px"
-                                }
-                              ],
-                              "backgroundColor": "#FAF4B8",
-                              "height": "6px",
-                              "margin": "sm"
+                              "text": "header"
                             }
-                          ],
-                          "backgroundColor": "#FDF97E",
-                          "paddingTop": "19px",
-                          "paddingAll": "12px",
-                          "paddingBottom": "16px"
+                          ]
+                        },
+                        "hero": {
+                          "type": "image",
+                          "url": "https://example.com/flex/images/image.jpg",
+                          "size": "full",
+                          "aspectRatio": "2:1"
                         },
                         "body": {
                           "type": "box",
                           "layout": "vertical",
                           "contents": [
                             {
-                              "type": "box",
-                              "layout": "horizontal",
-                              "contents": [
-                                {
-                                  "type": "text",
-                                  "text": "test",
-                                  "color": "#8C8C8C",
-                                  "size": "sm",
-                                  "wrap": true
-                                }
-                              ],
-                              "flex": 1
+                              "type": "text",
+                              "text": "body"
                             }
-                          ],
-                          "spacing": "md",
-                          "paddingAll": "12px"
+                          ]
                         },
-                        "styles": {
-                          "footer": {
-                            "separator": false
-                          }
+                        "footer": {
+                          "type": "box",
+                          "layout": "vertical",
+                          "contents": [
+                            {
+                              "type": "text",
+                              "text": "footer"
+                            }
+                          ]
                         }
                       }
                       dataToMsg.push(arrayData);
