@@ -193,54 +193,8 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 await result.map((element) => { 
                     const arrayData = {
-                        "type": "bubble",
-                        "styles": {
-                          "header": {
-                            "backgroundColor": "#ffaaaa"
-                          },
-                          "body": {
-                            "backgroundColor": "#aaffaa"
-                          },
-                          "footer": {
-                            "backgroundColor": "#aaaaff"
-                          }
-                        },
-                        "header": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "contents": [
-                            {
-                              "type": "text",
-                              "text": "header"
-                            }
-                          ]
-                        },
-                        "hero": {
-                          "type": "image",
-                          "url": "https://example.com/flex/images/image.jpg",
-                          "size": "full",
-                          "aspectRatio": "2:1"
-                        },
-                        "body": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "contents": [
-                            {
-                              "type": "text",
-                              "text": "body"
-                            }
-                          ]
-                        },
-                        "footer": {
-                          "type": "box",
-                          "layout": "vertical",
-                          "contents": [
-                            {
-                              "type": "text",
-                              "text": "footer"
-                            }
-                          ]
-                        }
+                        "type": "text",
+                        "text": element.detail
                       }
                       dataToMsg.push(arrayData);
                  });
@@ -258,86 +212,8 @@ class DialogFlow extends BaseController {
                         "type": "box",
                         "layout": "vertical",
                         "contents": [
-                            {
-                                "type": "bubble",
-                                "header": {
-                                  "type": "box",
-                                  "layout": "vertical",
-                                  "contents": [
-                                    {
-                                      "type": "text",
-                                      "text": "Header text"
-                                    }
-                                  ]
-                                },
-                                "hero": {
-                                  "type": "image",
-                                  "url": "https://example.com/flex/images/image.jpg"
-                                },
-                                "body": {
-                                  "type": "box",
-                                  "layout": "vertical",
-                                  "contents": [
-                                    {
-                                      "type": "text",
-                                      "text": "Body text"
-                                    }
-                                  ]
-                                },
-                                "footer": {
-                                  "type": "box",
-                                  "layout": "vertical",
-                                  "contents": [
-                                    {
-                                      "type": "text",
-                                      "text": "Footer text"
-                                    }
-                                  ]
-                                },
-                                "styles": {
-                                  "comment": "See the example of a bubble style object"
-                                }
-                              },
-                              {
-                                "type": "bubble",
-                                "header": {
-                                  "type": "box",
-                                  "layout": "vertical",
-                                  "contents": [
-                                    {
-                                      "type": "text",
-                                      "text": "Header text"
-                                    }
-                                  ]
-                                },
-                                "hero": {
-                                  "type": "image",
-                                  "url": "https://example.com/flex/images/image.jpg"
-                                },
-                                "body": {
-                                  "type": "box",
-                                  "layout": "vertical",
-                                  "contents": [
-                                    {
-                                      "type": "text",
-                                      "text": "Body text"
-                                    }
-                                  ]
-                                },
-                                "footer": {
-                                  "type": "box",
-                                  "layout": "vertical",
-                                  "contents": [
-                                    {
-                                      "type": "text",
-                                      "text": "Footer text"
-                                    }
-                                  ]
-                                },
-                                "styles": {
-                                  "comment": "See the example of a bubble style object"
-                                }
-                              }
+                            ...dataToMsg
+                          
                         ]
                       }
                     }
