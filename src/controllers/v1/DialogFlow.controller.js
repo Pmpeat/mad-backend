@@ -253,7 +253,7 @@ class DialogFlow extends BaseController {
                             layout: "vertical",
                             margin: "xxl",
                             spacing: "sm",
-                            contents: [...dataToMsg],
+                            contents: dataToMsg,
                           },
                           {
                             type: "separator",
