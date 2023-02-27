@@ -193,6 +193,8 @@ class DialogFlow extends BaseController {
             if(result.length > 0){
                 await result.map((element) => { 
                     const arrayData = {
+                        "type": "buttons",
+                        "imageBackgroundColor": "#F00000",
                         "title": element.detail,
                         "text": element.status,
                         "actions": [
