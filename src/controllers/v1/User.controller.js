@@ -139,27 +139,33 @@ class UserController extends BaseController {
    */
   static async linkUserLineId(req, res,event) {
     try {
+        let updateUserLink;
         const options = {
           where: {email:event.message.text},
         };
         const result = await super.getList(req, 'users', options);
         if(result.length > 0){
           console.log(result);
-          const option = {
-            where : {
-              email : event.message.text
+          if(result[0].dataValues.lineId === null){
+            const option = {
+              where : {
+                email : event.message.text
+              }
             }
-          }
-          const dataLine = {
-            lineId : event.source.userId
-          }
-          const updateUserLink = await super.updateByCustomWhere(req, 'users', dataLine ,option);
-
-          if (!_.isNull(updateUserLink)) {
+            const dataLine = {
+              lineId : event.source.userId
+            }
+            updateUserLink = await super.updateByCustomWhere(req, 'users', dataLine ,option); 
+            if (!_.isNull(updateUserLink)) {
               return "success";
+            } else {
+              return "ระบบขัดข้องกรุณาติดต่อฝ่าย IT";
+            } 
           } else {
-            return "ระบบขัดข้องกรุณาติดต่อฝ่าย IT";
+            return "อีเมลนี่ถูกผูกบัญชีกับระบบแล้ว";
           }
+          
+         
         } else {
           return "ไม่พบอีเมลในระบบ กรุณาลงทะเบียนใหม่อีกครั้ง"
         }
