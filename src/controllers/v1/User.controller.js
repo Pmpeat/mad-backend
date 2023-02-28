@@ -145,15 +145,15 @@ class UserController extends BaseController {
         const result = await super.getList(req, 'users', options);
         if(result.length > 0){
           console.log(result);
-          // const option = {
-          //   where : {
-          //     email : event.message.text
-          //   }
-          // }
-          // const dataLine = {
-          //   lineId : event.source.userId
-          // }
-          // const updateUserLink = await super.updateByCustomWhere(req, 'users', dataLine ,option);
+          const option = {
+            where : {
+              email : event.message.text
+            }
+          }
+          const dataLine = {
+            lineId : event.source.userId
+          }
+          const updateUserLink = await super.updateByCustomWhere(req, 'users', dataLine ,option);
 
           if (!_.isNull(updateUserLink)) {
               return "success";

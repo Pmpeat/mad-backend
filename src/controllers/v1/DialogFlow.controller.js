@@ -57,7 +57,7 @@ class DialogFlow extends BaseController {
         if(response[0].queryResult.intent.displayName === "Register - email"){
           
           updatedLinkUser = await UserController.linkUserLineId(req,res,event);
-
+          console.log(updatedLinkUser);
           if(updatedLinkUser === "success"){
               return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
           } else {
