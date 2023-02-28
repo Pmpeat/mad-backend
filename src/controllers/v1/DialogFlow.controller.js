@@ -564,6 +564,7 @@ class DialogFlow extends BaseController {
             || response[0].queryResult.intent.displayName === "RequestRepair" && resultRichMenu !== "changeScene"
             || response[0].queryResult.intent.displayName === "Joke" && resultRichMenu !== "changeScene"
             || response[0].queryResult.intent.displayName === "Default Welcome Intent" && resultRichMenu !== "changeScene"
+            || response[0].queryResult.intent.displayName === "Register" && resultRichMenu !== "changeScene"
          ) {
             return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
         }
