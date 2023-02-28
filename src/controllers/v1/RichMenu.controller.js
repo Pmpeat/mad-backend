@@ -37,6 +37,7 @@ const credentials = {
     private_key: googlePrivateKey,
 }
 const richMenuMain = process.env.RICH_MENU_ID_MAIN;
+const richMenuMainIT = process.env.RICH_MENU_ID_MAIN_IT;
 const richMenuRepair = process.env.RICH_MENU_ID_REPAIR;
 const richMenuOrder = process.env.RICH_MENU_ID_ORDER;
 // Create a new session
@@ -46,32 +47,41 @@ const sessionClient = new dialogflow.SessionsClient({googleProjectId,credentials
 
 class RichMenu extends BaseController {
 
- static async nextCheckRepair (userId) {
+    static async pageMainIt (userId) {
     try {
-       const response = await client.linkRichMenuToUser(userId,richMenuRepair);
-       return "changeScene";
-    } catch (err) {
-        console.log(err);
-    }
- }
-
- static async nextCheckOrder (userId) {
-    try {
-       const response = await client.linkRichMenuToUser(userId,richMenuOrder);
-       return "changeScene";
-    } catch (err) {
-        console.log(err);
-    }
- }
-
- static async backCheckRepair (userId) {
-    try {
-        const response = await client.unlinkRichMenuFromUser(userId,richMenuMain);
+        const response = await client.linkRichMenuToUser(userId,richMenuMainIT);
         return "changeScene";
-     } catch (err) {
-         console.log(err);
-     }
- }
+    } catch (err) {
+        console.log(err);
+    }
+    }
+
+    static async pageCheckRepair (userId) {
+        try {
+        const response = await client.linkRichMenuToUser(userId,richMenuRepair);
+        return "changeScene";
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    static async pageCheckOrder (userId) {
+        try {
+        const response = await client.linkRichMenuToUser(userId,richMenuOrder);
+        return "changeScene";
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    static async pageMainMenu (userId) {
+        try {
+            const response = await client.unlinkRichMenuFromUser(userId,richMenuMain);
+            return "changeScene";
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
   
 }

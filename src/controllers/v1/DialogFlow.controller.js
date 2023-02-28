@@ -548,17 +548,22 @@ class DialogFlow extends BaseController {
 
         let resultRichMenu = "default";
 
+        if(event.message.text === "ไปยังหน้า IT" || event.message.text === "ย้อนกลับหน้า IT"){
+          resultRichMenu = await RichController.pageMainIt(event.source.userId);
+        }
+
         if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม"){
-            resultRichMenu = await RichController.nextCheckRepair(event.source.userId);
+            resultRichMenu = await RichController.pageCheckRepair(event.source.userId);
         }
 
         if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ"){
-            resultRichMenu = await RichController.nextCheckOrder(event.source.userId);
+            resultRichMenu = await RichController.pageCheckOrder(event.source.userId);
         }
 
         if(event.message.text === "ย้อนกลับ"){
-            resultRichMenu = await RichController.backCheckRepair(event.source.userId);
-        }
+          resultRichMenu = await RichController.pageMainMenu(event.source.userId);
+      }
+
          if (response[0].queryResult.intent.displayName === "Default Fallback Intent" && resultRichMenu !== "changeScene"
             || response[0].queryResult.intent.displayName === "RequestOrder" && resultRichMenu !== "changeScene"
             || response[0].queryResult.intent.displayName === "RequestRepair" && resultRichMenu !== "changeScene"
