@@ -137,44 +137,30 @@ class UserController extends BaseController {
   /**
    * It's a function that link user lineId
    */
-  static async linkUserLineId(req, res) {
+  static async linkUserLineId(req, res,event) {
     try {
-
-        const data = req.body;
         const options = {
-          where: {email:data.email,lineId:{[Op.eq]: null}},
+          where: {email:event.message.text,lineId:{[Op.eq]: null}},
         };
         const result = await super.getList(req, 'users', options);
         if(result.length > 0){
           const option = {
             where : {
-              email : data.email
+              email : event.message.text
             }
           }
           const dataLine = {
-            lineId : data.lineId
+            lineId : event.source.userId
           }
           const updateUserLink = await super.updateByCustomWhere(req, 'users', dataLine ,option);
 
           if (!_.isNull(updateUserLink)) {
-              requestHandler.sendSuccess(
-                  res,
-                  'successfully updated order status',
-                  201
-              )(updateUserLink);
+              return "success";
           } else {
-              requestHandler.throwError(
-                  422,
-                  'Unprocessable Entity',
-                  'Unable to process the contained instructions'
-              );
+            return "ระบบขัดข้องกรุณาติดต่อฝ่าย IT";
           }
         } else {
-          requestHandler.throwError(
-            422,
-            'Unprocessable Entity',
-            'Unable to process the contained instructions'
-        );
+          return "อีเมลนี้ถูกผูกบัญชีเเล้ว"
         }
         
       } catch (err) {

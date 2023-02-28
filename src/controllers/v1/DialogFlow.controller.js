@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const BaseController = require('./Base.controller');
 const RichController = require('./RichMenu.controller');
+const UserController = require('./User.controller');
 const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
 
@@ -51,6 +52,19 @@ class DialogFlow extends BaseController {
 
         let createNewProblem;
         let createNewOrder;
+        let updatedLinkUser;
+
+        if(response[0].queryResult.intent.displayName === "Register - email"){
+          
+          updatedLinkUser = await UserController.linkUserLineId(req,res,event);
+
+          if(updatedLinkUser === "success"){
+              return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
+          } else {
+              return client.replyMessage(event.replyToken,{type:'text',text:updatedLinkUser});
+          }
+      }
+
 
         if(response[0].queryResult.intent.displayName === "RequestRepair - problem"){
             const data = {
