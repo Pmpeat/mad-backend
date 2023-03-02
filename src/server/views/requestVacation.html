@@ -25,11 +25,14 @@
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js">
 
 async function main() {
+  console.log("test");
   await liff.init({liffId:'1660688308-YdMaaznd'});
   if(!liff.isLoggedIn()){
+    console.log("test");
     const destinationUrl = window.location.href;
     liff.login({redirectUri: destinationUrl});
   } else {
+    console.log("inn");
     const context = await liff.getContext();
     console.log('context =>>> ',context);
 
