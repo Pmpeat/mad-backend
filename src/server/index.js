@@ -8,10 +8,17 @@ const Logger = require('../utils/logger.js');
 const logger = new Logger();
 const line = require('@line/bot-sdk');
 
+app.set('views', __dirname + '/views');
+app.engine('html', require('ejs').renderFile);
+
 const lineConfig = {
     channelAccessToken : process.env.LINE_ACCESS_TOKEN,
     channelSecret : process.env.LINE_SECRET_TOKEN
 }
+app.get('/register', function (req, res)
+{
+    res.sendFile('register.html');
+});
 
 app.use('/webhook', line.middleware(lineConfig));
 
