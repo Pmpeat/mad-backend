@@ -58,6 +58,27 @@ class UserController extends BaseController {
       const createNewUsers = await super.create(req, 'users',data);
       const id = await createNewUsers.dataValues.id;
 
+      const userVacationData = {
+        userId:id,
+        vacationLeave:'0',
+        sickLeave:'0',
+        personalLeave:'0',
+        leaveWithoutPayment:'0',
+        createdByUserId:data.createdByUserId 
+      }
+
+      const vacationsResult = await super.create(req, 'vacations', userVacationData);
+
+      if (!_.isNull(vacationsResult)) {
+        
+      } else {
+        requestHandler.throwError(
+            422,
+            'Unprocessable Entity',
+            'Unable to process the contained instructions role error'
+        );
+      }
+
         const roleData = {
           userId: id,
           roleId: data.roleId
@@ -68,11 +89,11 @@ class UserController extends BaseController {
         if (!_.isNull(createdRole)) {
         
         } else {
-        requestHandler.throwError(
-            422,
-            'Unprocessable Entity',
-            'Unable to process the contained instructions role error'
-        );
+          requestHandler.throwError(
+              422,
+              'Unprocessable Entity',
+              'Unable to process the contained instructions role error'
+          );
         }
 
       if (!_.isNull(createNewUsers)) {
@@ -102,6 +123,9 @@ class UserController extends BaseController {
           include: [
             {
               model: req.app.get('db')['roles'],
+            },
+            {
+              model: req.app.get('db')['vacations'],
             }
           ],
           order: [['id', 'asc']],

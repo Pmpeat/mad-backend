@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
       Users.hasMany(models.review_applicants, {
         foreignKey: 'userId'
       });
+
+      Users.hasMany(models.vacations, {
+        foreignKey: 'userId'
+      });
     }
   }
   Users.init({

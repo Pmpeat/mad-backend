@@ -20,7 +20,7 @@ module.exports = {
   },
   auth: {
     jwtSecret: process.env.JWT_SECRET || 'madoffice',
-    jwtExpiresIn: process.env.JWT_EXPIRES_IN || '1d',
+    jwtExpiresIn: process.env.JWT_EXPIRES_IN || '365d',
     saltRounds: process.env.SALT_ROUND || 10,
     refreshTokenSecret:
       process.env.REFRESH_TOKEN_SECRET || 'uhwLE3mY6f8SrQuCrBs9R5==',
