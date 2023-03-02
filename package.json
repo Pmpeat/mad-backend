@@ -26,6 +26,7 @@
   "homepage": "https://github.com/Pmpeat/mad-backend#readme",
   "dependencies": {
     "@line/bot-sdk": "^7.5.2",
+    "@line/liff": "^2.21.4",
     "aws-sdk": "^2.1176.0",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",

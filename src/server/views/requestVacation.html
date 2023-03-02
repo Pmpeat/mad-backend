@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The title</title>
+    </head>
 <body>
 
 <h1>Show a Date Control</h1>
@@ -19,27 +23,21 @@
 
 </body>
 <script>
+  import liff from '@line/liff';
+  liff
+  .init({
+    liffId: "1660688308-YdMaaznd", // Use own liffId
+  })
+  .then(() => {
+    // Start to use liff's api
+    const context = liff.getContext();
+    console.log(context);
+  })
+  .catch((err) => {
+    // Error happens during initialization
+    console.log(err.code, err.message);
+  });
 
-  async function main() {
-    console.log("main");
-    await liff.init({liffId: '1660688308-YdMaaznd'});
-    console.log("init");
-    if (!liff.isLoggedIn()) {
-      liff.login();
-    } else {
-      console.log("teset");
-      liff.getFriendship().then(data => {
-        if (data.friendFlag) {
-          console.log(data);
-        } else {
-          // not friend or being blocked, force to add friend
-          window.location = 'https://line.me/R/ti/p/@348qzudt'
-        }
-      })
-    }
-    
-  }
-  main();
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const type = urlParams.get('type');
