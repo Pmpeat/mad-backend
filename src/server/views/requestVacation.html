@@ -20,21 +20,26 @@
 </body>
 <script>
 
-  // async function main() {
-  //   await liff.init({liffId: '1660688308-YdMaaznd'});
-  //   if (!liff.isLoggedIn()) {
-  //     liff.login();
-  //   }
-  //   liff.getFriendship().then(data => {
-  //     if (data.friendFlag) {
-  //       console.log(data);
-  //     } else {
-  //       // not friend or being blocked, force to add friend
-  //       window.location = 'https://line.me/R/ti/p/@348qzudt'
-  //     }
-  //   })
-  // }
-  // main();
+  async function main() {
+    console.log("main");
+    await liff.init({liffId: '1660688308-YdMaaznd'});
+    console.log("init");
+    if (!liff.isLoggedIn()) {
+      liff.login();
+    } else {
+      console.log("teset");
+      liff.getFriendship().then(data => {
+        if (data.friendFlag) {
+          console.log(data);
+        } else {
+          // not friend or being blocked, force to add friend
+          window.location = 'https://line.me/R/ti/p/@348qzudt'
+        }
+      })
+    }
+    
+  }
+  main();
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const type = urlParams.get('type');
