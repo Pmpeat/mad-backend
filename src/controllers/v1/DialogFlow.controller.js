@@ -552,6 +552,10 @@ class DialogFlow extends BaseController {
           resultRichMenu = await RichController.pageMainIt(event.source.userId);
         }
 
+        if(event.message.text === "ไปยังหน้า การลา"){
+          resultRichMenu = await RichController.pageMainVacation(event.source.userId);
+        }
+
         if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม"){
             resultRichMenu = await RichController.pageCheckRepair(event.source.userId);
         }

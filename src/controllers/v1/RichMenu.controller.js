@@ -38,6 +38,7 @@ const credentials = {
 }
 const richMenuMain = process.env.RICH_MENU_ID_MAIN;
 const richMenuMainIT = process.env.RICH_MENU_ID_MAIN_IT;
+const richMenuMainVacation = process.env.RICH_MENU_ID_MAIN_VACATION;
 const richMenuRepair = process.env.RICH_MENU_ID_REPAIR;
 const richMenuOrder = process.env.RICH_MENU_ID_ORDER;
 // Create a new session
@@ -48,12 +49,21 @@ const sessionClient = new dialogflow.SessionsClient({googleProjectId,credentials
 class RichMenu extends BaseController {
 
     static async pageMainIt (userId) {
-    try {
-        const response = await client.linkRichMenuToUser(userId,richMenuMainIT);
-        return "changeScene";
-    } catch (err) {
-        console.log(err);
+        try {
+            const response = await client.linkRichMenuToUser(userId,richMenuMainIT);
+            return "changeScene";
+        } catch (err) {
+            console.log(err);
+        }
     }
+    
+    static async pageMainVacation (userId) {
+        try {
+            const response = await client.linkRichMenuToUser(userId,richMenuMainVacation);
+            return "changeScene";
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     static async pageCheckRepair (userId) {
