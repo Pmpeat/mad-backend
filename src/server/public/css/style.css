@@ -64,13 +64,8 @@ button {
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   font-weight: 600;
+  width: 100%;
   
-  
-}
-button.redbox {
-    display: block;
-    width: 100%;
-    color:#AE1100;
 }
 
 .input-group {
