@@ -21,35 +21,31 @@
 
 <p><strong>Note:</strong> type="date" is not supported in Internet Explorer 11 or prior Safari 14.1.</p>
 
-</body>
-<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js">
-console.log("inn");
-async function main() {
-  console.log("test");
-  await liff.init({liffId:'1660688308-YdMaaznd'})
-  .then(() => {
-    // Start to use liff's api
-    if(!liff.isLoggedIn()){
-    console.log("test");
-    const destinationUrl = window.location.href;
-    liff.login({redirectUri: destinationUrl});
-    } else {
-      console.log("inn");
-      const context = liff.getContext();
-      console.log('context =>>> ',context);
-
-      const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      document.querySelector("#type").append(urlParams.get('type'));
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js">
+    async function main() {
+      await liff.init({liffId:'1660688308-YdMaaznd'})
+      .then(() => {
+        // Start to use liff's api
+        if(!liff.isLoggedIn()){
+        const destinationUrl = window.location.href;
+        liff.login({redirectUri: destinationUrl});
+        } else {
+          const context = liff.getContext();
+          console.log('context =>>> ',context);
+    
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          document.querySelector("#type").append(urlParams.get('type'));
+        }
+      })
+      .catch((err) => {
+        // Error happens during initialization
+        console.log(err.code, err.message);
+      });
     }
-  })
-  .catch((err) => {
-    // Error happens during initialization
-    console.log(err.code, err.message);
-  });
-}
-
-main();
-  
-</script>
+    
+    main();
+      
+  </script>
+</body>
 </html>
