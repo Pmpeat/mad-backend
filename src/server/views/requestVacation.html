@@ -18,11 +18,26 @@
 <p><strong>Note:</strong> type="date" is not supported in Internet Explorer 11 or prior Safari 14.1.</p>
 
 </body>
-<script>
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js">
+
+  async function main() {
+    await liff.init({liffId: '1660688308-YdMaaznd'});
+    if (!liff.isLoggedIn()) {
+      liff.login();
+    }
+    liff.getFriendship().then(data => {
+      if (data.friendFlag) {
+        console.log(data);
+      } else {
+        // not friend or being blocked, force to add friend
+        window.location = 'https://line.me/R/ti/p/@348qzudt'
+      }
+    })
+  }
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const type = urlParams.get('type')
   document.getElementById("type").value = type;
-  console.log(type);
+  
 </script>
 </html>
