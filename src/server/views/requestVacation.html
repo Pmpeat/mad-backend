@@ -20,24 +20,24 @@
 </body>
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js">
 
-  async function main() {
-    await liff.init({liffId: '1660688308-YdMaaznd'});
-    if (!liff.isLoggedIn()) {
-      liff.login();
-    }
-    liff.getFriendship().then(data => {
-      if (data.friendFlag) {
-        console.log(data);
-      } else {
-        // not friend or being blocked, force to add friend
-        window.location = 'https://line.me/R/ti/p/@348qzudt'
-      }
-    })
-  }
-  main();
+  // async function main() {
+  //   await liff.init({liffId: '1660688308-YdMaaznd'});
+  //   if (!liff.isLoggedIn()) {
+  //     liff.login();
+  //   }
+  //   liff.getFriendship().then(data => {
+  //     if (data.friendFlag) {
+  //       console.log(data);
+  //     } else {
+  //       // not friend or being blocked, force to add friend
+  //       window.location = 'https://line.me/R/ti/p/@348qzudt'
+  //     }
+  //   })
+  // }
+  // main();
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const type = urlParams.get('type')
+  const type = urlParams.get('type');
   document.getElementById("type").value = type;
   
 </script>
