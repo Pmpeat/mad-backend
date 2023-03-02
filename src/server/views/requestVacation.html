@@ -25,17 +25,19 @@
     document.getElementById("test").value = "Johnny Bravo";
     async function main() {
       await liff.init({liffId:'1660688308-YdMaaznd'})
-      .then(() => {
+      .then(async() => {
         // Start to use liff's api
         if(!liff.isLoggedIn()){
         const destinationUrl = window.location.href;
         liff.login({redirectUri: destinationUrl});
         } else {
-          const context = liff.getContext();
+          const context = await liff.getContext();
           console.log('context =>>> ',context);
     
           const queryString = window.location.search;
           const urlParams = new URLSearchParams(queryString);
+          const type = urlParams.get('type')
+          console.log(type);
           document.querySelector("#type").append(urlParams.get('type'));
         }
       })
