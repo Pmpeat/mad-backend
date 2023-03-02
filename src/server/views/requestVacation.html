@@ -20,8 +20,8 @@
 </form>
 
 <p><strong>Note:</strong><span id="test"></span></p>
-
-  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js">
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script>
     document.getElementById("test").value = "Johnny Bravo";
     async function main() {
       await liff.init({liffId:'1660688308-YdMaaznd'})
