@@ -11,6 +11,7 @@
   <input type="date" id="to" name="to">
   <label for="reason">reason <span>(optional)</span>:</label>
   <input type="text" id="reason" name="reason">
+  <input type="text" id="type" name="type">
   <input type="submit">
 </form>
 
@@ -21,6 +22,7 @@
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const type = urlParams.get('type')
+  document.getElementById("type").value = type;
   console.log(type);
 </script>
 </html>

@@ -22,6 +22,7 @@ app.get('/register', function (req, res)
 
 app.get('/request-vacation', function (req, res)
 {
+  console.log(req);
     res.render('requestVacation.html');
 });
 
