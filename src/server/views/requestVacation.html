@@ -2,24 +2,43 @@
 <html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>The title</title>
+        <title>Request Vacation</title>
+        <link rel="stylesheet" href="../../public/style.css">
     </head>
 <body>
 
-<h1>Show a Date Control</h1>
 
-<form action="/api/v1/vacation/create-request-vacation" method="POST">
-  <label for="from">From:</label>
-  <input type="date" id="from" name="from">
-  <label for="to">To:</label>
-  <input type="date" id="to" name="to">
-  <label for="reason">reason <span>(optional)</span>:</label>
-  <input type="text" id="reason" name="reason">
-  <input type="text" id="type" name="type">
-  <input type="submit">
-</form>
+  <!-- <h1>Request Form</h1>
+  <form action="/api/v1/vacation/create-request-vacation" method="POST">
+    <input type="text" id="type" name="type" readonly>
+    <label for="from">From:</label>
+    <input type="date" id="from" name="from">
+    <label for="to">To:</label>
+    <input type="date" id="to" name="to">
+    <label for="reason">reason <span>(optional)</span>:</label>
+    <input type="text" id="reason" name="reason">
+    <p><button type="submit">Submit</button></p>
+  </form> -->
 
-<p><strong>Note:</strong><span id="test"></span></p>
+  <form>
+  
+    <div class="segment">
+      <h1>Request Form</h1>
+    </div>
+    <input type="text" id="type" name="type" readonly>
+    <label>
+      <input type="date" id="from" name="from" placeholder="From"/>
+    </label>
+    <label>
+      <input type="date" id="to" name="to" placeholder="To"/>
+    </label>
+    <label>
+      <input type="text" id="reason" name="reason" placeholder="Reason (optional)"/>
+    </label>
+    <button class="red" type="button">Submit</button>
+    
+  </form>
+
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
     
