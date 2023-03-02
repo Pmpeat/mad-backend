@@ -41,6 +41,11 @@ label {
   width: 100%;
 }
 
+h3 {
+ color : #9c9faa;
+ text-align: center;
+}
+
 input {
   margin-right: 16px/2;
   box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
