@@ -17,7 +17,12 @@ const lineConfig = {
 }
 app.get('/register', function (req, res)
 {
-    res.sendFile('register.html');
+    res.render('register.html');
+});
+
+app.get('/request-vacation', function (req, res)
+{
+    res.render('requestVacation.html');
 });
 
 app.use('/webhook', line.middleware(lineConfig));

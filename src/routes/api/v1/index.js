@@ -8,7 +8,6 @@ router.use('/user', require('./userRouter'));
 router.use('/line', require('./lineRouter'));
 router.use('/repair', require('./repairRouter'));
 router.use('/order', require('./orderRouter'));
-router.use('/view', require('./htmlRouter'));
 router.use('/vacation', require('./vacationRouter'));
 
 module.exports = router;

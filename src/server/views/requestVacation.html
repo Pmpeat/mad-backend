@@ -4,13 +4,13 @@
 
 <h1>Show a Date Control</h1>
 
-<form action="/api/v1/vacation/create-request-vacation" method="PUT">
+<form action="/api/v1/vacation/create-request-vacation" method="POST">
   <label for="from">From:</label>
   <input type="date" id="from" name="from">
   <label for="to">To:</label>
   <input type="date" id="to" name="to">
   <label for="reason">reason <span>(optional)</span>:</label>
-  <input type="date" id="reason" name="reason">
+  <input type="text" id="reason" name="reason">
   <input type="submit">
 </form>
 
