@@ -21,8 +21,6 @@ app.get('/register', function (req, res)
 });
 
 app.get('/request-vacation', async (req, res) => {
-  const events = req.body.events;
-  await events.map(item => console.log(item));
     res.render('requestVacation.html');
 });
 
