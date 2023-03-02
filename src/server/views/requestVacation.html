@@ -22,7 +22,7 @@
 <p><strong>Note:</strong><span id="test"></span></p>
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
-    document.getElementById("type").value = "Johnny Bravo";
+    
     async function main() {
       await liff.init({liffId:'1660688308-YdMaaznd'})
       .then(async() => {
@@ -37,8 +37,7 @@
           const queryString = window.location.search;
           const urlParams = await new URLSearchParams(queryString);
           const type = await urlParams.get('type')
-          console.log(type);
-          document.querySelector("#type").append(type);
+          document.getElementById("type").value = type;
         }
       })
       .catch((err) => {
