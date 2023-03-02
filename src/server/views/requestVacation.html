@@ -19,9 +19,10 @@
   <input type="submit">
 </form>
 
-<p><strong>Note:</strong> type="date" is not supported in Internet Explorer 11 or prior Safari 14.1.</p>
+<p><strong>Note:</strong><span id="test"></span></p>
 
   <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js">
+    document.getElementById("test").value = "Johnny Bravo";
     async function main() {
       await liff.init({liffId:'1660688308-YdMaaznd'})
       .then(() => {
