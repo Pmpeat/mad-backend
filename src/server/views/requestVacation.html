@@ -37,6 +37,7 @@
           const queryString = window.location.search;
           const urlParams = await new URLSearchParams(queryString);
           const type = await urlParams.get('type')
+          console.log(type);
           document.querySelector("#type").append(type);
         }
       })
