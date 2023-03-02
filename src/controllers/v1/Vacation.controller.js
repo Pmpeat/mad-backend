@@ -112,8 +112,9 @@ class VacationController extends BaseController {
 
       static async createUserRequestVacation (req,res) {
         try {
-            console.log("requestVacation =>>> ",data);
+            
             const data = req.body;
+            console.log("requestVacation =>>> ",data);
             const types = req.params.type;
               const userVacationData = {
                 lineId:data.lineId,
