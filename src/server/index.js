@@ -8,6 +8,7 @@ const Logger = require('../utils/logger.js');
 const logger = new Logger();
 const line = require('@line/bot-sdk');
 
+app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
