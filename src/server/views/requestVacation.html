@@ -36,9 +36,8 @@
     
           const queryString = window.location.search;
           const urlParams = new URLSearchParams(queryString);
-          const type = urlParams.get('type')
-          console.log(type);
-          document.querySelector("#type").append(urlParams.get('type'));
+          const type = await urlParams.get('type')
+          document.querySelector("#type").append(type);
         }
       })
       .catch((err) => {
