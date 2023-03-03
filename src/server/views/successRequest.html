@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Request Repair</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+    </head>
+<body>
+
+    <h1>คำร้องของคุณถูกบันทึกเข้าสู่ระบบแล้ว... <span id="counter" name="counter"></span></h1>
+
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script>
+    async function main() {
+        var count = 60, timer = setInterval(function() {
+        $("#counter").html(count--);
+        if(count == 1) {
+            clearInterval(timer);
+            liff.closeWindow();
+        }
+        }, 1000);
+      
+    }
+    
+    main();
+      
+  </script>
+</body>
+</html>
