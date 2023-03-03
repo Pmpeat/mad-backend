@@ -10,6 +10,36 @@ const config = require('../../config/appconfig');
 
 class RepairController extends BaseController {
 
+  static async createUserRequestVacation (req,res) {
+    try {
+        
+        const data = req.body;
+          const userRepairData = {
+            lineId:data.lineId,
+            detail:data.detail,
+            urgency:data.urgency,
+            status: "รอการตรวจสอบ"
+          }
+
+          const result = await super.create(req, 'request_repairs', userRepairData);
+          if (!_.isNull(result)) {
+            requestHandler.sendSuccess(
+              res,
+              'successfully create request repair',
+              201
+            )(result);
+          } else {
+            requestHandler.throwError(
+              422,
+              'Unprocessable Entity',
+              'Unable to process the contained instructions'
+            );
+          }
+    } catch(err) {
+        console.log(err);
+    }
+  }
+
     static async getAllRepair (req,res) {
         try {
             const data = req.body;
