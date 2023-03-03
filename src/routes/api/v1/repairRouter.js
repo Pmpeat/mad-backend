@@ -19,7 +19,16 @@ router.post('/create-request-repair', async (req ,res) => {
     try {
         const resultQuery = await RepairController.createUserRequestRepair(req ,res);
         if(!_.isNull(resultQuery)){
-            res.render('successRequest.html');
+            var options = {
+                root: path.join(__dirname)
+            };
+            res.sendFile('successRequest.html', options, function (err) {
+                if (err) {
+                    next(err);
+                } else {
+                    console.log('Sent:', fileName);
+                }
+            });
         } else {
             console.log("error =>>> ");
         }
