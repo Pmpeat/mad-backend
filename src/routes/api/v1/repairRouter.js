@@ -21,7 +21,7 @@ router.post('/create-request-repair', async (req ,res) => {
         if(!_.isNull(resultQuery)){
             res.render('successRequest.html');
         } else {
-
+            console.log("error =>>> ");
         }
         
     } catch (err) {
