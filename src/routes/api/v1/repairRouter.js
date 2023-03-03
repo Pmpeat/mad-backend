@@ -19,7 +19,7 @@ router.post('/create-request-repair', async (req ,res) => {
     try {
         const resultQuery = await RepairController.createUserRequestRepair(req ,res);
         if(!_.isNull(resultQuery)){
-            res.render('../../../server/views/successRequest.html');
+            res.render('successRequest.html');
         } else {
 
         }
