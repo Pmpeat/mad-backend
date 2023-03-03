@@ -18,10 +18,10 @@ router.post('/update', RepairController.updateRepairStatus);
 router.post('/create-request-repair', async (req ,res) => {
     try {
         const resultQuery = await RepairController.createUserRequestRepair(req ,res);
-        
+        res.redirect("/success-request");
         if(!_.isNull(resultQuery)){
             console.log(resultQuery);
-            res.redirect("/success-request");
+            
         } else {
             console.log("error =>>> ");
         }
