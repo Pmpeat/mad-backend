@@ -11,18 +11,14 @@
 
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
-    async function main() {
         var count = 60, timer = setInterval(function() {
-        $("#counter").html(count--);
+        document.getElementById("lineId").value = count--;
         if(count == 1) {
             clearInterval(timer);
             liff.closeWindow();
         }
         }, 1000);
-      
-    }
     
-    main();
       
   </script>
 </body>
