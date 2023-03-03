@@ -20,10 +20,10 @@ exports.requestNotiToMadIT = async (req,res,id) => {
         if (err) {
           console.log(err);
         } else {
-          res.json({
-            httpResponse: httpResponse,
-            body: body,
-          });
+        //   res.json({
+        //     httpResponse: httpResponse,
+        //     body: body,
+        //   });
         }
       }
     );
