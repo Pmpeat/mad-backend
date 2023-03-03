@@ -14,17 +14,16 @@ router.post('/update', RepairController.updateRepairStatus);
 /**
  * /api/v1/repair/create-request-repair
  * */
-// router.post('/create-request-repair', RepairController.createUserRequestRepair);
 router.post('/create-request-repair', async (req ,res) => {
     try {
         const resultQuery = await RepairController.createUserRequestRepair(req ,res);
-        console.log(resultQuery);
-        res.redirect("/success-request");
-        if(!_.isNull(resultQuery)){
-            
+        
+        if(resultQuery === "success"){
+            res.redirect("/success-request");
             
         } else {
             console.log("error =>>> ");
+            res.redirect("/success-request");
         }
         
     } catch (err) {

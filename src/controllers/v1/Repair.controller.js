@@ -23,18 +23,9 @@ class RepairController extends BaseController {
 
           const result = await super.create(req, 'request_repairs', userRepairData);
           if (!_.isNull(result)) {
-            // requestHandler.sendSuccess(
-            //   res,
-            //   'successfully create request repair',
-            //   201
-            // )(result);
-            return result;
+            return "success";
           } else {
-            requestHandler.throwError(
-              422,
-              'Unprocessable Entity',
-              'Unable to process the contained instructions'
-            );
+            return "false";
           }
     } catch(err) {
         console.log(err);

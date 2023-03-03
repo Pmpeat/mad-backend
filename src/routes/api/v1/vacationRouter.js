@@ -10,7 +10,21 @@ router.post('/update-vacation',auth.isAuth, vacationController.updateUserVacatio
 /**
  * /api/v1/vacation/create-request-vacation/{type}
  * */
-router.post('/create-request-vacation', vacationController.createUserRequestVacation);
-
+router.post('/create-request-vacation', async (req ,res) => {
+    try {
+        const resultQuery = await vacationController.createUserRequestVacation(req ,res);
+        
+        if(resultQuery === "success"){
+            res.redirect("/success-request");
+            
+        } else {
+            console.log("error =>>> ");
+            res.redirect("/success-request");
+        }
+        
+    } catch (err) {
+        res.status(500).end();
+    }
+});
 
 module.exports = router;

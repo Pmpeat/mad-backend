@@ -115,7 +115,6 @@ class VacationController extends BaseController {
             
             const data = req.body;
             console.log("requestVacation =>>> ",data);
-            const types = req.params.type;
               const userVacationData = {
                 lineId:data.lineId,
                 type:data.type,
@@ -126,17 +125,9 @@ class VacationController extends BaseController {
 
               const result = await super.create(req, 'request_vacations', userVacationData);
               if (!_.isNull(result)) {
-                requestHandler.sendSuccess(
-                  res,
-                  'successfully create user request vacation',
-                  201
-                )(result);
+                return "success";
               } else {
-                requestHandler.throwError(
-                  422,
-                  'Unprocessable Entity',
-                  'Unable to process the contained instructions'
-                );
+                return "false";
               }
         } catch(err) {
             console.log(err);
