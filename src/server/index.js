@@ -21,6 +21,11 @@ app.get('/register', function (req, res)
     res.render('register.html');
 });
 
+app.get('/success-request', function (req, res)
+{
+    res.render('successRequest.html');
+});
+
 app.get('/request-repair', function (req, res)
 {
     res.render('requestRepair.html');
