@@ -18,7 +18,7 @@ router.post('/update', RepairController.updateRepairStatus);
 router.post('/create-request-repair', async (req ,res) => {
     try {
         const resultQuery = await RepairController.createUserRequestRepair(req ,res);
-        console.log("resultQuery");
+        console.log(resultQuery);
         if(!_.isNull(resultQuery)){
             
             res.send("<html> <head>server Response</head><body><h1> This page was render direcly from the server <p>Hello there welcome to my website</p></h1></body></html>");
