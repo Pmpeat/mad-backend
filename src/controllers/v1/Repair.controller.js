@@ -1,7 +1,6 @@
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
-import liff from '@line/liff';
 const BaseController = require('./Base.controller');
 const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
@@ -24,12 +23,12 @@ class RepairController extends BaseController {
 
           const result = await super.create(req, 'request_repairs', userRepairData);
           if (!_.isNull(result)) {
-            liff.closeWindow();
-            requestHandler.sendSuccess(
-              res,
-              'successfully create request repair',
-              201
-            )(result);
+            // requestHandler.sendSuccess(
+            //   res,
+            //   'successfully create request repair',
+            //   201
+            // )(result);
+            return result;
           } else {
             requestHandler.throwError(
               422,

@@ -14,6 +14,22 @@ router.post('/update', RepairController.updateRepairStatus);
 /**
  * /api/v1/repair/create-request-repair
  * */
-router.post('/create-request-repair', RepairController.createUserRequestRepair);
+// router.post('/create-request-repair', RepairController.createUserRequestRepair);
+router.post('/create-request-repair', async (req ,res) => {
+    try {
+        const resultQuery = await RepairController.createUserRequestRepair(req ,res);
+        if(!_.isNull(resultQuery)){
+            res.render('../../../server/views/successRequest.html');
+        } else {
+
+        }
+        
+    } catch (err) {
+        res.status(500).end();
+    }
+});
+
+
+
 
 module.exports = router;
