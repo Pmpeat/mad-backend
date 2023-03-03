@@ -11,8 +11,8 @@
 
 <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
-        var count = 60, timer = setInterval(function() {
-        document.getElementById("lineId").value = count--;
+        var count = 5, timer = setInterval(function() {
+        document.getElementById("counter").value = count--;
         if(count == 1) {
             clearInterval(timer);
             liff.closeWindow();
