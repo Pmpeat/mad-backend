@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     from: DataTypes.DATE,
     to: DataTypes.DATE,
     status: DataTypes.STRING,
+    approveStatus : DataTypes.BOOLEAN,
   }, {
     sequelize,
     modelName: 'request_vacations',
