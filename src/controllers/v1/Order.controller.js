@@ -27,7 +27,7 @@ class OrderController extends BaseController {
 
           const result = await super.create(req, 'request_orders', userOrderData);
           if (!_.isNull(result)) {
-            requestNotiToMadIT(result.dataValues.id);
+            requestNotiToMadIT(req,res,result.dataValues.id);
             return "success";
           } else {
             return "false";

@@ -1,6 +1,6 @@
 const request = require("request");
 
-exports.requestNotiToMadIT = async (id) => {
+exports.requestNotiToMadIT = async (req,res,id) => {
     const message = "มีการแจ้งปัญหาเข้ามาใหม่ไอดีที่ : " + id + " โปรดตรวจสอบ";
     request(
       {
