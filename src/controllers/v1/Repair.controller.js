@@ -49,12 +49,12 @@ class RepairController extends BaseController {
                 where : {status:{
                   [Op.in]: checkStatus,
                 }},
-                order : [[id ,'asc']]
+                order : [['id' ,'asc']]
               };
             } else {
               options = {
                 where : {status:data.status},
-                order : [[id ,'asc']]
+                order : [['id' ,'asc']]
               };
             }
              
