@@ -26,6 +26,11 @@ app.get('/success-request', function (req, res)
     res.render('successRequest.html');
 });
 
+app.get('/false-request', function (req, res)
+{
+    res.render('falseRequest.html');
+});
+
 app.get('/request-repair', function (req, res)
 {
     res.render('requestRepair.html');

@@ -10,6 +10,28 @@ const config = require('../../config/appconfig');
 
 class OrderController extends BaseController {
 
+  static async createUserRequestOrder (req,res) {
+    try {
+        
+        const data = req.body;
+          const userOrderData = {
+            lineId:data.lineId,
+            detail:data.detail,
+            urgency:data.urgency,
+            status: "รอการตรวจสอบ"
+          }
+
+          const result = await super.create(req, 'request_orders', userOrderData);
+          if (!_.isNull(result)) {
+            return "success";
+          } else {
+            return "false";
+          }
+    } catch(err) {
+        console.log(err);
+    }
+  }
+
     static async getAllOrderr (req,res) {
         try {
             const data = req.body;

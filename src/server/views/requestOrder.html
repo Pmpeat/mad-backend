@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Request Order</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+    </head>
+<body>
+
+  <form action="/api/v1/order/create-request-order" method="POST">
+  
+    <div class="segment">
+      <h1>Request Form</h1>
+    </div>
+    <input type="text" id="lineId" name="lineId" readonly hidden>
+    <label>
+        <h3>ระดับความเร่งด่วย</h3>
+        <select id="urgency" name="urgency">
+          <option value="fastest">ด่วนที่สุด (ตอนนี้เลย)</option>
+          <option value="fast">ด่วน (ภายใน 3 ชม.)</option>
+          <option value="normal" selected>ปานกลาง (ภายใน 1 วัน)</option>
+          <option value="slow">น้อย (ภายใน 1 สัปดาห์)</option>
+        </select>
+      </label>
+    <label>
+      <h3>รายการที่ต้องการสั่งซื้อ</h3>
+      <input type="text" id="detail" name="detail" placeholder="กรุณากรอกรายการที่ต้องการ"/>
+    </label>
+    <button class="red" type="submit">Submit</button>
+    
+  </form>
+
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script>
+    async function main() {
+      await liff.init({liffId:'1660688308-rWyYYW12'})
+      .then(async() => {
+        // Start to use liff's api
+        if(!liff.isLoggedIn()){
+        const destinationUrl = window.location.href;
+        liff.login({redirectUri: destinationUrl});
+        } else {
+          const context = await liff.getContext();
+    
+          document.getElementById("lineId").value = context.userId;
+        }
+      })
+      .catch((err) => {
+        // Error happens during initialization
+        console.log(err.code, err.message);
+      });
+    }
+    
+    main();
+      
+  </script>
+</body>
+</html>
