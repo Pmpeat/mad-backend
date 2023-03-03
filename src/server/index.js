@@ -31,6 +31,11 @@ app.get('/false-request', function (req, res)
     res.render('falseRequest.html');
 });
 
+app.get('/request-order', function (req, res)
+{
+    res.render('requestOrder.html');
+});
+
 app.get('/request-repair', function (req, res)
 {
     res.render('requestRepair.html');

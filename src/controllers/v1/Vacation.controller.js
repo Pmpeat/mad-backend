@@ -121,6 +121,7 @@ class VacationController extends BaseController {
                 reason:data.reason,
                 from:data.from,
                 to:data.to,
+                approveStatus:false
               }
 
               const result = await super.create(req, 'request_vacations', userVacationData);
