@@ -1,12 +1,14 @@
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
+const { Op } = require('sequelize');
 const BaseController = require('./Base.controller');
 const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
 const logger = new Logger();
 const requestHandler = new RequestHandler(logger);
 const config = require('../../config/appconfig');
+const { Sequelize } = require('../../models');
 
 class RepairController extends BaseController {
 
@@ -35,9 +37,20 @@ class RepairController extends BaseController {
     static async getAllRepair (req,res) {
         try {
             const data = req.body;
-            const options = {
+            const checkStatus = ["รอการตรวจสอบ","กำลังตรวจสอบ"];
+            let options;
+            if (data.status === "รอการตรวจสอบ"){
+              options = {
+                where : {status:{
+                  [Op.in]: checkStatus,
+                }}
+              };
+            } else {
+              options = {
                 where : {status:data.status}
               };
+            }
+             
               const result = await super.getList(req, 'request_repairs',options);
               if (!_.isNull(result)) {
                 requestHandler.sendSuccess(

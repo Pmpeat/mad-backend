@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
+const { Op } = require('sequelize');
 const _ = require('lodash');
 const BaseController = require('./Base.controller');
 const RequestHandler = require('../../utils/RequestHandler');
@@ -35,9 +36,19 @@ class OrderController extends BaseController {
     static async getAllOrderr (req,res) {
         try {
             const data = req.body;
-            const options = {
+            const checkStatus = ["รอการตรวจสอบ","กำลังตรวจสอบ"];
+            let options;
+            if (data.status === "รอการตรวจสอบ"){
+              options = {
+                where : {status:{
+                  [Op.in]: checkStatus,
+                }}
+              };
+            } else {
+              options = {
                 where : {status:data.status}
               };
+            }
               const result = await super.getList(req, 'request_orders',options);
               if (!_.isNull(result)) {
                 requestHandler.sendSuccess(
