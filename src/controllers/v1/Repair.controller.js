@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
+const liff = require('@line/liff');
 const BaseController = require('./Base.controller');
 const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
@@ -10,7 +11,7 @@ const config = require('../../config/appconfig');
 
 class RepairController extends BaseController {
 
-  static async createUserRequestVacation (req,res) {
+  static async createUserRequestRepair (req,res) {
     try {
         
         const data = req.body;
@@ -23,6 +24,7 @@ class RepairController extends BaseController {
 
           const result = await super.create(req, 'request_repairs', userRepairData);
           if (!_.isNull(result)) {
+            liff.closeWindow();
             requestHandler.sendSuccess(
               res,
               'successfully create request repair',

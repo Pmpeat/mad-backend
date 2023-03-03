@@ -14,6 +14,6 @@ router.post('/update', RepairController.updateRepairStatus);
 /**
  * /api/v1/repair/create-request-repair
  * */
-router.post('/create-request-repair', RepairController.createUserRequestVacation);
+router.post('/create-request-repair', RepairController.createUserRequestRepair);
 
 module.exports = router;

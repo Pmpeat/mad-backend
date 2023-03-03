@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
+const liff = require('@line/liff');
 const BaseController = require('./Base.controller');
 const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
@@ -126,6 +127,7 @@ class VacationController extends BaseController {
 
               const result = await super.create(req, 'request_vacations', userVacationData);
               if (!_.isNull(result)) {
+                liff.closeWindow();
                 requestHandler.sendSuccess(
                   res,
                   'successfully create user request vacation',

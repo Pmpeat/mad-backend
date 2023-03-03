@@ -25,6 +25,7 @@
     <div class="segment">
       <h1>Request Form</h1>
     </div>
+    <input type="text" id="lineId" name="lineId" readonly hidden>
     <input type="text" id="type" name="type" readonly hidden>
     <label>
       <h3>From</h3>
@@ -55,7 +56,7 @@
         } else {
           const context = await liff.getContext();
           console.log('context =>>> ',context);
-    
+          document.getElementById("lineId").value = context.userId;
           const queryString = window.location.search;
           const urlParams = await new URLSearchParams(queryString);
           const type = await urlParams.get('type')
