@@ -16,7 +16,7 @@ class OrderController extends BaseController {
             const options = {
                 where : {status:data.status}
               };
-              const result = await super.getList(req, 'request_order',options);
+              const result = await super.getList(req, 'request_orders',options);
               if (!_.isNull(result)) {
                 requestHandler.sendSuccess(
                   res,
@@ -62,7 +62,7 @@ class OrderController extends BaseController {
                   id : data.orderId
                 }
               }
-              const updateOrderStatus = await super.updateByCustomWhere(req, 'request_order', data ,option);
+              const updateOrderStatus = await super.updateByCustomWhere(req, 'request_orders', data ,option);
 
             if (!_.isNull(updateOrderStatus)) {
                 requestHandler.sendSuccess(

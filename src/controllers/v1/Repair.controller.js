@@ -47,7 +47,7 @@ class RepairController extends BaseController {
             const options = {
                 where : {status:data.status}
               };
-              const result = await super.getList(req, 'request_repair',options);
+              const result = await super.getList(req, 'request_repairs',options);
               if (!_.isNull(result)) {
                 requestHandler.sendSuccess(
                   res,
@@ -93,7 +93,7 @@ class RepairController extends BaseController {
                   id : data.repairId
                 }
               }
-              const updateRepairStatus = await super.updateByCustomWhere(req, 'request_repair', data ,option);
+              const updateRepairStatus = await super.updateByCustomWhere(req, 'request_repairs', data ,option);
 
             if (!_.isNull(updateRepairStatus)) {
                 requestHandler.sendSuccess(

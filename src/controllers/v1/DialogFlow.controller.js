@@ -72,7 +72,7 @@ class DialogFlow extends BaseController {
                 detail: event.message.text,
                 status: "รอการตรวจสอบ"
             };
-            createNewProblem = await super.create(req, 'request_repair',data);
+            createNewProblem = await super.create(req, 'request_repairs',data);
 
             if(!_.isNull(createNewProblem)){
                 return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
@@ -87,7 +87,7 @@ class DialogFlow extends BaseController {
                 detail: event.message.text,
                 status: "รอการตรวจสอบ"
             };
-            createNewOrder = await super.create(req, 'request_order',data);
+            createNewOrder = await super.create(req, 'request_orders',data);
 
             if(!_.isNull(createNewOrder)){
                 return client.replyMessage(event.replyToken,{type:'text',text:response[0].queryResult.fulfillmentText});
@@ -610,7 +610,7 @@ class DialogFlow extends BaseController {
             limit : 4,
             order: [['id', 'desc']],
           };
-          const result = await super.getList(req, 'request_repair', options);
+          const result = await super.getList(req, 'request_repairs', options);
        return result;
     } catch(err) {
         console.log(err);
@@ -624,7 +624,7 @@ class DialogFlow extends BaseController {
             limit : 4,
             order: [['id', 'desc']],
           };
-          const result = await super.getList(req, 'request_order', options);
+          const result = await super.getList(req, 'request_orders', options);
        return result;
     } catch(err) {
         console.log(err);
