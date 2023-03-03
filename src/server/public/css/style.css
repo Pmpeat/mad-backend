@@ -57,6 +57,17 @@ input {
 
 }
 
+select {
+  margin-right: 16px/2;
+  box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+
+}
+
 button {
   color:#61677C;
   font-weight: bold;
