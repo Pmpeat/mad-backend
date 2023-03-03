@@ -46,11 +46,13 @@ class OrderController extends BaseController {
               options = {
                 where : {status:{
                   [Op.in]: checkStatus,
-                }}
+                }},
+                order : [[id ,'asc']]
               };
             } else {
               options = {
-                where : {status:data.status}
+                where : {status:data.status},
+                order : [[id ,'asc']]
               };
             }
               const result = await super.getList(req, 'request_orders',options);
