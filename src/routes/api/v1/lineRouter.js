@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const dialogFlowController = require('../../../controllers/v1/DialogFlow.controller');
-
 const auth = require('../../../utils/auth');
 const line = require('@line/bot-sdk');
 const dotenv = require('dotenv');
@@ -12,7 +11,6 @@ const lineConfig = {
 }
 
 const client = new line.Client(lineConfig);
-
 
 /**
  * /api/v1/line/handle-event

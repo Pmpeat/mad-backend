@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const { Op } = require('sequelize');
 const BaseController = require('./Base.controller');
+const {
+  requestNotiToMadIT
+} = require("./Line.controller");
 const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
 const logger = new Logger();
@@ -100,6 +103,7 @@ class RepairController extends BaseController {
               const updateRepairStatus = await super.updateByCustomWhere(req, 'request_repairs', data ,option);
 
             if (!_.isNull(updateRepairStatus)) {
+              requestNotiToMadIT(data.repairId);
                 requestHandler.sendSuccess(
                     res,
                     'successfully updated repair status',
