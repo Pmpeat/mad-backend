@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
 const _ = require('lodash');
 const BaseController = require('./Base.controller');
+const {
+  requestNotiToMadIT
+} = require("./Line.controller");
 const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
 const logger = new Logger();
@@ -24,6 +27,7 @@ class OrderController extends BaseController {
 
           const result = await super.create(req, 'request_orders', userOrderData);
           if (!_.isNull(result)) {
+            requestNotiToMadIT(result.dataValues.id);
             return "success";
           } else {
             return "false";

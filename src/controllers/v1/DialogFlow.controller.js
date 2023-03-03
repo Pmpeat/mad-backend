@@ -4,6 +4,9 @@ const _ = require('lodash');
 const BaseController = require('./Base.controller');
 const RichController = require('./RichMenu.controller');
 const UserController = require('./User.controller');
+const {
+  requestNotiToMadIT
+} = require("./Line.controller");
 const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
 

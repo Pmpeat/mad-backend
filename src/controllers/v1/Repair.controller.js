@@ -27,7 +27,9 @@ class RepairController extends BaseController {
           }
 
           const result = await super.create(req, 'request_repairs', userRepairData);
+          
           if (!_.isNull(result)) {
+            requestNotiToMadIT(result.dataValues.id);
             return "success";
           } else {
             return "false";
@@ -103,7 +105,6 @@ class RepairController extends BaseController {
               const updateRepairStatus = await super.updateByCustomWhere(req, 'request_repairs', data ,option);
 
             if (!_.isNull(updateRepairStatus)) {
-              requestNotiToMadIT(data.repairId);
                 requestHandler.sendSuccess(
                     res,
                     'successfully updated repair status',
