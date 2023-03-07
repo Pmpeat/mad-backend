@@ -18,8 +18,9 @@ class RepairController extends BaseController {
 
   static async createUserRequestRepair (req,res) {
     try {
-      const checkUser = HelperController.checkUserLineId(req,res,data.lineId);
       const data = req.body;
+      const checkUser = HelperController.checkUserLineId(req,res,data.lineId);
+      
       if(!_.isNull(checkUser)){
         
           const userRepairData = {
