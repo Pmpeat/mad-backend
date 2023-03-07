@@ -2,6 +2,8 @@ const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const BaseController = require('./Base.controller');
+const HelperController = require('./Helper.controller');
+const EmailController = require('./Email.controller');
 const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
 const logger = new Logger();
@@ -114,6 +116,8 @@ class VacationController extends BaseController {
         try {
             
             const data = req.body;
+           const checkUser = HelperController.checkUserLineId(req,res,data.lineId);
+           if(!_.isNull(checkUser)){
             console.log("requestVacation =>>> ",data);
               const userVacationData = {
                 lineId:data.lineId,
@@ -130,6 +134,10 @@ class VacationController extends BaseController {
               } else {
                 return "false";
               }
+           } else {
+            return "lineId";
+           }
+            
         } catch(err) {
             console.log(err);
         }

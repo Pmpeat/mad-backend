@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const BaseController = require('./Base.controller');
 const RichController = require('./RichMenu.controller');
+const HelperController = require('./Helper.controller');
 const UserController = require('./User.controller');
 const {
   requestNotiToMadIT
@@ -101,7 +102,7 @@ class DialogFlow extends BaseController {
 
         // repair check
         if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม : ไม่รับคำร้อง"){
-            const result = await this.findRepair(event.source.userId,"ไม่รับคำร้อง",req,res);
+            const result = await HelperController.findRepair(event.source.userId,"ไม่รับคำร้อง",req,res);
             let texts;
             const dataToMsg = [];
             if(result.length > 0){
@@ -175,7 +176,7 @@ class DialogFlow extends BaseController {
             }
         }
         if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม : รอการตรวจสอบ"){
-            const result = await this.findRepair(event.source.userId,"รอการตรวจสอบ",req,res);
+            const result = await HelperController.findRepair(event.source.userId,"รอการตรวจสอบ",req,res);
             let texts;
             const dataToMsg = [];
             if(result.length > 0){
@@ -249,7 +250,7 @@ class DialogFlow extends BaseController {
             }
         }
         if(event.message.text === "ตรวจสอบสถานะการสั่งซ่อม : แก้ไขแล้ว"){
-            const result = await this.findRepair(event.source.userId,"แก้ไขแล้ว",req,res);
+            const result = await HelperController.findRepair(event.source.userId,"แก้ไขแล้ว",req,res);
             let texts;
             const dataToMsg = [];
             if(result.length > 0){
@@ -326,7 +327,7 @@ class DialogFlow extends BaseController {
 
         // order check
         if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ : ไม่รับคำร้อง"){
-            const result = await this.findOrder(event.source.userId,"ไม่รับคำร้อง",req,res);
+            const result = await HelperController.findOrder(event.source.userId,"ไม่รับคำร้อง",req,res);
             let texts;
             const dataToMsg = [];
             if(result.length > 0){
@@ -400,7 +401,7 @@ class DialogFlow extends BaseController {
             }
         }
         if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ : รอการตรวจสอบ"){
-            const result = await this.findOrder(event.source.userId,"รอการตรวจสอบ",req,res);
+            const result = await HelperController.findOrder(event.source.userId,"รอการตรวจสอบ",req,res);
             let texts;
             const dataToMsg = [];
             if(result.length > 0){
@@ -474,7 +475,7 @@ class DialogFlow extends BaseController {
             }
         }
         if(event.message.text === "ตรวจสอบสถานะการสั่งซื้อ: สั่งซื้อแล้ว"){
-            const result = await this.findOrder(event.source.userId,"สั่งซื้อแล้ว",req,res);
+            const result = await HelperController.findOrder(event.source.userId,"สั่งซื้อแล้ว",req,res);
             let texts;
             const dataToMsg = [];
             if(result.length > 0){
@@ -606,78 +607,65 @@ class DialogFlow extends BaseController {
     }
   }
 
-  static async findRepair (userId,state,req,res) {
-    try {
-        const options = {
-            where : {lineId:userId,status:state},
-            limit : 4,
-            order: [['id', 'desc']],
-          };
-          const result = await super.getList(req, 'request_repairs', options);
-       return result;
-    } catch(err) {
-        console.log(err);
-    }
-  }
-
-  static async findOrder (userId,state,req,res) {
-    try {
-        const options = {
-            where : {lineId:userId,status:state},
-            limit : 4,
-            order: [['id', 'desc']],
-          };
-          const result = await super.getList(req, 'request_orders', options);
-       return result;
-    } catch(err) {
-        console.log(err);
-    }
-  }
-
-  static async pushMessageTest (dataToMsg) {
-    const texts = {
-        "type": "template",
-        "altText": "this is a carousel template",
-        "template": {
+  static async pushMessageTest (data) {
+    texts = {
+      "type": "flex",
+      "altText": "this is a flex message",
+      "contents": {
           "type": "carousel",
-          "columns": [
+          "contents": [
             {
-              "title": "Title",
-              "text": "Text",
-              "actions": [
-                {
-                  "type": "message",
-                  "label": "Action 1",
-                  "text": "Action 1"
-                },
-                {
-                  "type": "message",
-                  "label": "Action 2",
-                  "text": "Action 2"
-                }
-              ],
-              "thumbnailImageUrl": "PROVIDE_URL_FROM_YOUR_SERVER",
-              "imageBackgroundColor": "#F20000"
-            },
-            {
-              "title": "Title",
-              "text": "Text",
-              "actions": [
-                {
-                  "type": "message",
-                  "label": "Action 1",
-                  "text": "Action 1"
-                },
-                {
-                  "type": "message",
-                  "label": "Action 2",
-                  "text": "Action 2"
-                }
-              ]
+              "type": "bubble",
+              "direction": "ltr",
+              "header": {
+                "type": "box",
+                "layout": "vertical",
+                "flex": 1,
+                "height": "100px",
+                "backgroundColor": "#58C339FF",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "คำร้องของคุณ",
+                    "weight": "bold",
+                    "size": "lg",
+                    "flex": 1,
+                    "align": "center",
+                    "gravity": "center",
+                    "contents": []
+                  },
+                  {
+                    "type": "text",
+                    "text": "ได้รับการเปลี่ยนสถานะ",
+                    "flex": 1,
+                    "align": "center",
+                    "gravity": "center",
+                    "contents": []
+                  }
+                ]
+              },
+              "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "รายละเอียดคำร้อง :",
+                    "align": "start",
+                    "gravity": "center",
+                    "contents": []
+                  },
+                  {
+                    "type": "text",
+                    "text": "สถานะล่าสุด :",
+                    "contents": []
+                  }
+                ]
+              }
             }
           ]
         }
-      };
+    }
 
     return client.pushMessage(data.lineUserId,texts);
   }

@@ -16,7 +16,8 @@ class OrderController extends BaseController {
 
   static async createUserRequestOrder (req,res) {
     try {
-        
+      const checkUser = HelperController.checkUserLineId(req,res,data.lineId);
+      if(!_.isNull(checkUser)){
         const data = req.body;
           const userOrderData = {
             lineId:data.lineId,
@@ -31,6 +32,9 @@ class OrderController extends BaseController {
             return "success";
           } else {
             return "false";
+          }
+        } else {
+            return "lineId";
           }
     } catch(err) {
         console.log(err);

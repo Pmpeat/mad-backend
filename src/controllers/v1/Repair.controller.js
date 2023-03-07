@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const { Op } = require('sequelize');
 const BaseController = require('./Base.controller');
+const HelperController = require('./Helper.controller');
 const {
   requestNotiToMadIT
 } = require("./Line.controller");
@@ -17,7 +18,8 @@ class RepairController extends BaseController {
 
   static async createUserRequestRepair (req,res) {
     try {
-        
+      const checkUser = HelperController.checkUserLineId(req,res,data.lineId);
+      if(!_.isNull(checkUser)){
         const data = req.body;
           const userRepairData = {
             lineId:data.lineId,
@@ -34,6 +36,9 @@ class RepairController extends BaseController {
           } else {
             return "false";
           }
+        } else {
+          return "lineId";
+        }
     } catch(err) {
         console.log(err);
     }
@@ -104,9 +109,11 @@ class RepairController extends BaseController {
                   id : data.repairId
                 }
               }
+              const getResult = await super.getList(req, 'request_repairs',option);
               const updateRepairStatus = await super.updateByCustomWhere(req, 'request_repairs', data ,option);
-
+              
             if (!_.isNull(updateRepairStatus)) {
+              const helper = HelperController.pushMessageUpdateStatusText(getResult[0].dataValues);
                 requestHandler.sendSuccess(
                     res,
                     'successfully updated repair status',

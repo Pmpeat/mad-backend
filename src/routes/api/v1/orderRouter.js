@@ -21,6 +21,8 @@ router.post('/create-request-order', async (req ,res) => {
         if(resultQuery === "success"){
             res.redirect("/success-request");
             
+        } else if (resultQuery === "lineId"){
+            res.redirect("/false-line-id");
         } else {
             console.log("error =>>> ");
             res.redirect("/false-request");
