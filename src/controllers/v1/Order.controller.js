@@ -20,7 +20,7 @@ class OrderController extends BaseController {
       const data = req.body;
       const checkUser = await HelperController.checkUserLineId(req,res,data.lineId);
       
-      if(!_.isNull(checkUser)){
+      if(checkUser === "success"){
         
           const userOrderData = {
             lineId:data.lineId,
