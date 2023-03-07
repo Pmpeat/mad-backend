@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
 const _ = require('lodash');
 const BaseController = require('./Base.controller');
+const HelperController = require('./Helper.controller');
 const {
   requestNotiToMadIT
 } = require("./Line.controller");
@@ -17,8 +18,9 @@ class OrderController extends BaseController {
   static async createUserRequestOrder (req,res) {
     try {
       const checkUser = HelperController.checkUserLineId(req,res,data.lineId);
+      const data = req.body;
       if(!_.isNull(checkUser)){
-        const data = req.body;
+        
           const userOrderData = {
             lineId:data.lineId,
             detail:data.detail,
@@ -106,8 +108,9 @@ class OrderController extends BaseController {
                 }
               }
               const updateOrderStatus = await super.updateByCustomWhere(req, 'request_orders', data ,option);
-
+              const getResult = await super.getList(req, 'request_orders',option);
             if (!_.isNull(updateOrderStatus)) {
+              const helper = HelperController.pushMessageUpdateStatusText(getResult[0].dataValues,"คำสั่งซื้อ");
                 requestHandler.sendSuccess(
                     res,
                     'successfully updated order status',

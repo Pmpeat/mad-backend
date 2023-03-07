@@ -19,8 +19,9 @@ class RepairController extends BaseController {
   static async createUserRequestRepair (req,res) {
     try {
       const checkUser = HelperController.checkUserLineId(req,res,data.lineId);
+      const data = req.body;
       if(!_.isNull(checkUser)){
-        const data = req.body;
+        
           const userRepairData = {
             lineId:data.lineId,
             detail:data.detail,
@@ -109,11 +110,11 @@ class RepairController extends BaseController {
                   id : data.repairId
                 }
               }
-              const getResult = await super.getList(req, 'request_repairs',option);
-              const updateRepairStatus = await super.updateByCustomWhere(req, 'request_repairs', data ,option);
               
+              const updateRepairStatus = await super.updateByCustomWhere(req, 'request_repairs', data ,option);
+              const getResult = await super.getList(req, 'request_repairs',option);
             if (!_.isNull(updateRepairStatus)) {
-              const helper = HelperController.pushMessageUpdateStatusText(getResult[0].dataValues);
+              const helper = HelperController.pushMessageUpdateStatusText(getResult[0].dataValues,"คำสั่งซ่อม");
                 requestHandler.sendSuccess(
                     res,
                     'successfully updated repair status',

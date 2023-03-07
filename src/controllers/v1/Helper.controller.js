@@ -88,7 +88,7 @@ class HelperController extends BaseController {
     }
   }
 
-  static async pushMessageUpdateStatusText (data) {
+  static async pushMessageUpdateStatusText (data,type) {
     let color = "#000";
     switch (data.status) {
         case "ไม่รับคำร้อง":
@@ -111,7 +111,7 @@ class HelperController extends BaseController {
     }
     const texts = {
       "type": "flex",
-      "altText": "this is a flex message",
+      "altText": "คำร้องของคุณมีการเปลี่ยนสถานะ",
       "contents": {
           "type": "carousel",
           "contents": [
@@ -127,7 +127,7 @@ class HelperController extends BaseController {
                 "contents": [
                   {
                     "type": "text",
-                    "text": "คำร้องของคุณ",
+                    "text": `${type}`,
                     "weight": "bold",
                     "size": "lg",
                     "flex": 1,
