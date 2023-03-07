@@ -20,7 +20,7 @@ class RepairController extends BaseController {
     try {
       const data = req.body;
       const checkUser = HelperController.checkUserLineId(req,res,data.lineId);
-      
+      console.log(checkUser);
       if(!_.isNull(checkUser)){
         
           const userRepairData = {
@@ -33,7 +33,7 @@ class RepairController extends BaseController {
           const result = await super.create(req, 'request_repairs', userRepairData);
           
           if (!_.isNull(result)) {
-            requestNotiToMadIT(req,res,result.dataValues.id);
+            // requestNotiToMadIT(req,res,result.dataValues.detail);
             return "success";
           } else {
             return "false";

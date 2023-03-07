@@ -1,7 +1,7 @@
 const request = require("request");
 
-exports.requestNotiToMadIT = async (req,res,id) => {
-    const message = "มีการแจ้งปัญหาเข้ามาใหม่ไอดีที่ : " + id + " โปรดตรวจสอบ";
+exports.requestNotiToMadIT = async (req,res,detail) => {
+    const message = "มีการแจ้งปัญหาเข้ามาใหม่ไอดีที่ : " + detail + " โปรดตรวจสอบ";
     request(
       {
         method: "POST",
