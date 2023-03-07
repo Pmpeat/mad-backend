@@ -32,7 +32,7 @@ class RepairController extends BaseController {
           const result = await super.create(req, 'request_repairs', userRepairData);
           
           if (!_.isNull(result)) {
-            // requestNotiToMadIT(req,res,result.dataValues.detail);
+            requestNotiToMadIT(req,res,result.dataValues.detail);
             return "success";
           } else {
             return "false";

@@ -116,8 +116,8 @@ class VacationController extends BaseController {
         try {
             
             const data = req.body;
-           const checkUser = HelperController.checkUserLineId(req,res,data.lineId);
-           if(!_.isNull(checkUser)){
+           const checkUser = await HelperController.checkUserLineId(req,res,data.lineId);
+           if(checkUser === "success"){
             console.log("requestVacation =>>> ",data);
               const userVacationData = {
                 lineId:data.lineId,
