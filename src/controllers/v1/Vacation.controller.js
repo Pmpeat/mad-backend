@@ -138,7 +138,7 @@ class VacationController extends BaseController {
               const result = await super.create(req, 'request_vacations', userVacationData);
               if (!_.isNull(result)) {
                 if(data.type !== "sick"){
-                  const sendMail = await EmailController.sendMail(req,res,result[0].dataValues.id);
+                  const sendMail = await EmailController.sendMail(req,res,result.dataValues.id);
                 }
                 return "success";
               } else {
