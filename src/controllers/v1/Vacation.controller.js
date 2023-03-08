@@ -190,8 +190,8 @@ class VacationController extends BaseController {
                   where : {userId:userData[0].dataValues.id}
                 };
 
-                let dataRemain;
-                let remain
+                let dataRemain = {};
+                let remain = 0;
                 switch (data.type) {
                   case "vacation":
                     remain = parseInt(vacationData[0].dataValues.vacationLeave) - parseInt(reqVacationData[0].dataValues.days);
@@ -221,6 +221,7 @@ class VacationController extends BaseController {
                   default:
                     break;
                 }
+                console.log("optionUpdateRemain =>> ", optionUpdateRemain);
                 console.log("dataRemain =>> ", dataRemain);
                 resultUpdate = await super.updateByCustomWhere(req, 'vacations', dataRemain,optionUpdateRemain);
                 console.log("resultUpdate =>> ", resultUpdate);
