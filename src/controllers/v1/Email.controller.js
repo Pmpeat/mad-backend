@@ -62,8 +62,8 @@ class EmailController extends BaseController {
           <div style="width:20%">
             <a href="https://hr-project.madtypes.com/approve-vacation?request=${requestId}&status=reject" style="text-decoration : none ;font-size : 14px ;font-weight : bold ;
             color : #c7384a ;letter-spacing : 2px ;">
-            <div style="box-sizing : border-box ;border-radius : 300px ;border : solid 3px #c7384a;height: 100%;">
-                <span style="display : flex ;justify-content : center ;align-items : center ;width : 100% ;height : 100% ;">
+            <div style="box-sizing : border-box ;border-radius : 300px ;border : solid 3px #c7384a;height: 100%;width:100%;text-align: center;">
+                <span>
                     ไม่อนุมัติ
                 </span>
             </div>
@@ -73,8 +73,8 @@ class EmailController extends BaseController {
          <div style="width:20%">
             <a href="https://hr-project.madtypes.com/approve-vacation?request=${requestId}&status=approve" style="text-decoration : none ;font-size : 14px ;font-weight : bold ;
             color : #4ab847 ;letter-spacing : 2px ;">
-            <div style="box-sizing : border-box ;border-radius : 300px ;border : solid 3px #4ab847;height: 100%;">
-                <span style="display : flex ;justify-content : center ;align-items : center ;width : 100% ;height : 100% ;">
+            <div style="box-sizing : border-box ;border-radius : 300px ;border : solid 3px #4ab847;height: 100%;width:100%;text-align: center;">
+                <span>
                     อนุมัติ
                 </span>
             </div>

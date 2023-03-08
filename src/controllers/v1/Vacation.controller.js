@@ -161,11 +161,12 @@ class VacationController extends BaseController {
         try {
             
             const data = req.body;
+            console.log(data);
             const options = {
               where : {id:data.requestId}
             };
               const updateRequestStatus = {
-                approveStatus:data.status
+                approveStatus:data.status === "approve"? true:false 
               }
 
               const result = await super.updateByCustomWhere(req, 'request_vacations', updateRequestStatus,options);
