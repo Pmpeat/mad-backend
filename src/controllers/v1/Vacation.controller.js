@@ -161,7 +161,6 @@ class VacationController extends BaseController {
         try {
             
             const data = req.body;
-            console.log(data);
             const options = {
               where : {id:data.requestId}
             };
