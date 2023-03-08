@@ -221,9 +221,7 @@ class VacationController extends BaseController {
                   default:
                     break;
                 }
-                console.log("dataRemain =>> ", dataRemain);
                 resultUpdate = await super.updateByCustomWhere(req, 'vacations', dataRemain,optionUpdateRemain);
-                console.log("resultUpdate =>> ", resultUpdate);
               }
 
               if (!_.isNull(resultUpdate)) {
@@ -240,7 +238,11 @@ class VacationController extends BaseController {
                 );
               }
             } else {
-
+              requestHandler.sendSuccess(
+                res,
+                'ขออภัยมีการอัพเดทสถานะไปแล้ว',
+                201
+              )(resultUpdate);
             }
             
         } catch(err) {
