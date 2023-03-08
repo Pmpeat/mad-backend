@@ -240,9 +240,9 @@ class VacationController extends BaseController {
             } else {
               requestHandler.sendSuccess(
                 res,
-                'ขออภัยมีการอัพเดทสถานะไปแล้ว',
+                'updated',
                 201
-              )(resultUpdate);
+              )('updated');
             }
             
         } catch(err) {
