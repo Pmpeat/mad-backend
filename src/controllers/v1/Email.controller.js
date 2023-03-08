@@ -71,7 +71,7 @@ class EmailController extends BaseController {
         </div>`,
       };
 
-      if (!_.isNull(updatePasswordUser)) {
+      if (!_.isNull(userData)) {
         transporter.sendMail(mailOptions, function (err, info) {
           console.log();
           if (err) {
