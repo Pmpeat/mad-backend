@@ -24,7 +24,6 @@ router.post('/create-request-repair', async (req ,res) => {
         } else if (resultQuery === "lineId"){
             res.redirect("/false-line-id");
         } else {
-            console.log("error =>>> ");
             res.redirect("/false-request");
         }
         

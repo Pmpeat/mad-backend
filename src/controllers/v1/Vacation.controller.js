@@ -117,8 +117,15 @@ class VacationController extends BaseController {
             
             const data = req.body;
            const checkUser = await HelperController.checkUserLineId(req,res,data.lineId);
+
+           const oneDay = 24 * 60 * 60 * 1000; 
+           const firstDate = new Date(data.from);
+            const secondDate = new Date(data.to);
+           const diffDays = Math.round(Math.abs(( firstDate - secondDate) / oneDay)) +1;
+           
            if(checkUser === "success"){
-            console.log("requestVacation =>>> ",data);
+            const checkVacation = await HelperController.checkVacation(req,res,data.lineId,data.type,diffDays);
+            if(checkVacation === true){
               const userVacationData = {
                 lineId:data.lineId,
                 type:data.type,
@@ -130,10 +137,17 @@ class VacationController extends BaseController {
 
               const result = await super.create(req, 'request_vacations', userVacationData);
               if (!_.isNull(result)) {
+                if(data.type !== "sick"){
+                  const sendMail = await EmailController.sendMail(req,res,result[0].dataValues.id);
+                }
                 return "success";
               } else {
                 return "false";
               }
+            } else {
+              return "remain"
+            }
+              
            } else {
             return "lineId";
            }

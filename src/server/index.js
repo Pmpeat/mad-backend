@@ -26,9 +26,19 @@ app.get('/success-request', function (req, res)
     res.render('successRequest.html');
 });
 
+app.get('/approve-vacation', function (req, res)
+{
+    res.render('approveVacation.html');
+});
+
 app.get('/false-line-id', function (req, res)
 {
     res.render('falseLineId.html');
+});
+
+app.get('/false-remain', function (req, res)
+{
+    res.render('falseRemain.html');
 });
 
 app.get('/false-request', function (req, res)

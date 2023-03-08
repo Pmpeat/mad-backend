@@ -17,8 +17,9 @@ router.post('/create-request-vacation', async (req ,res) => {
         if(resultQuery === "success"){
             res.redirect("/success-request");
             
+        } else if (resultQuery === "remain"){
+            res.redirect("/false-remain");
         } else {
-            console.log("error =>>> ");
             res.redirect("/false-request");
         }
         

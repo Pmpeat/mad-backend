@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const nodemailer = require("nodemailer");
 const BaseController = require('./Base.controller');
+const HelperController = require('./Helper.controller');
 const RequestHandler = require('../../utils/RequestHandler');
 const config = require('../../config/appconfig');
 const Logger = require('../../utils/logger');
@@ -14,10 +15,25 @@ class EmailController extends BaseController {
   /**
    * It's a function that send mail
    */
-  static async sendMail(req, res) {
+  static async sendMail(req, res,requestId) {
     try {
       const data = req.body;
-
+      const userData = await HelperController.getUserFromLineId(req,res,data.lineId);
+      let typeText = "";
+      switch (data.type) {
+        case "vacation":
+          typeText = "ลาพักร้อน";
+          break;
+        case "sick":
+          typeText = "ลาป่วย";
+          break;
+        case "personal":
+          typeText = "ลากิจ";
+          break;
+        case "withoutpay":
+          typeText = "ลาไม่รับเงิน";
+          break;
+      }
       let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -26,20 +42,32 @@ class EmailController extends BaseController {
         },
       });
 
-
+      
+      const maillist = ["patiphan.work@gmail.com","patiphan@mad-arai-d.com"];
+      
 
       let mailOptions = {
-        from: 'immtrip.app@gmail.com',
-        to: `${data.email}`,
-        subject: `IMMTRIP APPLICATION รหัสผ่านใหม่ของท่าน`,
-        html: `<div>
-        <h1 style="text-align: center">นี่คือข้อความตอบกลับจาก IMMTRIP APPLICATION</h1>
-        <p style="text-align: center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;จากการรีเซ็ทรหัสผ่านของท่าน ระบบได้ทำการเปลี่ยนเเละส่งรหัสผ่านใหม่ให้ท่าน<br/>เพื่อให้ท่านสามารถเข้าสู่ระบบด้วยรหัสผ่านใหม่ได้ทันทีและสามารถเปลี่ยนรหัสผ่านได้ด้วยตัวเอง</p>
-        <div style="text-align: center">
-        รหัสผ่านใหม่ของท่านคือ <span style="color:red">${randomstring}</span>
+        from: 'emailmadaraid@gmail.com',
+        to: `${maillist}`,
+        subject: `ขออนุมัติการลา`,
+        html: `<div style="width:100%">
+        <h1 style="text-align: center">คำร้องขออนุมัติการลา</h1>
+        <p style="text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;คำร้องการลาจากคุณ : ${userData[0].dataValues.firstName} ${userData[0].dataValues.lastName}</br> </br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ประเภทการลา : ${typeText}</br> </br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตั้งเเต่วันที่ : ${data.from} ถึง : ${data.to}</br> </br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เหตุผล : ${data.reason}</br> </br></p>
+        <p style="text-align: center">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">****</span>กรุณาคลิกที่นี่เพื่อเลือก อนุมัติ หรือ ไม่อนุมัติ<span style="color:red">****</span></p>
+        <div style="display:flex;justify-content : center ;align-items : center;">
+        <a href="https://hr-project.madtypes.com/approve-vacation?request=${requestId}" style="width : 240px ;height : 56px ;text-decoration : none ;font-size : 14px ;font-weight : bold ;
+            color : #555555 ;letter-spacing : 2px ;">
+            <div style="box-sizing : border-box ;border-radius : 300px ;border : solid 3px #555555;">
+                <span style="display : flex ;justify-content : center ;align-items : center ;width : 100% ;height : 100% ;">
+                    ตอบกลับคำร้อง
+                </span>
+            </div>
+         </a>
         </div>
-        <p style="text-align: center">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">****</span>เพื่อความปลอดภัยหลังจากได้รับรหัสผ่านใหม่แล้ว กรุณาเปลี่ยนรหัสด้วยตัวท่านเองทันที<span style="color:red">****</span></p>
-        <p style="text-align: center">&nbsp;&nbsp;&nbsp;&nbsp;ขอบคุณสำหรับการใช้งานแอปพลิเคชัน อิ่มทริป</p>
+        <p style="text-align: center">ขอบคุณสำหรับตอบกลับ</p>
         </div>`,
       };
 

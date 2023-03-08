@@ -19,6 +19,21 @@ const client = new line.Client(lineConfig);
 
 class HelperController extends BaseController {
 
+   /**
+   * It's a function that get all user
+   */
+   static async getUserFromLineId(req,res,lineId) {
+    try {
+        const options = {
+          where:{'lineId':lineId},
+          order: [['id', 'asc']],
+        };
+        const result = await super.getList(req, 'users', options);
+        return result;
+      } catch (err) {
+        requestHandler.sendError(req, res, err);
+      }
+  }
     
   /**
    * It's a function that get all user
@@ -43,18 +58,51 @@ class HelperController extends BaseController {
    /**
    * It's a function that get all roles
    */
-   static async checkVacation(req,res,userId) {
+   static async checkVacation(req,res,lineId,type,days) {
     try {
-        const options = {
-        where:{'userId':userId},
-          order: [['id', 'asc']],
-        };
-        const result = await super.getList(req, 'roles', options);
-        if(result.length > 0){
-            return "success";
-           } else {
-            return "error"
-           }
+        const optionLineId = {
+            where:{'lineId':lineId},
+              order: [['id', 'asc']],
+            };
+        const resultUser = await super.getList(req, 'users', optionLineId);
+        if(resultUser.length > 0){
+            const options = {
+                where:{'userId':resultUser[0].dataValues.id},
+                  order: [['id', 'asc']],
+                };
+                const result = await super.getList(req, 'vacations', options);
+
+                let check = true;
+            switch (type) {
+                case "vacation":
+                    if(result[0].dataValues.vacationLeave > days){
+                        check = true;
+                    } else {
+                        check = false;
+                    }
+                    break;
+                case "sick":
+                    if(result[0].dataValues.sickLeave > days){
+                        check = true;
+                    } else {
+                        check = false;
+                    }
+                    break;
+                case "personal":
+                    if(result[0].dataValues.personalLeave > days){
+                        check = true;
+                    } else {
+                        check = false;
+                    }
+                    break;
+                default:
+                    check = true;
+                    break;
+            }
+
+            return check;
+        }
+        
       } catch (err) {
         requestHandler.sendError(req, res, err);
       }

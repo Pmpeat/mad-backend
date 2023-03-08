@@ -168,9 +168,7 @@ class UserController extends BaseController {
           where: {email:event.message.text},
         };
         const result = await super.getList(req, 'users', options);
-        console.log(result.length);
         if(result.length > 0){
-          console.log(result);
           if(result[0].dataValues.lineId === null){
             const option = {
               where : {
