@@ -25,9 +25,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
+      days: {
+        type: Sequelize.INTEGER,
+        default : 0
+      },
       approveStatus: {
-        type: Sequelize.BOOLEAN,
-        default : false
+        type: Sequelize.STRING,
+        default : "pending"
       },
       createdAt: {
         allowNull: false,

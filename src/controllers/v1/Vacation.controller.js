@@ -133,7 +133,7 @@ class VacationController extends BaseController {
                 from:data.from,
                 to:data.to,
                 days:diffDays,
-                approveStatus:false
+                approveStatus:"pending"
               }
 
               const result = await super.create(req, 'request_vacations', userVacationData);
@@ -165,16 +165,20 @@ class VacationController extends BaseController {
             const options = {
               where : {id:data.requestId}
             };
+
+            const reqVacationData = await super.getAllByIdWithOptions(req,'request_vacations',options);
+
+            if(reqVacationData[0].dataValues.approveStatus === "pending"){
               const updateRequestStatus = {
-                approveStatus:data.status === "approve"? true:false 
+                approveStatus:data.status === "approve"? "approve":"reject" 
               }
 
               const result = await super.updateByCustomWhere(req, 'request_vacations', updateRequestStatus,options);
 
               let resultUpdate;
-              if (data.status === "approve") {
 
-                const reqVacationData = await super.getAllByIdWithOptions(req,'request_vacations',options);
+              if (data.status === "approve") {
+                
                 const optionUser = {
                   where : {lineId:reqVacationData[0].dataValues.lineId}
                 }
@@ -184,9 +188,11 @@ class VacationController extends BaseController {
                   where : {userId:userData[0].dataValues.id}
                 }
                 const vacationData = await super.getAllByIdWithOptions(req,'vacations',optionVacation);
+
                 const optionUpdateRemain = {
                   where : {userId:userData[0].dataValues.id}
                 };
+
                 let dataRemain;
                 let remain
                 switch (data.type) {
@@ -235,7 +241,9 @@ class VacationController extends BaseController {
                   'Unable to process the contained instructions'
                 );
               }
-              
+            } else {
+
+            }
             
         } catch(err) {
             console.log(err);
