@@ -1,12 +1,39 @@
 <!DOCTYPE html>
-<html>
-<head>
-<title>Page Title</title>
-</head>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Approve Request Vacation</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+    </head>
 <body>
 
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
-
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script>
+    async function main() {
+          const queryString = window.location.search;
+          const urlParams = await new URLSearchParams(queryString);
+          const requestId = await urlParams.get('request')
+          const status = await urlParams.get('status')
+            const data = {
+                requestId : requestId,
+                status : status
+            }
+          $.ajax({
+            url:"/api/v1/vacation/update-status-request",
+            method:"POST",
+            data:data,
+            dataType : "JSON",
+            success:function(response)
+            {
+                console.log("success =>>> ",response);
+            }, error: function (error){
+                console.log(error);
+            }
+        });
+    }
+    
+    main();
+      
+  </script>
 </body>
 </html>

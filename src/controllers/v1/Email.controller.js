@@ -52,20 +52,35 @@ class EmailController extends BaseController {
         subject: `ขออนุมัติการลา`,
         html: `<div style="width:100%">
         <h1 style="text-align: center">คำร้องขออนุมัติการลา</h1>
-        <p style="text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;คำร้องการลาจากคุณ : ${userData[0].dataValues.firstName} ${userData[0].dataValues.lastName}</br> </br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ประเภทการลา : ${typeText}</br> </br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตั้งเเต่วันที่ : ${data.from} ถึง : ${data.to}</br> </br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เหตุผล : ${data.reason}</br> </br></p>
+        <p style="text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;คำร้องการลาจากคุณ : ${userData[0].dataValues.firstName} ${userData[0].dataValues.lastName}</p>
+        <p style="text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ประเภทการลา : ${typeText}</p>
+        <p style="text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตั้งเเต่วันที่ : ${data.from} ถึง : ${data.to}</p>
+        <p style="text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เหตุผล : ${data.reason}</p>
         <p style="text-align: center">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">****</span>กรุณาคลิกที่นี่เพื่อเลือก อนุมัติ หรือ ไม่อนุมัติ<span style="color:red">****</span></p>
-        <div style="display:flex;justify-content : center ;align-items : center;">
-        <a href="https://hr-project.madtypes.com/approve-vacation?request=${requestId}" style="width : 240px ;height : 56px ;text-decoration : none ;font-size : 14px ;font-weight : bold ;
-            color : #555555 ;letter-spacing : 2px ;">
-            <div style="box-sizing : border-box ;border-radius : 300px ;border : solid 3px #555555;">
+        <div style="display:flex;height:5%">
+          <div style="width:25%"><p> </p></div>
+          <div style="width:20%">
+            <a href="https://hr-project.madtypes.com/approve-vacation?request=${requestId}&status=reject" style="text-decoration : none ;font-size : 14px ;font-weight : bold ;
+            color : #c7384a ;letter-spacing : 2px ;">
+            <div style="box-sizing : border-box ;border-radius : 300px ;border : solid 3px #c7384a;height: 100%;">
                 <span style="display : flex ;justify-content : center ;align-items : center ;width : 100% ;height : 100% ;">
-                    ตอบกลับคำร้อง
+                    ไม่อนุมัติ
                 </span>
             </div>
-         </a>
+          </a>
+         </div>
+         <div style="width:10%"><p> </p></div>
+         <div style="width:20%">
+            <a href="https://hr-project.madtypes.com/approve-vacation?request=${requestId}&status=approve" style="text-decoration : none ;font-size : 14px ;font-weight : bold ;
+            color : #4ab847 ;letter-spacing : 2px ;">
+            <div style="box-sizing : border-box ;border-radius : 300px ;border : solid 3px #4ab847;height: 100%;">
+                <span style="display : flex ;justify-content : center ;align-items : center ;width : 100% ;height : 100% ;">
+                    อนุมัติ
+                </span>
+            </div>
+          </a>
+         </div>
+         <div style="width:25%"><p> </p></div>
         </div>
         <p style="text-align: center">ขอบคุณสำหรับตอบกลับ</p>
         </div>`,

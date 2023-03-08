@@ -28,4 +28,9 @@ router.post('/create-request-vacation', async (req ,res) => {
     }
 });
 
+/**
+ * /api/v1/vacation/update-status-request
+ * */
+router.post('/update-status-request', vacationController.updateUserRequestVacationStatus);
+
 module.exports = router;

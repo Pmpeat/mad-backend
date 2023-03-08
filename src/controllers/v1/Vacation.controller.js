@@ -157,6 +157,38 @@ class VacationController extends BaseController {
         }
       }
 
+      static async updateUserRequestVacationStatus (req,res) {
+        try {
+            
+            const data = req.body;
+            const options = {
+              where : {id:data.requestId}
+            };
+              const updateRequestStatus = {
+                approveStatus:data.status
+              }
+
+              const result = await super.updateByCustomWhere(req, 'request_vacations', updateRequestStatus,options);
+              if (!_.isNull(result)) {
+                requestHandler.sendSuccess(
+                  res,
+                  'successfully create user vacation',
+                  201
+                )(result);
+              } else {
+                requestHandler.throwError(
+                  422,
+                  'Unprocessable Entity',
+                  'Unable to process the contained instructions'
+                );
+              }
+              
+            
+        } catch(err) {
+            console.log(err);
+        }
+      }
+
 }
 
 
