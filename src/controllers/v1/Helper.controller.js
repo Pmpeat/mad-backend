@@ -220,6 +220,102 @@ class HelperController extends BaseController {
     return client.pushMessage(data.lineId,texts);
   }
 
+  static async pushMessageUpdateStatusVacation (data) {
+    let color = "#000";
+    let status = "อนุมัติ";
+    switch (data.approveStatus) {
+        case "reject":
+            color = await "#F73000FF";
+            status = await "ไม่อนุมัติ"
+            break;
+        case "approve":
+            color = await "#3BC001FF";
+            status = await "อนุมัติ";
+            break;
+        default:
+            break;
+    }
+
+    let type = "ลา";
+    switch (data.type) {
+        case "vacation":
+            type = await "ลาพักร้อน";
+            break;
+        case "sick":
+            type = await "ลาป่วย";
+            break;
+        case "personal":
+            type = await "ลากิจ";
+            break;
+        case "withoutpay":
+            type = await "ลาไม่ได้รับเงิน";
+            break;
+        default:
+            break;
+    }
+
+    const texts = {
+      "type": "flex",
+      "altText": `คำขอ ${type}`,
+      "contents": {
+          "type": "carousel",
+          "contents": [
+            {
+              "type": "bubble",
+              "direction": "ltr",
+              "header": {
+                "type": "box",
+                "layout": "vertical",
+                "flex": 1,
+                "height": "100px",
+                "backgroundColor": `${color}`,
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "คำขอ",
+                    "weight": "bold",
+                    "size": "lg",
+                    "flex": 1,
+                    "align": "center",
+                    "gravity": "center",
+                    "contents": []
+                  },
+                  {
+                    "type": "text",
+                    "text": `ได้รับการ ${status} แล้ว`,
+                    "flex": 1,
+                    "align": "center",
+                    "gravity": "center",
+                    "contents": []
+                  }
+                ]
+              },
+              "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": `วันที่ลา ${data.from} : ถึง : ${data.to}`,
+                    "align": "start",
+                    "gravity": "center",
+                    "contents": []
+                  },
+                  {
+                    "type": "text",
+                    "text": `เหตุผล : ${data.reason}`,
+                    "contents": []
+                  }
+                ]
+              }
+            }
+          ]
+        }
+    }
+
+    return client.pushMessage(data.lineId,texts);
+  }
+
 
 }
 

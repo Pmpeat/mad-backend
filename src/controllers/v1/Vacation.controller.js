@@ -138,9 +138,8 @@ class VacationController extends BaseController {
 
               const result = await super.create(req, 'request_vacations', userVacationData);
               if (!_.isNull(result)) {
-                if(data.type !== "sick"){
-                  const sendMail = await EmailController.sendMail(req,res,result.dataValues.id);
-                }
+                const sendMail = await EmailController.sendMail(req,res,result.dataValues.id);
+                
                 return "success";
               } else {
                 return "false";
@@ -225,6 +224,17 @@ class VacationController extends BaseController {
               }
 
               if (!_.isNull(resultUpdate)) {
+                const dataMessage = {
+                  lineId : reqVacationData[0].dataValues.lineId,
+                  type : reqVacationData[0].dataValues.type,
+                  approveStatus : data.status,
+                  from:reqVacationData[0].dataValues.from,
+                  to:reqVacationData[0].dataValues.to,
+                  reason:reqVacationData[0].dataValues.reason
+                }
+
+                const pushMessage = await HelperController.pushMessageUpdateStatusVacation(dataMessage);
+
                 requestHandler.sendSuccess(
                   res,
                   'successfully create user vacation',
