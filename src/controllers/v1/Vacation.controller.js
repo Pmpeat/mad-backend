@@ -227,7 +227,7 @@ class VacationController extends BaseController {
                 const dataMessage = {
                   lineId : reqVacationData[0].dataValues.lineId,
                   type : reqVacationData[0].dataValues.type,
-                  approveStatus : data.status,
+                  approveStatus : updateRequestStatus.approveStatus,
                   from:reqVacationData[0].dataValues.from,
                   to:reqVacationData[0].dataValues.to,
                   reason:reqVacationData[0].dataValues.reason
@@ -237,7 +237,7 @@ class VacationController extends BaseController {
 
                 requestHandler.sendSuccess(
                   res,
-                  'successfully create user vacation',
+                  'successfully update vacation',
                   201
                 )(resultUpdate);
               } else {
