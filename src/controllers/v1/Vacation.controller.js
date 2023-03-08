@@ -178,17 +178,17 @@ class VacationController extends BaseController {
               let resultUpdate;
 
               if (data.status === "approve") {
-                
+                console.log("innnn");
                 const optionUser = {
                   where : {lineId:reqVacationData[0].dataValues.lineId}
                 }
                 const userData = await super.getAllByIdWithOptions(req,'users',optionUser);
-
+                console.log("userData =>> ",userData);
                 const optionVacation = {
                   where : {userId:userData[0].dataValues.id}
                 }
                 const vacationData = await super.getAllByIdWithOptions(req,'vacations',optionVacation);
-
+                console.log("vacationData =>> ",vacationData);
                 const optionUpdateRemain = {
                   where : {userId:userData[0].dataValues.id}
                 };
