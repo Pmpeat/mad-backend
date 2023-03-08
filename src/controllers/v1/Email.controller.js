@@ -43,12 +43,12 @@ class EmailController extends BaseController {
       });
 
       
-      const maillist = ["patiphan.work@gmail.com","patiphan@mad-arai-d.com"];
+      // const maillist = ["patiphan.work@gmail.com",];
       
 
       let mailOptions = {
         from: 'emailmadaraid@gmail.com',
-        to: `${maillist}`,
+        to: 'kanyanut@mad-arai-d.com',
         subject: `ขออนุมัติการลา`,
         html: `<div style="width:100%">
         <h1 style="text-align: center">คำร้องขออนุมัติการลา</h1>
