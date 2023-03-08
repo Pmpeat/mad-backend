@@ -192,6 +192,7 @@ class VacationController extends BaseController {
 
                 let dataRemain = {};
                 let remain = 0;
+                console.log("data.type =>> ", data.type);
                 switch (data.type) {
                   case "vacation":
                     remain = parseInt(vacationData[0].dataValues.vacationLeave) - parseInt(reqVacationData[0].dataValues.days);
