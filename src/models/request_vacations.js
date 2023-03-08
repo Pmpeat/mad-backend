@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
     reason: DataTypes.STRING,
     from: DataTypes.DATE,
     to: DataTypes.DATE,
-    status: DataTypes.STRING,
     days: DataTypes.INTEGER,
     approveStatus : DataTypes.STRING,
   }, {
