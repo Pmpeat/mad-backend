@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     from: DataTypes.DATE,
     to: DataTypes.DATE,
     status: DataTypes.STRING,
+    days: DataTypes.INTEGER,
     approveStatus : DataTypes.BOOLEAN,
   }, {
     sequelize,

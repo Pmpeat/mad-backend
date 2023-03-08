@@ -132,6 +132,7 @@ class VacationController extends BaseController {
                 reason:data.reason,
                 from:data.from,
                 to:data.to,
+                days:diffDays,
                 approveStatus:false
               }
 
@@ -169,12 +170,64 @@ class VacationController extends BaseController {
               }
 
               const result = await super.updateByCustomWhere(req, 'request_vacations', updateRequestStatus,options);
-              if (!_.isNull(result)) {
+
+              let resultUpdate;
+              if (data.status === "approve") {
+
+                const reqVacationData = await super.getAllByIdWithOptions(req,'request_vacations',options);
+                const optionUser = {
+                  where : {lineId:reqVacationData[0].dataValues.lineId}
+                }
+                const userData = await super.getAllByIdWithOptions(req,'users',optionUser);
+
+                const optionVacation = {
+                  where : {userId:userData[0].dataValues.id}
+                }
+                const vacationData = await super.getAllByIdWithOptions(req,'vacations',optionVacation);
+                const optionUpdateRemain = {
+                  where : {userId:userData[0].dataValues.id}
+                };
+                let dataRemain;
+                let remain
+                switch (data.type) {
+                  case "vacation":
+                    remain = parseInt(vacationData[0].dataValues.vacationLeave) - parseInt(reqVacationData[0].dataValues.days);
+                    dataRemain = {
+                      vacationLeave : remain
+                    }
+                    break;
+                  case "sick":
+                    remain = parseInt(vacationData[0].dataValues.sickLeave) - parseInt(reqVacationData[0].dataValues.days);
+                    dataRemain = {
+                      sickLeave : remain
+                    }
+                    break;
+                  case "personal":
+                    remain = parseInt(vacationData[0].dataValues.personalLeave) - parseInt(reqVacationData[0].dataValues.days);
+                    dataRemain = {
+                      personalLeave : remain
+                    }
+                    break;
+                  case "withoutpay":
+                    remain = parseInt(vacationData[0].dataValues.personalLeave) + parseInt(reqVacationData[0].dataValues.days);
+                    dataRemain = {
+                      leaveWithoutPayment : remain
+                    }
+                    break;
+                
+                  default:
+                    break;
+                }
+
+                resultUpdate = await super.updateByCustomWhere(req, 'vacations', dataRemain,optionUpdateRemain);
+              }
+
+              if (!_.isNull(resultUpdate)) {
                 requestHandler.sendSuccess(
                   res,
                   'successfully create user vacation',
                   201
-                )(result);
+                )(resultUpdate);
               } else {
                 requestHandler.throwError(
                   422,
