@@ -61,7 +61,7 @@ class HelperController extends BaseController {
             where : {lineId:event.source.userId}
           };
           const resultUser = await super.getList(req, 'users',options);
-          const userId = await resultUser.dataValues.id;
+          const userId = await resultUser[0].dataValues.id;
           const optionVacation = {
             where : {userId : userId}
           }
