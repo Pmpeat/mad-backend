@@ -55,6 +55,23 @@ class HelperController extends BaseController {
       }
   }
 
+  static async findUserVacation (req,res,event) {
+    try {
+        const options = {
+            where : {lineId:event.source.userId}
+          };
+          const resultUser = await super.getList(req, 'users',options);
+          const userId = await resultUser.dataValues.id;
+          const optionVacation = {
+            where : {userId : userId}
+          }
+          const result = await super.getList(req, 'vacations',optionVacation);
+          return result;
+    } catch(err) {
+        console.log(err);
+    }
+  }
+
    /**
    * It's a function that get all roles
    */

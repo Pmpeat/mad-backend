@@ -550,6 +550,165 @@ class DialogFlow extends BaseController {
         }
         // order check
 
+        // vacation
+        if(event.message.text === "เช็ควันลา"){
+          const result = await HelperController.findUserVacation(req,res,event);
+          const texts = {
+            "type": "flex",
+            "altText": "this is a flex message",
+            "contents": {
+                "type": "carousel",
+                "contents": [
+                  {
+                    "type": "bubble",
+                    "direction": "ltr",
+                    "header": {
+                      "type": "box",
+                      "layout": "vertical",
+                      "flex": 1,
+                      "height": "80px",
+                      "backgroundColor": "#FFFFFFFF",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": "วันลาทั้งหมดของคุณ",
+                          "weight": "bold",
+                          "size": "lg",
+                          "color": "#000000FF",
+                          "flex": 1,
+                          "align": "center",
+                          "gravity": "center",
+                          "contents": []
+                        },
+                        {
+                          "type": "text",
+                          "text": "รายละเอียด",
+                          "flex": 1,
+                          "align": "center",
+                          "gravity": "center",
+                          "contents": []
+                        }
+                      ]
+                    },
+                    "body": {
+                      "type": "box",
+                      "layout": "vertical",
+                      "contents": [
+                        {
+                          "type": "text",
+                          "text": `ลาพักร้อน`,
+                          "align": "start",
+                          "gravity": "center",
+                          "contents": [
+                            {
+                              "type": "span",
+                              "text": "ลาพักร้อน คงเหลือ"
+                            },
+                            {
+                              "type": "span",
+                              "text": " : "
+                            },
+                            {
+                              "type": "span",
+                              "text": `${result[0].dataValues.vacationLeave}`,
+                              "color": "#39BA00FF"
+                            },
+                            {
+                              "type": "span",
+                              "text": "วัน"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "text": `ลาป่วย`,
+                          "align": "start",
+                          "gravity": "center",
+                          "contents": [
+                            {
+                              "type": "span",
+                              "text": `ลาป่วย คงเหลือ`
+                            },
+                            {
+                              "type": "span",
+                              "text": " : "
+                            },
+                            {
+                              "type": "span",
+                              "text": `${result[0].dataValues.sickLeave}`,
+                              "color": "#39BA00FF"
+                            },
+                            {
+                              "type": "span",
+                              "text": "วัน"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "text": "ลากิจ",
+                          "align": "start",
+                          "gravity": "center",
+                          "contents": [
+                            {
+                              "type": "span",
+                              "text": `ลากิจ คงเหลือ`
+                            },
+                            {
+                              "type": "span",
+                              "text": " : "
+                            },
+                            {
+                              "type": "span",
+                              "text": `${result[0].dataValues.personalLeave}`,
+                              "color": "#39BA00FF"
+                            },
+                            {
+                              "type": "span",
+                              "text": "วัน"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "text": `ลาไม่รับเงิน`,
+                          "align": "start",
+                          "gravity": "center",
+                          "contents": [
+                            {
+                              "type": "span",
+                              "text": "ลาไม่รับเงิน ใช้ไปแล้ว"
+                            },
+                            {
+                              "type": "span",
+                              "text": " : "
+                            },
+                            {
+                              "type": "span",
+                              "text": `${result[0].dataValues.leaveWithoutPayment}`,
+                              "color": "#F73000FF"
+                            },
+                            {
+                              "type": "span",
+                              "text": "วัน"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+          }
+
+          if(!_.isNull(result)){
+              return client.pushMessage(event.source.userId,texts);
+          } else {
+              return client.replyMessage(event.replyToken,{type:'text',text:"ระบบขัดข้อง กรุณาติดต่อฝ่าย it"});
+          }
+        }
+        // vacation
+
         let resultRichMenu = "default";
 
         if(event.message.text === "ไปยังหน้า IT" || event.message.text === "ย้อนกลับหน้า IT"){
@@ -570,7 +729,9 @@ class DialogFlow extends BaseController {
 
         if(event.message.text === "ย้อนกลับ"){
           resultRichMenu = await RichController.pageMainMenu(event.source.userId);
-      }
+        }
+
+       
 
          if (response[0].queryResult.intent.displayName === "Default Fallback Intent" && resultRichMenu !== "changeScene"
             || response[0].queryResult.intent.displayName === "RequestOrder" && resultRichMenu !== "changeScene"
