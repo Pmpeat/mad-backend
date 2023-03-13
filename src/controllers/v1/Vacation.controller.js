@@ -41,6 +41,40 @@ class VacationController extends BaseController {
         }
       }
 
+      static async getRequestVacation (req,res) {
+        try {
+            const data = req.body;
+            let options;
+            if (data.status === "all") {
+              options = {
+                order : [['id' ,'asc']]
+              };
+            } else {
+              options = {
+                where : {approveStatus:data.status},
+                order : [['id' ,'asc']]
+              };
+            }
+            
+              const result = await super.getList(req, 'request_vacations',options);
+              if (!_.isNull(result)) {
+                requestHandler.sendSuccess(
+                  res,
+                  'successfully get user request vacation',
+                  201
+                )(result);
+              } else {
+                requestHandler.throwError(
+                  422,
+                  'Unprocessable Entity',
+                  'Unable to process the contained instructions'
+                );
+              }
+        } catch(err) {
+            console.log(err);
+        }
+      }
+
       static async createUserVacation (req,res) {
         try {
             const data = req.body;

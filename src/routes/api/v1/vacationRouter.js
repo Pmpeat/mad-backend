@@ -28,6 +28,14 @@ router.post('/create-request-vacation', async (req ,res) => {
     }
 });
 
+
+
+/**
+ * /api/v1/vacation/get-request-vacation
+ * */
+router.post('/find', vacationController.getRequestVacation);
+
+
 /**
  * /api/v1/vacation/update-status-request
  * */
