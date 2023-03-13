@@ -555,7 +555,7 @@ class DialogFlow extends BaseController {
           const result = await HelperController.findUserVacation(req,res,event);
           const texts = {
             "type": "flex",
-            "altText": "this is a flex message",
+            "altText": "วันลาทั้งหมดของคุณ",
             "contents": {
                 "type": "carousel",
                 "contents": [
@@ -610,7 +610,7 @@ class DialogFlow extends BaseController {
                             },
                             {
                               "type": "span",
-                              "text": `${result[0].dataValues.vacationLeave}`,
+                              "text": `${result[0].dataValues.vacationLeave} `,
                               "color": "#39BA00FF"
                             },
                             {
@@ -635,7 +635,7 @@ class DialogFlow extends BaseController {
                             },
                             {
                               "type": "span",
-                              "text": `${result[0].dataValues.sickLeave}`,
+                              "text": `${result[0].dataValues.sickLeave} `,
                               "color": "#39BA00FF"
                             },
                             {
@@ -660,7 +660,7 @@ class DialogFlow extends BaseController {
                             },
                             {
                               "type": "span",
-                              "text": `${result[0].dataValues.personalLeave}`,
+                              "text": `${result[0].dataValues.personalLeave} `,
                               "color": "#39BA00FF"
                             },
                             {
@@ -685,7 +685,7 @@ class DialogFlow extends BaseController {
                             },
                             {
                               "type": "span",
-                              "text": `${result[0].dataValues.leaveWithoutPayment}`,
+                              "text": `${result[0].dataValues.leaveWithoutPayment} `,
                               "color": "#F73000FF"
                             },
                             {
