@@ -50,36 +50,55 @@ class RepairController extends BaseController {
             const data = req.body;
             const checkStatus = ["รอการตรวจสอบ","กำลังตรวจสอบ"];
             let options;
-            if (data.status === "รอการตรวจสอบ"){
-              options = {
-                where : {status:{
-                  [Op.in]: checkStatus,
-                }},
-                include : [
-                  {
-                    model: req.app.get("db")["users"],
-                    as : 'line',
-                    on : {
-                      'lineId': {[Op.eq]: Sequelize.col('request_repairs.lineId')}
+
+            switch (data.status) {
+              case "all":
+                options = {
+                  include : [
+                    {
+                      model: req.app.get("db")["users"],
+                      as : 'line',
+                      on : {
+                        'lineId': {[Op.eq]: Sequelize.col('request_repairs.lineId')}
+                      }
                     }
-                  }
-                ],
-                order : [['id' ,'asc']]
-              };
-            } else {
-              options = {
-                where : {status:data.status},
-                include : [
-                  {
-                    model: req.app.get("db")["users"],
-                    as : 'line',
-                    on : {
-                      'lineId': {[Op.eq]: Sequelize.col('request_repairs.lineId')}
+                  ],
+                  order : [['id' ,'desc']]
+                };
+                break;
+              case "รอการตรวจสอบ":
+                options = {
+                  where : {status:{
+                    [Op.in]: checkStatus,
+                  }},
+                  include : [
+                    {
+                      model: req.app.get("db")["users"],
+                      as : 'line',
+                      on : {
+                        'lineId': {[Op.eq]: Sequelize.col('request_repairs.lineId')}
+                      }
                     }
-                  }
-                ],
-                order : [['id' ,'asc']]
-              };
+                  ],
+                  order : [['id' ,'desc']]
+                };
+                break;
+            
+              default:
+                options = {
+                  where : {status:data.status},
+                  include : [
+                    {
+                      model: req.app.get("db")["users"],
+                      as : 'line',
+                      on : {
+                        'lineId': {[Op.eq]: Sequelize.col('request_repairs.lineId')}
+                      }
+                    }
+                  ],
+                  order : [['id' ,'desc']]
+                };
+                break;
             }
 
               const result = await super.getList(req, 'request_repairs',options);

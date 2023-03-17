@@ -58,7 +58,7 @@ class VacationController extends BaseController {
                     }
                   }
                 ],
-                order : [['id' ,'asc']]
+                order : [['id' ,'desc']]
               };
             } else {
               options = {
@@ -72,7 +72,7 @@ class VacationController extends BaseController {
                     }
                   }
                 ],
-                order : [['id' ,'asc']]
+                order : [['id' ,'desc']]
               };
             }
             
