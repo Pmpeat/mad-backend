@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      request_repairs.belongsTo(models.users, {
+        as: 'line'
+      });
     }
   }
   request_repairs.init({

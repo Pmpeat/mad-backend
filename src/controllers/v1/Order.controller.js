@@ -12,6 +12,7 @@ const Logger = require('../../utils/logger');
 const logger = new Logger();
 const requestHandler = new RequestHandler(logger);
 const config = require('../../config/appconfig');
+const { Sequelize } = require('../../models');
 
 class OrderController extends BaseController {
 
@@ -54,11 +55,29 @@ class OrderController extends BaseController {
                 where : {status:{
                   [Op.in]: checkStatus,
                 }},
+                include : [
+                  {
+                    model: req.app.get("db")["users"],
+                    as : 'line',
+                    on : {
+                      'lineId': {[Op.eq]: Sequelize.col('request_orders.lineId')}
+                    }
+                  }
+                ],
                 order : [['id' ,'asc']]
               };
             } else {
               options = {
                 where : {status:data.status},
+                include : [
+                  {
+                    model: req.app.get("db")["users"],
+                    as : 'line',
+                    on : {
+                      'lineId': {[Op.eq]: Sequelize.col('request_orders.lineId')}
+                    }
+                  }
+                ],
                 order : [['id' ,'asc']]
               };
             }

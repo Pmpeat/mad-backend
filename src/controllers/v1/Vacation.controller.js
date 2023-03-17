@@ -1,6 +1,8 @@
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
+const { Op } = require('sequelize');
+const { Sequelize } = require('../../models');
 const BaseController = require('./Base.controller');
 const HelperController = require('./Helper.controller');
 const EmailController = require('./Email.controller');
@@ -47,11 +49,29 @@ class VacationController extends BaseController {
             let options;
             if (data.status === "all") {
               options = {
+                include : [
+                  {
+                    model: req.app.get("db")["users"],
+                    as : 'line',
+                    on : {
+                      'lineId': {[Op.eq]: Sequelize.col('request_vacations.lineId')}
+                    }
+                  }
+                ],
                 order : [['id' ,'asc']]
               };
             } else {
               options = {
                 where : {approveStatus:data.status},
+                include : [
+                  {
+                    model: req.app.get("db")["users"],
+                    as : 'line',
+                    on : {
+                      'lineId': {[Op.eq]: Sequelize.col('request_vacations.lineId')}
+                    }
+                  }
+                ],
                 order : [['id' ,'asc']]
               };
             }
