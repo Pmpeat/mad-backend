@@ -35,7 +35,7 @@
         <option value="halfdayAfternoon">ลาครึ่งวันบ่าย</option>
       </select>
     </label>
-    <label id="halfdiv">
+    <label id="halfdiv" style="display: none;">
       <h3>วันที่</h3>
       <input type="date" id="half" name="half"/>
     </label>
@@ -84,7 +84,6 @@
     }
     
     main();
-
     function showDiv() {
       const selectedValue = document.getElementById("leaveType").value;
       if(selectedValue === "fullday"){
