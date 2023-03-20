@@ -26,7 +26,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       days: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         default : 0
       },
       approveStatus: {
