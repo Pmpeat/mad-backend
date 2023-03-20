@@ -27,24 +27,27 @@
     </div>
     <input type="text" id="lineId" name="lineId" readonly hidden>
     <input type="text" id="type" name="type" readonly hidden>
-    <select name="leaveType" id="leaveType">
-      <option value="fullday" selected>เต็มวัน</option>
-      <option value="halfdayMorning">ลาครึ่งวันเช้า</option>
-      <option value="halfdayAfternoon">ลาครึ่งวันบ่าย</option>
-    </select>
     <label>
-      <h3>From</h3>
+      <h3>รูปแบบการลา</h3>
+      <select name="leaveType" id="leaveType">
+        <option value="fullday" selected>เต็มวัน</option>
+        <option value="halfdayMorning">ลาครึ่งวันเช้า</option>
+        <option value="halfdayAfternoon">ลาครึ่งวันบ่าย</option>
+      </select>
+    </label>
+    <label>
+      <h3>ตั้งเเต่</h3>
       <input type="date" id="from" name="from"/>
     </label>
     <label>
-      <h3>To</h3>
+      <h3>ถึง</h3>
       <input type="date" id="to" name="to"/>
     </label>
     <label>
       <p style="display: flex;justify-content: center;"><span style="color:red">***</span>กรณีลาครึ่งวันเลือกวัน และ พิมลงใน reson ว่าลาครึ่งวัน<span style="color:red">***</span></p>
       <input type="text" id="reason" name="reason" placeholder="Reason (optional)"/>
     </label>
-    <button class="red" type="submit">Submit</button>
+    <button class="red" type="submit">ส่งคำขอ</button>
     
   </form>
 
