@@ -73,7 +73,7 @@ class EmailController extends BaseController {
         <div style="display:flex;height:5%">
           <div style="width:25%"><p> </p></div>
           <div style="width:20%">
-            <a href="https://hr-project.madtypes.com/approve-vacation?request=${requestId}&status=reject" style="text-decoration : none ;font-size : 14px ;font-weight : bold ;
+            <a href="https://hr-project.madtypes.com/reject-vacation?request=${requestId}&status=reject" style="text-decoration : none ;font-size : 14px ;font-weight : bold ;
             color : #c7384a ;letter-spacing : 2px ;">
             <div style="box-sizing : border-box ;border-radius : 300px ;border : solid 3px #c7384a;height: 100%;width:100%;text-align: center;">
                 <span>

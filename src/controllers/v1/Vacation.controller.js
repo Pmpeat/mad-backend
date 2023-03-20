@@ -238,9 +238,20 @@ class VacationController extends BaseController {
             const reqVacationData = await super.getAllByIdWithOptions(req,'request_vacations',options);
 
             if(reqVacationData[0].dataValues.approveStatus === "pending"){
-              const updateRequestStatus = {
-                approveStatus:data.status === "approve"? "approve":"reject" 
+              let updateRequestStatus = {};
+
+              if(data.status === "approve"){
+                updateRequestStatus = {
+                  approveStatus:"approve",
+                  rejectReason:""
+                }
+              } else {
+                updateRequestStatus = {
+                  approveStatus:"reject" ,
+                  rejectReason:data.reason
+                }
               }
+              
 
               const result = await super.updateByCustomWhere(req, 'request_vacations', updateRequestStatus,options);
 
@@ -298,6 +309,7 @@ class VacationController extends BaseController {
                   lineId : reqVacationData[0].dataValues.lineId,
                   type : reqVacationData[0].dataValues.type,
                   approveStatus : updateRequestStatus.approveStatus,
+                  reasonReject : updateRequestStatus.rejectReason,
                   from:reqVacationData[0].dataValues.from,
                   to:reqVacationData[0].dataValues.to,
                   reason:reqVacationData[0].dataValues.reason
@@ -316,6 +328,57 @@ class VacationController extends BaseController {
                   'Unprocessable Entity',
                   'Unable to process the contained instructions'
                 );
+              }
+            } else {
+              requestHandler.sendSuccess(
+                res,
+                'updated',
+                201
+              )('updated');
+            }
+            
+        } catch(err) {
+            console.log(err);
+        }
+      }
+
+      static async rejectRequestVacationStatus (req,res) {
+        try {
+            
+            const data = req.body;
+            const options = {
+              where : {id:data.requestId}
+            };
+
+            const reqVacationData = await super.getAllByIdWithOptions(req,'request_vacations',options);
+
+            if(reqVacationData[0].dataValues.approveStatus === "pending"){
+
+                const updateRequestStatus = {
+                  approveStatus:"reject" ,
+                  rejectReason:data.reason
+                }
+              
+              const result = await super.updateByCustomWhere(req, 'request_vacations', updateRequestStatus,options);
+
+              let resultUpdate;
+
+              if (!_.isNull(resultUpdate)) {
+                const dataMessage = {
+                  lineId : reqVacationData[0].dataValues.lineId,
+                  type : reqVacationData[0].dataValues.type,
+                  approveStatus : updateRequestStatus.approveStatus,
+                  reasonReject : updateRequestStatus.rejectReason,
+                  from:reqVacationData[0].dataValues.from,
+                  to:reqVacationData[0].dataValues.to,
+                  reason:reqVacationData[0].dataValues.reason
+                }
+
+                const pushMessage = await HelperController.pushMessageUpdateStatusVacation(dataMessage);
+
+                return "success";
+              } else {
+                return "false";
               }
             } else {
               requestHandler.sendSuccess(

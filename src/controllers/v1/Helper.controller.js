@@ -304,6 +304,14 @@ class HelperController extends BaseController {
                     "align": "center",
                     "gravity": "center",
                     "contents": []
+                  },
+                  {
+                    "type": "text",
+                    "text": `เหตุผล ${data.reasonReject === "" ? "-" : data.reasonReject}`,
+                    "flex": 1,
+                    "align": "center",
+                    "gravity": "center",
+                    "contents": []
                   }
                 ]
               },

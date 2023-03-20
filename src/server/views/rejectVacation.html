@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Reject Request Form</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+    </head>
+<body>
+
+
+  <!-- <h1>Request Form</h1>
+  <form action="/api/v1/vacation/create-request-vacation" method="POST">
+    <input type="text" id="type" name="type" readonly>
+    <label for="from">From:</label>
+    <input type="date" id="from" name="from">
+    <label for="to">To:</label>
+    <input type="date" id="to" name="to">
+    <label for="reason">reason <span>(optional)</span>:</label>
+    <input type="text" id="reason" name="reason">
+    <p><button type="submit">Submit</button></p>
+  </form> -->
+
+  <form action="/api/v1/vacation/reject-request-vacation" method="POST">
+  
+    <div class="segment">
+      <h1>Reject Request Form</h1>
+    </div>
+    <input type="text" id="requestId" name="requestId" readonly hidden>
+    <input type="text" id="status" name="status" readonly hidden>
+   
+    <label>
+      <p style="display: flex;justify-content: center;">เหตุผลการไม่อนุมัติ(optional)</p>
+      <input type="text" id="reason" name="reason" placeholder="Reason (optional)"/>
+    </label>
+    <button class="red" type="submit">ยืนยัน</button>
+    
+  </form>
+
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script>
+       async function main() {
+          const queryString = window.location.search;
+          const urlParams = await new URLSearchParams(queryString);
+          const requestId = await urlParams.get('request')
+          const status = await urlParams.get('status')
+            const data = {
+                requestId : requestId,
+                status : status
+            }
+         document.getElementById('requestId').value = requestId;
+         document.getElementById('status').value = status;
+    }
+    
+    main();
+  </script>
+</body>
+</html>

@@ -21,6 +21,21 @@ app.get('/register', function (req, res)
     res.render('register.html');
 });
 
+app.get('/success-reject', function (req, res)
+{
+    res.render('successReject.html');
+});
+
+app.get('/false-reject', function (req, res)
+{
+    res.render('falseReject.html');
+});
+
+app.get('/reject-vacation', function (req, res)
+{
+    res.render('rejectVacation.html');
+});
+
 app.get('/success-request', function (req, res)
 {
     res.render('successRequest.html');

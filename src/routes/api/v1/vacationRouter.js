@@ -28,6 +28,26 @@ router.post('/create-request-vacation', async (req ,res) => {
     }
 });
 
+/**
+ * /api/v1/vacation/reject-request-vacation
+ * */
+router.post('/reject-request-vacation', async (req ,res) => {
+    try {
+        const resultQuery = await vacationController.rejectRequestVacationStatus(req ,res);
+        
+        if(resultQuery === "success"){
+            res.redirect("/success-reject");
+            
+        } else if (resultQuery === "remain"){
+            res.redirect("/false-reject");
+        } else {
+            res.redirect("/false-request");
+        }
+        
+    } catch (err) {
+        res.status(500).end();
+    }
+});
 
 
 /**
