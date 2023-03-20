@@ -200,7 +200,7 @@ class VacationController extends BaseController {
                   reason:data.reason,
                   from:data.half,
                   to:data.half,
-                  days:1,
+                  days:0.5,
                   approveStatus:"pending"
                 }
               }
@@ -263,25 +263,25 @@ class VacationController extends BaseController {
                 let remain = 0;
                 switch (reqVacationData[0].dataValues.type) {
                   case "vacation":
-                    remain = parseInt(vacationData[0].dataValues.vacationLeave) - parseInt(reqVacationData[0].dataValues.days);
+                    remain = parseFloat(vacationData[0].dataValues.vacationLeave) - parseFloat(reqVacationData[0].dataValues.days);
                     dataRemain = {
                       vacationLeave : remain
                     }
                     break;
                   case "sick":
-                    remain = parseInt(vacationData[0].dataValues.sickLeave) - parseInt(reqVacationData[0].dataValues.days);
+                    remain = parseFloat(vacationData[0].dataValues.sickLeave) - parseFloat(reqVacationData[0].dataValues.days);
                     dataRemain = {
                       sickLeave : remain
                     }
                     break;
                   case "personal":
-                    remain = parseInt(vacationData[0].dataValues.personalLeave) - parseInt(reqVacationData[0].dataValues.days);
+                    remain = parseFloat(vacationData[0].dataValues.personalLeave) - parseFloat(reqVacationData[0].dataValues.days);
                     dataRemain = {
                       personalLeave : remain
                     }
                     break;
                   case "withoutpay":
-                    remain = parseInt(vacationData[0].dataValues.personalLeave) + parseInt(reqVacationData[0].dataValues.days);
+                    remain = parseFloat(vacationData[0].dataValues.personalLeave) + parseFloat(reqVacationData[0].dataValues.days);
                     dataRemain = {
                       leaveWithoutPayment : remain
                     }
