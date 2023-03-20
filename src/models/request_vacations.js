@@ -24,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     to: DataTypes.DATE,
     days: DataTypes.INTEGER,
     approveStatus : DataTypes.STRING,
+    leaveType : DataTypes.STRING,
+    rejectReason : DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'request_vacations',
