@@ -180,15 +180,31 @@ class VacationController extends BaseController {
            if(checkUser === "success"){
             const checkVacation = await HelperController.checkVacation(req,res,data.lineId,data.type,diffDays);
             if(checkVacation === true){
-              const userVacationData = {
-                lineId:data.lineId,
-                type:data.type,
-                reason:data.reason,
-                from:data.from,
-                to:data.to,
-                days:diffDays,
-                approveStatus:"pending"
+              let userVacationData = {};
+              if(data.leaveType === "fullday"){
+                userVacationData = {
+                  lineId:data.lineId,
+                  leaveType:data.leaveType,
+                  type:data.type,
+                  reason:data.reason,
+                  from:data.from,
+                  to:data.to,
+                  days:diffDays,
+                  approveStatus:"pending"
+                }
+              } else {
+                userVacationData = {
+                  lineId:data.lineId,
+                  leaveType:data.leaveType,
+                  type:data.type,
+                  reason:data.reason,
+                  from:data.half,
+                  to:data.half,
+                  days:1,
+                  approveStatus:"pending"
+                }
               }
+              
 
               const result = await super.create(req, 'request_vacations', userVacationData);
               if (!_.isNull(result)) {

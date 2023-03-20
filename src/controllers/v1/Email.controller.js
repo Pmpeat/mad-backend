@@ -34,6 +34,18 @@ class EmailController extends BaseController {
           typeText = "ลาไม่รับเงิน";
           break;
       }
+      let leaveTypeText = "";
+      switch (data.leaveType) {
+        case "fullday":
+          leaveTypeText = "ลาเต็มวัน";
+          break;
+        case "halfdayMorning":
+          leaveTypeText = "ลาครึ่งวันเช้า";
+          break;
+        case "halfdayAfternoon":
+          leaveTypeText = "ลาครึ่งวันบ่าย";
+          break;
+      }
       let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -54,7 +66,8 @@ class EmailController extends BaseController {
         <h1 style="text-align: center">คำร้องขออนุมัติการลา</h1>
         <p style="text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;คำร้องการลาจากคุณ : ${userData[0].dataValues.firstName} ${userData[0].dataValues.lastName}</p>
         <p style="text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ประเภทการลา : ${typeText}</p>
-        <p style="text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตั้งเเต่วันที่ : ${data.from} ถึง : ${data.to}</p>
+        <p style="text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;รูปแบบการลา : ${leaveTypeText}</p>
+        <p style="text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ตั้งเเต่วันที่ : ${data.leaveType === "fullday" ? data.from : data.half} ถึง : ${data.leaveType === "fullday" ? data.to : data.half}</p>
         <p style="text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;เหตุผล : ${data.reason}</p>
         <p style="text-align: center">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">****</span>กรุณาคลิกที่นี่เพื่อเลือก อนุมัติ หรือ ไม่อนุมัติ<span style="color:red">****</span></p>
         <div style="display:flex;height:5%">
