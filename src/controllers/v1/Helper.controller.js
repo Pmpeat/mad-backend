@@ -243,11 +243,11 @@ class HelperController extends BaseController {
     switch (data.approveStatus) {
         case "reject":
             color = await "#F73000FF";
-            status = await "ไม่อนุมัติ"
+            status = await "ไม่ถูกอนุมัติ"
             break;
         case "approve":
             color = await "#3BC001FF";
-            status = await "อนุมัติ";
+            status = await "ถูกอนุมัติ";
             break;
         default:
             break;
@@ -299,7 +299,7 @@ class HelperController extends BaseController {
                   },
                   {
                     "type": "text",
-                    "text": `ได้รับการ ${status} แล้ว`,
+                    "text": `คำร้องของคุณ ${status}`,
                     "flex": 1,
                     "align": "center",
                     "gravity": "center",
