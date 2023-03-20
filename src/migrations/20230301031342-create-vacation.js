@@ -21,23 +21,23 @@ module.exports = {
         allowNull: true
       },
       vacationLeave: {
-        type: Sequelize.INTEGER,
-        default: 0,
+        type: Sequelize.FLOAT,
+        default: 0.0,
         allowNull: true
       },
       sickLeave: {
-        type: Sequelize.INTEGER,
-        default: 0,
+        type: Sequelize.FLOAT,
+        default: 0.0,
         allowNull: true
       },
       personalLeave: {
-        type: Sequelize.INTEGER,
-        default: 0,
+        type: Sequelize.FLOAT,
+        default: 0.0,
         allowNull: true
       },
       leaveWithoutPayment: {
-        type: Sequelize.INTEGER,
-        default: 0,
+        type: Sequelize.FLOAT,
+        default: 0.0,
         allowNull: true
       },
       createdByUserId: {
