@@ -92,21 +92,21 @@ class HelperController extends BaseController {
                 let check = true;
             switch (type) {
                 case "vacation":
-                    if(result[0].dataValues.vacationLeave > days){
+                    if(result[0].dataValues.vacationLeave >= days){
                         check = true;
                     } else {
                         check = false;
                     }
                     break;
                 case "sick":
-                    if(result[0].dataValues.sickLeave > days){
+                    if(result[0].dataValues.sickLeave >= days){
                         check = true;
                     } else {
                         check = false;
                     }
                     break;
                 case "personal":
-                    if(result[0].dataValues.personalLeave > days){
+                    if(result[0].dataValues.personalLeave >= days){
                         check = true;
                     } else {
                         check = false;
