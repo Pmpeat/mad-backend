@@ -130,7 +130,6 @@ class RepairController extends BaseController {
                 repairId: Joi.string().required(),
                 status: Joi.string().required(),
             });
-            console.log(data.repairId);
             const { error } = schema.validate(data);
 
             if (error) {
