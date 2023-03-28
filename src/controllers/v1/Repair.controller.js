@@ -130,7 +130,7 @@ class RepairController extends BaseController {
                 repairId: Joi.string().required(),
                 status: Joi.string().required(),
             });
-
+            console.log(data.repairId);
             const { error } = schema.validate(data);
 
             if (error) {
@@ -151,7 +151,10 @@ class RepairController extends BaseController {
               const updateRepairStatus = await super.updateByCustomWhere(req, 'request_repairs', data ,option);
               const getResult = await super.getList(req, 'request_repairs',option);
             if (!_.isNull(updateRepairStatus)) {
-              const helper = HelperController.pushMessageUpdateStatusText(getResult[0].dataValues,"คำสั่งซ่อม");
+              if(data.status === "แก้ไขแล้ว"){
+                const helper = HelperController.pushMessageUpdateStatusText(getResult[0].dataValues,"คำสั่งซ่อม");
+              } 
+              
                 requestHandler.sendSuccess(
                     res,
                     'successfully updated repair status',
