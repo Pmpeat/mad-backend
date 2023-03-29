@@ -6,6 +6,9 @@ const { Sequelize } = require('../../models');
 const BaseController = require('./Base.controller');
 const HelperController = require('./Helper.controller');
 const EmailController = require('./Email.controller');
+const {
+  requestNotiVacationToMadIT
+} = require("./Line.controller");
 const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
 const logger = new Logger();
@@ -209,7 +212,7 @@ class VacationController extends BaseController {
               const result = await super.create(req, 'request_vacations', userVacationData);
               if (!_.isNull(result)) {
                 const sendMail = await EmailController.sendMail(req,res,result.dataValues.id);
-                
+                const noti = await requestNotiVacationToMadIT(req,res,result.dataValues.id);
                 return "success";
               } else {
                 return "false";
