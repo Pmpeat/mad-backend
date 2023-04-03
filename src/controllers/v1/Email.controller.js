@@ -17,6 +17,7 @@ class EmailController extends BaseController {
    */
   static async sendMail(req, res,requestId) {
     try {
+      
       const data = req.body;
       const userData = await HelperController.getUserFromLineId(req,res,data.lineId);
       let typeText = "";
@@ -57,7 +58,7 @@ class EmailController extends BaseController {
       
       // const maillist = ["patiphan.work@gmail.com",];
       
-
+      console.log("innnn");
       let mailOptions = {
         from: 'emailmadaraid@gmail.com',
         to: 'patiphan@mad-arai-d.com',
