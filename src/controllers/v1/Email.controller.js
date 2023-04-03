@@ -61,7 +61,7 @@ class EmailController extends BaseController {
       
       let mailOptions = {
         from: 'emailmadaraid@gmail.com',
-        to: 'patiphan@mad-arai-d.com',
+        to: 'kanyanut@mad-arai-d.com',
         subject: `ขออนุมัติการลา`,
         html: `<div style="width:100%">
         <h1 style="text-align: center">คำร้องขออนุมัติการลา</h1>

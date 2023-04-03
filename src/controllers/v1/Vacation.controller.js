@@ -213,7 +213,7 @@ class VacationController extends BaseController {
 
               if (!_.isNull(result)) {
                 const sendMail = await EmailController.sendMail(req,res,result.dataValues.id);
-                // const noti = await requestNotiVacationToMadIT(req,res,result.dataValues.id);
+                const noti = await requestNotiVacationToMadIT(req,res,result.dataValues.id);
                 return "success";
               } else {
                 return "false";
