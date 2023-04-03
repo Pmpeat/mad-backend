@@ -210,6 +210,7 @@ class VacationController extends BaseController {
               
 
               const result = await super.create(req, 'request_vacations', userVacationData);
+              console.log(result);
               if (!_.isNull(result)) {
                 const sendMail = await EmailController.sendMail(req,res,result.dataValues.id);
                 const noti = await requestNotiVacationToMadIT(req,res,result.dataValues.id);
