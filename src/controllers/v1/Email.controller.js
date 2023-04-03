@@ -99,17 +99,18 @@ class EmailController extends BaseController {
         <p style="text-align: center">ขอบคุณสำหรับตอบกลับ</p>
         </div>`,
       };
-      console.log("innnn");
       if (!_.isNull(userData)) {
         transporter.sendMail(mailOptions, function (err, info) {
-          console.log("test");
+          
           if (err) {
+            console.log(err, ">>>>> err");
             requestHandler.throwError(
               422,
               'Unprocessable Entity',
               'Unable to process the contained instructions'
             );
           } else {
+            console.log(">>>>> Done");
             requestHandler.sendSuccess(
               res,
               'successfully send forget password',
