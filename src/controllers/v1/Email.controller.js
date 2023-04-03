@@ -58,7 +58,7 @@ class EmailController extends BaseController {
       
       // const maillist = ["patiphan.work@gmail.com",];
       
-      console.log("innnn");
+      
       let mailOptions = {
         from: 'emailmadaraid@gmail.com',
         to: 'patiphan@mad-arai-d.com',
@@ -99,10 +99,10 @@ class EmailController extends BaseController {
         <p style="text-align: center">ขอบคุณสำหรับตอบกลับ</p>
         </div>`,
       };
-
+      console.log("innnn");
       if (!_.isNull(userData)) {
         transporter.sendMail(mailOptions, function (err, info) {
-          console.log();
+          console.log("test");
           if (err) {
             requestHandler.throwError(
               422,
