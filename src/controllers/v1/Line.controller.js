@@ -1,4 +1,5 @@
 const request = require("request");
+const HelperController = require('./Helper.controller');
 
 exports.requestNotiToMadIT = async (req,res,detail) => {
     const message = "มีการแจ้งปัญหาเข้ามาใหม่ไอดีที่ : " + detail + " โปรดตรวจสอบ";
