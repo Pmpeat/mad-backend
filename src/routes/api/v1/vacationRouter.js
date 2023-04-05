@@ -51,7 +51,7 @@ router.post('/reject-request-vacation', async (req ,res) => {
 
 
 /**
- * /api/v1/vacation/get-request-vacation
+ * /api/v1/vacation/find
  * */
 router.post('/find', vacationController.getRequestVacation);
 
