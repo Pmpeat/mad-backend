@@ -66,8 +66,8 @@ exports.requestNotiToMadIT = async (req,res,detail) => {
     message += "จากคุณ : " + userData[0].dataValues.firstName + " " + userData[0].dataValues.lastName + "\n";
     message += "ลาแบบ : " + typeText + "\n";
     message += "----- : " + leaveTypeText + "\n";
-    // message += "ตั้งเเต่ : " + data.leaveType === "fullday" ? data.from : data.half + "\n";
-    // message += "ถึง : " + data.leaveType === "fullday" ? data.to : data.half + "\n";
+    message += "ตั้งเเต่ : " + data.leaveType === "fullday" ? data.from : data.half + "\n";
+    message += "ถึง : " + data.leaveType === "fullday" ? data.to : data.half + "\n";
     request(
       {
         method: "POST",
