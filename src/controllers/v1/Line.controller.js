@@ -30,12 +30,12 @@ exports.requestNotiToMadIT = async (req,res,detail) => {
     );
   };
 
-  exports.requestNotiVacationToMadIT = async (req,res) => {
+  exports.requestNotiVacationToMadIT = async (req,res,result) => {
     const data = req.body;
     const userData = await HelperController.getUserFromLineId(req,res,data.lineId);
-
+    const reusltData = result;
     let typeText = "";
-      switch (data.type) {
+      switch (reusltData.dataValues.type) {
         case "vacation":
           typeText = "ลาพักร้อน";
           break;
@@ -50,7 +50,7 @@ exports.requestNotiToMadIT = async (req,res,detail) => {
           break;
       }
       let leaveTypeText = "";
-      switch (data.leaveType) {
+      switch (reusltData.dataValues.leaveType) {
         case "fullday":
           leaveTypeText = "ลาเต็มวัน";
           break;
@@ -66,8 +66,8 @@ exports.requestNotiToMadIT = async (req,res,detail) => {
     message += "จากคุณ : " + userData[0].dataValues.firstName + " " + userData[0].dataValues.lastName + "\n";
     message += "ลาแบบ : " + typeText + "\n";
     message += "----- : " + leaveTypeText + "\n";
-    message += "ตั้งเเต่ : " + data.leaveType === "fullday" ? data.from : data.half + "\n";
-    message += "ถึง : " + data.leaveType === "fullday" ? data.to : data.half + "\n";
+    message += "ตั้งเเต่ : " + reusltData.dataValues.from;
+    message += "ถึง : " + reusltData.dataValues.to;
     request(
       {
         method: "POST",
