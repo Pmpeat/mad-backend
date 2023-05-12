@@ -5,7 +5,7 @@ const _ = require('lodash');
 const BaseController = require('./Base.controller');
 const HelperController = require('./Helper.controller');
 const {
-  requestNotiToMadIT
+  requestNotiOrderMadIT
 } = require("./Line.controller");
 const RequestHandler = require('../../utils/RequestHandler');
 const Logger = require('../../utils/logger');
@@ -32,7 +32,7 @@ class OrderController extends BaseController {
 
           const result = await super.create(req, 'request_orders', userOrderData);
           if (!_.isNull(result)) {
-            requestNotiToMadIT(req,res,result.dataValues.detail);
+            requestNotiOrderMadIT(req,res,result.dataValues.detail);
             return "success";
           } else {
             return "false";

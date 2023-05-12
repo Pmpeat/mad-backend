@@ -30,6 +30,35 @@ exports.requestNotiToMadIT = async (req,res,detail) => {
     );
   };
 
+  exports.requestNotiOrderMadIT = async (req,res,detail) => {
+    const message = "มีการแจ้งสั่งซื้อเข้ามาใหม่ไอดีที่ : " + detail + " โปรดตรวจสอบ";
+    request(
+      {
+        method: "POST",
+        uri: "https://notify-api.line.me/api/notify",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        auth: {
+          bearer: process.env.LINE_NOTIFY_TOKEN,
+        },
+        form: {
+          message: message,
+        },
+      },
+      (err, httpResponse, body) => {
+        if (err) {
+          console.log(err);
+        } else {
+        //   res.json({
+        //     httpResponse: httpResponse,
+        //     body: body,
+        //   });
+        }
+      }
+    );
+  };
+
   exports.requestNotiVacationToMadIT = async (req,res,result) => {
     const data = req.body;
     const userData = await HelperController.getUserFromLineId(req,res,data.lineId);
