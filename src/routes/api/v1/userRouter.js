@@ -8,6 +8,12 @@ const auth = require('../../../utils/auth');
 router.post('/create-user',auth.isAuth, userController.createUser);
 
 /**
+ * /api/v1/user/update-user/{id}
+ * */
+router.put('/update-user/:id',auth.isAuth, userController.updateUserEmail);
+
+
+/**
  * /api/v1/user/user-list
  * */
 router.get("/user-list", userController.getUserList);

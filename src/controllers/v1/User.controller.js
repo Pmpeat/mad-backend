@@ -114,6 +114,44 @@ class UserController extends BaseController {
     }
   }
 
+  static async updateUserEmail(req, res) {
+    try {
+      const idData = req.params.id;
+      const data = req.body.data;
+      const schema = Joi.object({
+        email: Joi.string().allow(null,''),
+      });
+
+      const { error } = schema.validate(data);
+      if (error) {
+        requestHandler.validateJoi(
+          error,
+          400,
+          "bad request",
+          error ? error.details[0].message : ""
+        );
+      }
+
+      const options = {
+        where : {id : idData}
+      }
+
+      const result = await super.updateByCustomWhere(req, "users",data,options);
+
+      if (result) {
+        requestHandler.sendSuccess(res, "Successfully updated email user", 200)();
+      } else {
+        requestHandler.throwError(
+          422,
+          "Unprocessable Entity",
+          "unable to process the contained instructions"
+        )();
+      }
+    } catch (err) {
+      requestHandler.sendError(req, res, err);
+    }
+  }
+
   /**
    * It's a function that get all user
    */
