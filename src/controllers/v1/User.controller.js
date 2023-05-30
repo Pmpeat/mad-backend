@@ -236,6 +236,36 @@ class UserController extends BaseController {
       }
   }
 
+   /**
+   * Delete Customer Address
+   */
+   static async delUser(req, res) {
+    try {
+      const data = req.body;
+
+      const optionsUserRole = {
+        where: {
+          userId: data.id,
+        },
+      };
+      await super.deleteByIdWithOptions(req, "user_roles", optionsUserRole);
+
+      const options = {
+        where: {
+          id: data.id,
+        },
+      };
+      await super.deleteByIdWithOptions(req, "users", options);
+      requestHandler.sendSuccess(
+        res,
+        "successfully deleted user",
+        200
+      )();
+    } catch (err) {
+      requestHandler.sendError(req, res, err);
+    }
+  }
+
 }
 
 
